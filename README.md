@@ -2,7 +2,7 @@
 
 Full-spectrum security audit combining five analysis layers into a single actionable report.
 
-**[Live Report: calcom/cal.com](https://zuub-don.github.io/sigma-audit/)**
+**[Live Report: calcom/cal.com](https://copyleftdev.github.io/sigma-audit/)**
 
 ## What It Does
 
@@ -80,7 +80,7 @@ python3 sigma-audit.py vercel/next.js --branch canary --output nextjs-audit.html
 
 ## Example Output
 
-The [live report for calcom/cal.com](https://zuub-don.github.io/sigma-audit/) found:
+The [live report for calcom/cal.com](https://copyleftdev.github.io/sigma-audit/) found:
 
 - **146 CVEs** across 377 npm dependencies
 - **4 weaponized/functional exploits** with public PoCs
