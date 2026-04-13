@@ -37,24 +37,6 @@
       "risk": "HIGH"
     },
     {
-      "slug": "expressjs-express",
-      "repo": "expressjs/express",
-      "date": "2026-04-13",
-      "total_cves": 0,
-      "critical": 0,
-      "high": 0,
-      "dependencies": 0,
-      "sast_findings": 0,
-      "pattern_findings": 0,
-      "exploitable": 0,
-      "attack_chains": 0,
-      "techniques": 0,
-      "top_cve": null,
-      "top_cve_cvss": 0,
-      "top_cve_epss": 0,
-      "risk": "NONE"
-    },
-    {
       "slug": "strapi-strapi",
       "repo": "strapi/strapi",
       "date": "2026-04-13",
