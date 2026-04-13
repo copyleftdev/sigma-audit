@@ -89,6 +89,24 @@
       "top_cve_cvss": 7.5,
       "top_cve_epss": 0.10462000221014023,
       "risk": "HIGH"
+    },
+    {
+      "slug": "payloadcms-payload",
+      "repo": "payloadcms/payload",
+      "date": "2026-04-13",
+      "total_cves": 76,
+      "critical": 2,
+      "high": 15,
+      "dependencies": 315,
+      "sast_findings": 5,
+      "pattern_findings": 10290,
+      "exploitable": 4,
+      "attack_chains": 120,
+      "techniques": 90,
+      "top_cve": "CVE-2025-29927",
+      "top_cve_cvss": 9.100000381469727,
+      "top_cve_epss": 0.9295499920845032,
+      "risk": "CRITICAL"
     }
   ]
 }
