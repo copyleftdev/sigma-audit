@@ -107,6 +107,24 @@
       "top_cve_cvss": 6.099999904632568,
       "top_cve_epss": 0.10571999847888947,
       "risk": "MEDIUM"
+    },
+    {
+      "slug": "elysiajs-elysia",
+      "repo": "elysiajs/elysia",
+      "date": "2026-04-13",
+      "total_cves": 16,
+      "critical": 1,
+      "high": 6,
+      "dependencies": 25,
+      "sast_findings": 11,
+      "pattern_findings": 14245,
+      "exploitable": 0,
+      "attack_chains": 16,
+      "techniques": 19,
+      "top_cve": "CVE-2023-3348",
+      "top_cve_cvss": 5.699999809265137,
+      "top_cve_epss": 0.0020800000056624413,
+      "risk": "HIGH"
     }
   ]
 }

@@ -1,0 +1,1334 @@
+{
+  "meta": {
+    "repo": "elysiajs/elysia",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 25,
+    "source_files": {
+      "ts": 236,
+      "tsx": 0,
+      "py": 0,
+      "go": 0
+    },
+    "total_cves": 16,
+    "severity": {
+      "MEDIUM": 8,
+      "CRITICAL": 1,
+      "NONE": 1,
+      "HIGH": 6
+    },
+    "sast_findings": 11,
+    "pattern_findings": 14245,
+    "exploitable": 0
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2023-3348",
+      "package": "npm:wrangler@4.40.2",
+      "severity": "MEDIUM",
+      "cvss": 5.699999809265137,
+      "epss_score": 0.0020800000056624413,
+      "epss_percentile": 0.4322200119495392,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-22"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-47764",
+      "package": "npm:cookie@1.1.1",
+      "severity": "MEDIUM",
+      "cvss": 6.900000095367432,
+      "epss_score": 0.002050000010058284,
+      "epss_percentile": 0.4268699884414673,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-74"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-66456",
+      "package": "npm:elysia@../../",
+      "severity": "CRITICAL",
+      "cvss": 9.100000381469727,
+      "epss_score": 0.001990000018849969,
+      "epss_percentile": 0.4206799864768982,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1321"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.010",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2022-36313",
+      "package": "npm:file-type@20.4.1",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.0017099999822676182,
+      "epss_percentile": 0.3832100033760071,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-53384",
+      "package": "npm:tsup@8.4.0",
+      "severity": "MEDIUM",
+      "cvss": 5.099999904632568,
+      "epss_score": 0.001560000004246831,
+      "epss_percentile": 0.3634200096130371,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2023-4316",
+      "package": "npm:zod@4.1.5",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.0014400000218302011,
+      "epss_percentile": 0.34681999683380127,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2025-66020",
+      "package": "npm:valibot@1.1.0",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.0013500000350177288,
+      "epss_percentile": 0.3324500024318695,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2025-66457",
+      "package": "npm:elysia@../../",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.0009899999713525176,
+      "epss_percentile": 0.2710700035095215,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-94"
+      ],
+      "techniques": [
+        {
+          "id": "T1027.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1564.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027.006",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2023-7079",
+      "package": "npm:wrangler@4.40.2",
+      "severity": "MEDIUM",
+      "cvss": 6.400000095367432,
+      "epss_score": 0.0007099999929778278,
+      "epss_percentile": 0.218189999461174,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-287"
+      ],
+      "techniques": [
+        {
+          "id": "T1557",
+          "source": "cwe"
+        },
+        {
+          "id": "T1040",
+          "source": "cwe"
+        },
+        {
+          "id": "T1185",
+          "source": "cwe"
+        },
+        {
+          "id": "T1563",
+          "source": "cwe"
+        },
+        {
+          "id": "T1505.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1548",
+          "source": "cwe"
+        },
+        {
+          "id": "T1134",
+          "source": "cwe"
+        },
+        {
+          "id": "T1550.001",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-0933",
+      "package": "npm:wrangler@4.40.2",
+      "severity": "HIGH",
+      "cvss": 7.699999809265137,
+      "epss_score": 0.000590000010561198,
+      "epss_percentile": 0.1853799968957901,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-20"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1539",
+          "source": "cwe"
+        },
+        {
+          "id": "T1553.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027",
+          "source": "cwe"
+        },
+        {
+          "id": "T1036.001",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-32630",
+      "package": "npm:file-type@20.4.1",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.0005099999834783375,
+      "epss_percentile": 0.1587900072336197,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-409"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2023-7080",
+      "package": "npm:wrangler@4.40.2",
+      "severity": "HIGH",
+      "cvss": 8.5,
+      "epss_score": 0.0004299999854993075,
+      "epss_percentile": 0.129830002784729,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-269"
+      ],
+      "techniques": [
+        {
+          "id": "T1548",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-31808",
+      "package": "npm:file-type@20.4.1",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.0003000000142492354,
+      "epss_percentile": 0.08618000149726868,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-835"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2025-50537",
+      "package": "npm:eslint@9.24.0",
+      "severity": "MEDIUM",
+      "cvss": 5.5,
+      "epss_score": 0.0002099999983329326,
+      "epss_percentile": 0.056699998676776886,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2026-30837",
+      "package": "npm:elysia@../../",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.0001900000061141327,
+      "epss_percentile": 0.05150999873876572,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": []
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 16,
+    "overall_risk": "HIGH",
+    "techniques": [
+      "T1548",
+      "T1557",
+      "T1040",
+      "T1185",
+      "T1563",
+      "T1505.003",
+      "T1134",
+      "T1550.001",
+      "T1574.007",
+      "T1539",
+      "T1553.002",
+      "T1574.006",
+      "T1562.003",
+      "T1027",
+      "T1036.001",
+      "T1574.010",
+      "T1027.009",
+      "T1564.009",
+      "T1027.006"
+    ],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "npm:elysia",
+        "cve": "CVE-2025-66456",
+        "risk": "HIGH",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2025-66456",
+          "weakness:CWE-1321",
+          "technique:T1574.010"
+        ]
+      },
+      {
+        "entry": "npm:wrangler",
+        "cve": "CVE-2023-7080",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-7080",
+          "weakness:CWE-269",
+          "technique:T1548"
+        ]
+      },
+      {
+        "entry": "npm:wrangler",
+        "cve": "CVE-2023-7080",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-7080",
+          "weakness:CWE-269",
+          "technique:T1548"
+        ]
+      },
+      {
+        "entry": "npm:wrangler",
+        "cve": "CVE-2026-0933",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-0933",
+          "weakness:CWE-20",
+          "technique:T1574.007",
+          "technique:T1539",
+          "technique:T1553.002",
+          "technique:T1574.006",
+          "technique:T1562.003",
+          "technique:T1027",
+          "technique:T1036.001"
+        ]
+      },
+      {
+        "entry": "npm:wrangler",
+        "cve": "CVE-2026-0933",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-0933",
+          "weakness:CWE-20",
+          "technique:T1574.007",
+          "technique:T1539",
+          "technique:T1553.002",
+          "technique:T1574.006",
+          "technique:T1562.003",
+          "technique:T1027",
+          "technique:T1036.001"
+        ]
+      },
+      {
+        "entry": "npm:elysia",
+        "cve": "CVE-2025-66457",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2025-66457",
+          "weakness:CWE-94",
+          "technique:T1027.009",
+          "technique:T1564.009",
+          "technique:T1027.006"
+        ]
+      },
+      {
+        "entry": "npm:elysia",
+        "cve": "CVE-2026-30837",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-30837",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:wrangler",
+        "cve": "CVE-2023-3348",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-3348",
+          "weakness:CWE-22"
+        ]
+      },
+      {
+        "entry": "npm:wrangler",
+        "cve": "CVE-2023-7079",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-7079",
+          "weakness:CWE-287",
+          "technique:T1557",
+          "technique:T1040",
+          "technique:T1185",
+          "technique:T1563",
+          "technique:T1505.003",
+          "technique:T1548",
+          "technique:T1134",
+          "technique:T1550.001"
+        ]
+      },
+      {
+        "entry": "npm:elysia",
+        "cve": "CVE-2026-31865",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-31865",
+          "weakness:CWE-1321",
+          "technique:T1574.010"
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 11,
+    "by_severity": {
+      "WARNING": 9,
+      "ERROR": 2
+    },
+    "by_rule": {
+      "detect-non-literal-regexp": 7,
+      "express-data-exfiltration": 1,
+      "object-assign-express": 1,
+      "prototype-pollution-loop": 1,
+      "remote-property-injection": 1
+    },
+    "findings": [
+      {
+        "rule": "express-data-exfiltration",
+        "severity": "WARNING",
+        "path": "src/adapter/utils.ts",
+        "line": 157,
+        "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability."
+      },
+      {
+        "rule": "object-assign-express",
+        "severity": "ERROR",
+        "path": "src/adapter/utils.ts",
+        "line": 157,
+        "message": "JSON injection occurs when untrusted input is incorporated into a JavaScript object without proper validation or sanitization. When using methods like Object.assign, malicious input can override or ad"
+      },
+      {
+        "rule": "prototype-pollution-loop",
+        "severity": "WARNING",
+        "path": "src/dynamic-handle.ts",
+        "line": 109,
+        "message": "Possibility of prototype polluting function detected. By adding or modifying attributes of an object prototype, it is possible to create attributes that exist on every object, or replace critical attr"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/formats.ts",
+        "line": 186,
+        "message": "RegExp() called with a `str` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For this "
+      },
+      {
+        "rule": "remote-property-injection",
+        "severity": "ERROR",
+        "path": "src/index.ts",
+        "line": 4573,
+        "message": "Bracket object notation with user input is present, this might allow an attacker to access all properties of the object and even it's prototype. Use literal values for object properties."
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/sucrose.ts",
+        "line": 304,
+        "message": "RegExp() called with a `type` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For this"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/sucrose.ts",
+        "line": 453,
+        "message": "RegExp() called with a `alias` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For thi"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/sucrose.ts",
+        "line": 453,
+        "message": "RegExp() called with a `type` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For this"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/sucrose.ts",
+        "line": 553,
+        "message": "RegExp() called with a `context` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For t"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/sucrose.ts",
+        "line": 557,
+        "message": "RegExp() called with a `context` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For t"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/type-system/format.ts",
+        "line": 196,
+        "message": "RegExp() called with a `str` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For this "
+      }
+    ]
+  },
+  "zentinel": {
+    "total": 14245,
+    "files_scanned": 238,
+    "errors": 81,
+    "warnings": 14008,
+    "by_rule": {
+      "community.assigned-undefined": 13594,
+      "community.express-check-csurf-middleware-usage": 74,
+      "community.useless-assignment": 74,
+      "community.aead-no-final": 74,
+      "community.sequelize-raw-query-1": 74,
+      "community.sequelize-raw-query-2": 74,
+      "community.sequelize-raw-query-4": 74,
+      "community.sequelize-raw-query-6": 74,
+      "community.disallow-old-tls-versions2": 74,
+      "typescript.security.settimeout-string": 22,
+      "typescript.security.hardcoded-secret": 19,
+      "typescript.security.function-constructor": 7,
+      "typescript.security.process-exit": 4,
+      "javascript.security.process-exit": 4,
+      "javascript.security.settimeout-string": 2
+    },
+    "highlights": [
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "example/openapi.ts",
+        "line": 23,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/utils.ts",
+        "line": 70,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/timeout.ts",
+        "line": 4,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "test/validator/cookie.test.ts",
+        "line": 185,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "typescript.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "test/validator/body.test.ts",
+        "line": 468,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a secrets manager"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/validator/body.test.ts",
+        "line": 468,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/validator/body.test.ts",
+        "line": 468,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "test/validator/body.test.ts",
+        "line": 468,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      }
+    ]
+  },
+  "github": {
+    "cve_issues": [],
+    "advisories": [
+      {
+        "ghsa_id": "GHSA-8hq9-phh3-p2wp",
+        "cve_id": "CVE-2026-31865",
+        "url": "https://api.github.com/repos/elysiajs/elysia/security-advisories/GHSA-8hq9-phh3-p2wp",
+        "html_url": "https://github.com/elysiajs/elysia/security/advisories/GHSA-8hq9-phh3-p2wp",
+        "summary": "Cookie Value Prototype Pollution",
+        "description": "### Impact\r\nElysia cookie can be overridden by prototype pollution , eg. `__proto__`\r\n\r\nSending cookie with the follows name can override cookie value:\r\n```bash\r\n__proto__=%7B%22injected%22%3A%22polluted%22%7D\r\n```\r\n\r\n### Patches\r\nPatched by 1.4.27\r\n\r\nReferences: https://github.com/elysiajs/elysia/compare/1.4.26...1.4.27\r\n\r\n### Workarounds\r\n1. Use t.Cookie validation to enforce validation value\r\n2. Prevent iterable over cookie if possible\r\n\r\n### References\r\nhttps://github.com/ebadfd/elysia-cookie-proto-pollution/",
+        "severity": "medium",
+        "author": null,
+        "publisher": {
+          "login": "SaltyAom",
+          "id": 35027979,
+          "node_id": "MDQ6VXNlcjM1MDI3OTc5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/35027979?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/SaltyAom",
+          "html_url": "https://github.com/SaltyAom",
+          "followers_url": "https://api.github.com/users/SaltyAom/followers",
+          "following_url": "https://api.github.com/users/SaltyAom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/SaltyAom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/SaltyAom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/SaltyAom/subscriptions",
+          "organizations_url": "https://api.github.com/users/SaltyAom/orgs",
+          "repos_url": "https://api.github.com/users/SaltyAom/repos",
+          "events_url": "https://api.github.com/users/SaltyAom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/SaltyAom/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-8hq9-phh3-p2wp",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2026-31865",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2026-03-16T22:25:03Z",
+        "published_at": "2026-03-16T22:25:03Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "npm",
+              "name": "elysia"
+            },
+            "vulnerable_version_range": "< 1.4.27",
+            "patched_versions": "1.4.27",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+            "score": 6.5
+          },
+          "cvss_v4": {
+            "vector_string": null,
+            "score": null
+          }
+        },
+        "cwes": [],
+        "cwe_ids": [],
+        "credits": [
+          {
+            "login": "ebadfd",
+            "type": "reporter"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "ebadfd",
+              "id": 66930150,
+              "node_id": "MDQ6VXNlcjY2OTMwMTUw",
+              "avatar_url": "https://avatars.githubusercontent.com/u/66930150?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/ebadfd",
+              "html_url": "https://github.com/ebadfd",
+              "followers_url": "https://api.github.com/users/ebadfd/followers",
+              "following_url": "https://api.github.com/users/ebadfd/following{/other_user}",
+              "gists_url": "https://api.github.com/users/ebadfd/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/ebadfd/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/ebadfd/subscriptions",
+              "organizations_url": "https://api.github.com/users/ebadfd/orgs",
+              "repos_url": "https://api.github.com/users/ebadfd/repos",
+              "events_url": "https://api.github.com/users/ebadfd/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/ebadfd/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "score": 6.5
+        }
+      },
+      {
+        "ghsa_id": "GHSA-f45g-68q3-5w8x",
+        "cve_id": "CVE-2026-30837",
+        "url": "https://api.github.com/repos/elysiajs/elysia/security-advisories/GHSA-f45g-68q3-5w8x",
+        "html_url": "https://github.com/elysiajs/elysia/security/advisories/GHSA-f45g-68q3-5w8x",
+        "summary": "string URL format redos",
+        "description": "### Impact\r\n`t.String({ format: 'url' })` is vulnerable to redos\r\n\r\nRepeating a partial url format (protocol and hostname) multiple times cause regex to slow down significantly\r\n```js\r\n'http://a'.repeat(n)\r\n```\r\n\r\nHere's a table demonstrating how long it takes to process repeated partial url format\r\n| `n` repeat | elapsed_ms |\r\n| --- | --- |\r\n| 1024 | 33.993 |\r\n| 2048 | 134.357 |\r\n| 4096 | 537.608 |\r\n| 8192 | 2155.842 |\r\n| 16384 | 8618.457 |\r\n| 32768 | 34604.139 |\r\n\r\n### Patches\r\nPatched by 1.4.26, please kindly update `elysia` to >= 1.4.26 \r\n\r\nHere's how long it takes after the patch\r\n| `n` repeat | elapsed_ms |\r\n| --- | --- |\r\n| 1024 | 0.194 |\r\n| 2048 | 0.274 |\r\n| 4096 | 0.455 |\r\n| 8192 | 0.831 |\r\n| 16384 | 1.632 |\r\n| 32768 | 3.052 |\r\n\r\n### Workarounds\r\n1. It's recommended to always limit URL format to a reasonable length\r\n```ts\r\nt.String({\r\n\tformat: 'url',\r\n\tmaxLength: 288\r\n})\r\n```\r\n\r\n2. If a long URL format is necessary, to patch this without updating to 1.4.26, add the following code to any part of your codebase\r\n```js\r\nimport { FormatRegistry } from '@sinclair/typebox'\r\n\r\nFormatRegistry.Delete('url')\r\nFormatRegistry.Set('url', (value) =>\r\n\t/^(?:https?|ftp):\\/\\/(?:[^\\s:@]+(?::[^\\s@]*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z0-9\\u{00a1}-\\u{ffff}]+-)*[a-z0-9\\u{00a1}-\\u{ffff}]+)(?:\\.(?:[a-z0-9\\u{00a1}-\\u{ffff}]+-)*[a-z0-9\\u{00a1}-\\u{ffff}]+)*(?:\\.(?:[a-z\\u{00a1}-\\u{ffff}]{2,})))(?::\\d{2,5})?(?:\\/[^\\s]*)?$/iu.test(\r\n\t\tvalue\r\n\t)\r\n)\r\n```\r\n\r\n### References\r\nhttps://github.com/EdamAme-x/elysia-poc-redos",
+        "severity": "high",
+        "author": null,
+        "publisher": {
+          "login": "SaltyAom",
+          "id": 35027979,
+          "node_id": "MDQ6VXNlcjM1MDI3OTc5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/35027979?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/SaltyAom",
+          "html_url": "https://github.com/SaltyAom",
+          "followers_url": "https://api.github.com/users/SaltyAom/followers",
+          "following_url": "https://api.github.com/users/SaltyAom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/SaltyAom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/SaltyAom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/SaltyAom/subscriptions",
+          "organizations_url": "https://api.github.com/users/SaltyAom/orgs",
+          "repos_url": "https://api.github.com/users/SaltyAom/repos",
+          "events_url": "https://api.github.com/users/SaltyAom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/SaltyAom/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-f45g-68q3-5w8x",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2026-30837",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2026-03-09T23:07:15Z",
+        "published_at": "2026-03-09T23:07:15Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "npm",
+              "name": "elysia"
+            },
+            "vulnerable_version_range": "< 1.4.26",
+            "patched_versions": "1.4.26",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "score": 7.5
+          },
+          "cvss_v4": {
+            "vector_string": null,
+            "score": null
+          }
+        },
+        "cwes": [],
+        "cwe_ids": [],
+        "credits": [
+          {
+            "login": "EdamAme-x",
+            "type": "reporter"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "EdamAme-x",
+              "id": 121654029,
+              "node_id": "U_kgDOB0BLDQ",
+              "avatar_url": "https://avatars.githubusercontent.com/u/121654029?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/EdamAme-x",
+              "html_url": "https://github.com/EdamAme-x",
+              "followers_url": "https://api.github.com/users/EdamAme-x/followers",
+              "following_url": "https://api.github.com/users/EdamAme-x/following{/other_user}",
+              "gists_url": "https://api.github.com/users/EdamAme-x/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/EdamAme-x/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/EdamAme-x/subscriptions",
+              "organizations_url": "https://api.github.com/users/EdamAme-x/orgs",
+              "repos_url": "https://api.github.com/users/EdamAme-x/repos",
+              "events_url": "https://api.github.com/users/EdamAme-x/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/EdamAme-x/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "score": 7.5
+        }
+      },
+      {
+        "ghsa_id": "GHSA-hxj9-33pp-j2cc",
+        "cve_id": "CVE-2025-66456",
+        "url": "https://api.github.com/repos/elysiajs/elysia/security-advisories/GHSA-hxj9-33pp-j2cc",
+        "html_url": "https://github.com/elysiajs/elysia/security/advisories/GHSA-hxj9-33pp-j2cc",
+        "summary": "Prototype pollution with multiple standalone validation schemas",
+        "description": "Prototype pollution vulnerability in `mergeDeep` after merging results of two standard schema validations with the same key. Due to the ordering of merging, there must be an `any` type that is set as a `standalone` guard, to allow for the `__proto__` prop to be merged.\r\n\r\nWhen combined with GHSA-8vch-m3f4-q8jf this allows for a full RCE by an attacker.\r\n\r\n### Impact\r\nRoutes with more than 2 standalone schema validation, eg. zod\r\n\r\nExample vulnerable code:\r\n```typescript\r\nimport { Elysia } from \"elysia\"\r\nimport * as z from \"zod\"\r\n\r\nconst app = new Elysia()\r\n\t.guard({\r\n\t\tschema: \"standalone\",\r\n\t\tbody: z.object({\r\n\t\t\tdata: z.any()\r\n\t\t})\r\n\t})\r\n\t.post(\"/\", ({ body }) => ({ body, win: {}.foo }), {\r\n\t\tbody: z.object({\r\n\t\t\tdata: z.object({\r\n\t\t\t\tmessageId: z.string(\"pollute-me\"),\r\n\t\t\t})\r\n\t\t})\r\n\t})\r\n```\r\n\r\n### Patches\r\nPatched by 1.4.17 (https://github.com/elysiajs/elysia/pull/1564)\r\n\r\nReference commit:\r\n- https://github.com/elysiajs/elysia/pull/1564/commits/26935bf76ebc43b4a43d48b173fc853de43bb51e\r\n- https://github.com/elysiajs/elysia/pull/1564/commits/3af978663e437dccc6c1a2a3aff4b74e1574849e\r\n\r\n### Workarounds\r\nRemove `__proto__` key from body\r\n\r\nExample plugin for removing `__proto__` from body\r\n\r\n```typescript\r\nnew Elysia()\r\n\t.onTransform(({ body, headers }) => {\r\n\t\tif (headers['content-type'] === 'application/json')\r\n\t\t\treturn JSON.parse(JSON.stringify(body), (k, v) => {\r\n\t\t\t\tif (k === '__proto__') return\r\n\r\n\t\t\t\treturn v\r\n\t\t\t})\r\n\t})\r\n```\r\n\r\n### References\r\nPOC: https://github.com/sportshead/elysia-poc\r\n",
+        "severity": "critical",
+        "author": null,
+        "publisher": {
+          "login": "SaltyAom",
+          "id": 35027979,
+          "node_id": "MDQ6VXNlcjM1MDI3OTc5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/35027979?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/SaltyAom",
+          "html_url": "https://github.com/SaltyAom",
+          "followers_url": "https://api.github.com/users/SaltyAom/followers",
+          "following_url": "https://api.github.com/users/SaltyAom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/SaltyAom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/SaltyAom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/SaltyAom/subscriptions",
+          "organizations_url": "https://api.github.com/users/SaltyAom/orgs",
+          "repos_url": "https://api.github.com/users/SaltyAom/repos",
+          "events_url": "https://api.github.com/users/SaltyAom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/SaltyAom/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-hxj9-33pp-j2cc",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2025-66456",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2025-12-09T11:25:10Z",
+        "published_at": "2025-12-09T11:25:10Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "npm",
+              "name": "elysia"
+            },
+            "vulnerable_version_range": ">= 1.4.0 < 1.4.17",
+            "patched_versions": "1.4.17",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": null,
+            "score": null
+          },
+          "cvss_v4": {
+            "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+            "score": 9.1
+          }
+        },
+        "cwes": [
+          {
+            "cwe_id": "CWE-1321",
+            "name": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')"
+          }
+        ],
+        "cwe_ids": [
+          "CWE-1321"
+        ],
+        "credits": [
+          {
+            "login": "sportshead",
+            "type": "finder"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "sportshead",
+              "id": 32637656,
+              "node_id": "MDQ6VXNlcjMyNjM3NjU2",
+              "avatar_url": "https://avatars.githubusercontent.com/u/32637656?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/sportshead",
+              "html_url": "https://github.com/sportshead",
+              "followers_url": "https://api.github.com/users/sportshead/followers",
+              "following_url": "https://api.github.com/users/sportshead/following{/other_user}",
+              "gists_url": "https://api.github.com/users/sportshead/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/sportshead/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/sportshead/subscriptions",
+              "organizations_url": "https://api.github.com/users/sportshead/orgs",
+              "repos_url": "https://api.github.com/users/sportshead/repos",
+              "events_url": "https://api.github.com/users/sportshead/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/sportshead/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "finder",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      {
+        "ghsa_id": "GHSA-8vch-m3f4-q8jf",
+        "cve_id": "CVE-2025-66457",
+        "url": "https://api.github.com/repos/elysiajs/elysia/security-advisories/GHSA-8vch-m3f4-q8jf",
+        "html_url": "https://github.com/elysiajs/elysia/security/advisories/GHSA-8vch-m3f4-q8jf",
+        "summary": "Arbitrary code injection through cookie config",
+        "description": "Arbitrary code execution from cookie config. If dynamic cookies are enabled (ie there exists a schema for cookies), the cookie config is injected into the compiled route without first being sanitised.\r\n\r\nAvailability of this exploit is generally low, as it requires write access to either the Elysia app's source code (in which case the vulnerability is meaningless) or write access to the cookie config (perhaps where it is assumed to be provisioned by the environment). \r\n\r\nHowever when combined with GHSA-hxj9-33pp-j2cc, this vulnerability allows for a full RCE chain.\r\n\r\n### Impact\r\n- aot enabled (default)\r\n- cookie schema passed to route\r\n- Cookie config controllable eg. via env\r\n\r\nExample of vulnerable code\r\n```js\r\nnew Elysia({\r\n\tcookie: {\r\n\t\tsecrets: `' + console.log('pwned from secrets') + '`\r\n\t},\r\n})\r\n\t.get(\"/\", () => \"hello world\", {\r\n\t\tcookie: t.Cookie({\r\n\t\t\tfoo: t.Any(),\r\n\t\t}),\r\n\t})\r\n```\r\n\r\nPOC: https://github.com/sportshead/elysia-poc\r\n\r\n### Patches\r\nPatched by 1.4.17 (https://github.com/elysiajs/elysia/pull/1564)\r\n\r\nReference commit:\r\n- https://github.com/elysiajs/elysia/pull/1564/commits/26935bf76ebc43b4a43d48b173fc853de43bb51e\r\n- https://github.com/elysiajs/elysia/pull/1564/commits/3af978663e437dccc6c1a2a3aff4b74e1574849e\r\n\r\n### Workarounds\r\nSanitize cookie-related env input\r\n\r\n```typescript\r\nconst overrideUnsafeQuote = (value: string) =>\r\n\t// '`' + value + '`'\r\n\t'`' + value.replace(/'/g, '\\\\`').replace(/\\${/g, '$\\\\{') + '`'\r\n```",
+        "severity": "high",
+        "author": null,
+        "publisher": {
+          "login": "SaltyAom",
+          "id": 35027979,
+          "node_id": "MDQ6VXNlcjM1MDI3OTc5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/35027979?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/SaltyAom",
+          "html_url": "https://github.com/SaltyAom",
+          "followers_url": "https://api.github.com/users/SaltyAom/followers",
+          "following_url": "https://api.github.com/users/SaltyAom/following{/other_user}",
+          "gists_url": "https://api.github.com/users/SaltyAom/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/SaltyAom/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/SaltyAom/subscriptions",
+          "organizations_url": "https://api.github.com/users/SaltyAom/orgs",
+          "repos_url": "https://api.github.com/users/SaltyAom/repos",
+          "events_url": "https://api.github.com/users/SaltyAom/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/SaltyAom/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-8vch-m3f4-q8jf",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2025-66457",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2025-12-09T11:25:24Z",
+        "published_at": "2025-12-09T11:25:24Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "npm",
+              "name": "elysia"
+            },
+            "vulnerable_version_range": "< 1.4.18",
+            "patched_versions": "1.4.18",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": null,
+            "score": null
+          },
+          "cvss_v4": {
+            "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:H/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+            "score": 7.5
+          }
+        },
+        "cwes": [
+          {
+            "cwe_id": "CWE-94",
+            "name": "Improper Control of Generation of Code ('Code Injection')"
+          }
+        ],
+        "cwe_ids": [
+          "CWE-94"
+        ],
+        "credits": [
+          {
+            "login": "sportshead",
+            "type": "finder"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "sportshead",
+              "id": 32637656,
+              "node_id": "MDQ6VXNlcjMyNjM3NjU2",
+              "avatar_url": "https://avatars.githubusercontent.com/u/32637656?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/sportshead",
+              "html_url": "https://github.com/sportshead",
+              "followers_url": "https://api.github.com/users/sportshead/followers",
+              "following_url": "https://api.github.com/users/sportshead/following{/other_user}",
+              "gists_url": "https://api.github.com/users/sportshead/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/sportshead/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/sportshead/subscriptions",
+              "organizations_url": "https://api.github.com/users/sportshead/orgs",
+              "repos_url": "https://api.github.com/users/sportshead/repos",
+              "events_url": "https://api.github.com/users/sportshead/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/sportshead/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "finder",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": null,
+          "score": null
+        }
+      }
+    ]
+  }
+}
