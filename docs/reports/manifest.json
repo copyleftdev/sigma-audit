@@ -89,6 +89,24 @@
       "top_cve_cvss": 9.100000381469727,
       "top_cve_epss": 0.9295499920845032,
       "risk": "CRITICAL"
+    },
+    {
+      "slug": "unjs-nitro",
+      "repo": "unjs/nitro",
+      "date": "2026-04-13",
+      "total_cves": 17,
+      "critical": 0,
+      "high": 4,
+      "dependencies": 143,
+      "sast_findings": 5,
+      "pattern_findings": 5696,
+      "exploitable": 0,
+      "attack_chains": 26,
+      "techniques": 16,
+      "top_cve": "CVE-2018-6341",
+      "top_cve_cvss": 6.099999904632568,
+      "top_cve_epss": 0.10571999847888947,
+      "risk": "MEDIUM"
     }
   ]
 }

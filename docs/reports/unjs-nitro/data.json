@@ -1,0 +1,784 @@
+{
+  "meta": {
+    "repo": "unjs/nitro",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 143,
+    "source_files": {
+      "ts": 470,
+      "tsx": 26,
+      "py": 0,
+      "go": 0
+    },
+    "total_cves": 17,
+    "severity": {
+      "MEDIUM": 9,
+      "NONE": 3,
+      "HIGH": 4,
+      "LOW": 1
+    },
+    "sast_findings": 5,
+    "pattern_findings": 5696,
+    "exploitable": 0
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2018-6341",
+      "package": "npm:react-dom@19.2.4",
+      "severity": "MEDIUM",
+      "cvss": 6.099999904632568,
+      "epss_score": 0.10571999847888947,
+      "epss_percentile": 0.9327300190925598,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2018-6341:0"
+      ],
+      "cwes": [
+        "CWE-79"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2015-8855",
+      "package": "npm:semver@7.7.4",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.01092000026255846,
+      "epss_percentile": 0.7795900106430054,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2022-25883",
+      "package": "npm:semver@7.7.4",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.005979999899864197,
+      "epss_percentile": 0.6939899921417236,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-10491",
+      "package": "npm:express@5.2.1",
+      "severity": "MEDIUM",
+      "cvss": 4.0,
+      "epss_score": 0.0032999999821186066,
+      "epss_percentile": 0.5602099895477295,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-74"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2014-6393",
+      "package": "npm:express@5.2.1",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.002899999963119626,
+      "epss_percentile": 0.5244699716567993,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2023-0842",
+      "package": "npm:xml2js@0.6.2",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.002309999894350767,
+      "epss_percentile": 0.45949000120162964,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-9266",
+      "package": "npm:express@5.2.1",
+      "severity": "MEDIUM",
+      "cvss": 4.699999809265137,
+      "epss_score": 0.0012499999720603228,
+      "epss_percentile": 0.31716999411582947,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-601"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-43796",
+      "package": "npm:express@5.2.1",
+      "severity": "MEDIUM",
+      "cvss": 5.0,
+      "epss_score": 0.0012000000569969416,
+      "epss_percentile": 0.30943000316619873,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-79"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-29041",
+      "package": "npm:express@5.2.1",
+      "severity": "MEDIUM",
+      "cvss": 6.099999904632568,
+      "epss_score": 0.0011399999493733048,
+      "epss_percentile": 0.29980000853538513,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-601",
+        "CWE-1286"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2026-22028",
+      "package": "npm:preact@10.29.0",
+      "severity": "HIGH",
+      "cvss": 7.199999809265137,
+      "epss_score": 0.0006000000284984708,
+      "epss_percentile": 0.18832999467849731,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-843"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2026-33490",
+      "package": "npm:h3@2.0.1-rc.20",
+      "severity": "LOW",
+      "cvss": 3.700000047683716,
+      "epss_score": 0.0004400000034365803,
+      "epss_percentile": 0.13488000631332397,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-706"
+      ],
+      "techniques": [
+        {
+          "id": "T1036",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.008",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-33732",
+      "package": "npm:srvx@0.11.15",
+      "severity": "MEDIUM",
+      "cvss": 4.800000190734863,
+      "epss_score": 0.0004400000034365803,
+      "epss_percentile": 0.13490000367164612,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-706"
+      ],
+      "techniques": [
+        {
+          "id": "T1036",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.008",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-33129",
+      "package": "npm:h3@2.0.1-rc.20",
+      "severity": "MEDIUM",
+      "cvss": 5.900000095367432,
+      "epss_score": 0.0003600000054575503,
+      "epss_percentile": 0.10570000112056732,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-208"
+      ],
+      "techniques": [
+        {
+          "id": "T1082",
+          "source": "cwe"
+        },
+        {
+          "id": "T1592.002",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-23527",
+      "package": "npm:h3@2.0.1-rc.20",
+      "severity": "HIGH",
+      "cvss": 8.899999618530273,
+      "epss_score": 0.0003100000030826777,
+      "epss_percentile": 0.0877000018954277,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-444"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2026-33131",
+      "package": "npm:h3@2.0.1-rc.20",
+      "severity": "HIGH",
+      "cvss": 7.400000095367432,
+      "epss_score": 0.00022000000171829015,
+      "epss_percentile": 0.06029000133275986,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-290"
+      ],
+      "techniques": [
+        {
+          "id": "T1557",
+          "source": "cwe"
+        },
+        {
+          "id": "T1539",
+          "source": "cwe"
+        },
+        {
+          "id": "T1553.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1134.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1528",
+          "source": "cwe"
+        },
+        {
+          "id": "T1036.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1550.004",
+          "source": "cwe"
+        },
+        {
+          "id": "T1134",
+          "source": "cwe"
+        }
+      ]
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 26,
+    "overall_risk": "MEDIUM",
+    "techniques": [
+      "T1574.007",
+      "T1574.006",
+      "T1562.003",
+      "T1027",
+      "T1557",
+      "T1539",
+      "T1553.002",
+      "T1134.001",
+      "T1528",
+      "T1036.001",
+      "T1550.004",
+      "T1134",
+      "T1036",
+      "T1574.008",
+      "T1082",
+      "T1592.002"
+    ],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "npm:h3",
+        "cve": "CVE-2026-23527",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-23527",
+          "weakness:CWE-444"
+        ]
+      },
+      {
+        "entry": "npm:h3",
+        "cve": "CVE-2026-33131",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-33131",
+          "weakness:CWE-290",
+          "technique:T1557",
+          "technique:T1539",
+          "technique:T1553.002",
+          "technique:T1134.001",
+          "technique:T1528",
+          "technique:T1036.001",
+          "technique:T1550.004",
+          "technique:T1134"
+        ]
+      },
+      {
+        "entry": "npm:h3",
+        "cve": "CVE-2026-33128",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-33128",
+          "weakness:CWE-93"
+        ]
+      },
+      {
+        "entry": "npm:h3",
+        "cve": "CVE-2026-33128",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-33128",
+          "weakness:CWE-93"
+        ]
+      },
+      {
+        "entry": "npm:express",
+        "cve": "CVE-2014-6393",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2014-6393"
+        ]
+      },
+      {
+        "entry": "npm:express",
+        "cve": "CVE-2014-6393",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2014-6393"
+        ]
+      },
+      {
+        "entry": "npm:express",
+        "cve": "CVE-2024-9266",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-9266",
+          "weakness:CWE-601"
+        ]
+      },
+      {
+        "entry": "npm:express",
+        "cve": "CVE-2024-43796",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-43796",
+          "weakness:CWE-79"
+        ]
+      },
+      {
+        "entry": "npm:express",
+        "cve": "CVE-2024-43796",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-43796",
+          "weakness:CWE-79"
+        ]
+      },
+      {
+        "entry": "npm:express",
+        "cve": "CVE-2024-10491",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-10491",
+          "weakness:CWE-74",
+          "technique:T1574.007",
+          "technique:T1574.006",
+          "technique:T1562.003",
+          "technique:T1027"
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 5,
+    "by_severity": {
+      "WARNING": 3,
+      "INFO": 2
+    },
+    "by_rule": {
+      "detect-non-literal-regexp": 2,
+      "unsafe-formatstring": 2,
+      "prototype-pollution-loop": 1
+    },
+    "findings": [
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/config/resolvers/imports.ts",
+        "line": 29,
+        "message": "RegExp() called with a `options` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For t"
+      },
+      {
+        "rule": "prototype-pollution-loop",
+        "severity": "WARNING",
+        "path": "src/dev/vfs.ts",
+        "line": 68,
+        "message": "Possibility of prototype polluting function detected. By adding or modifying attributes of an object prototype, it is possible to create attributes that exist on every object, or replace critical attr"
+      },
+      {
+        "rule": "unsafe-formatstring",
+        "severity": "INFO",
+        "path": "src/runtime/internal/error/hooks.ts",
+        "line": 4,
+        "message": "Detected string concatenation with a non-literal variable in a util.format / console.log function. If an attacker injects a format specifier in the string, it will forge the log message. Try to use co"
+      },
+      {
+        "rule": "unsafe-formatstring",
+        "severity": "INFO",
+        "path": "src/runtime/internal/task.ts",
+        "line": 75,
+        "message": "Detected string concatenation with a non-literal variable in a util.format / console.log function. If an attacker injects a format specifier in the string, it will forge the log message. Try to use co"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "src/utils/regex.ts",
+        "line": 23,
+        "message": "RegExp() called with a `input` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For thi"
+      }
+    ]
+  },
+  "zentinel": {
+    "total": 5696,
+    "files_scanned": 497,
+    "errors": 6,
+    "warnings": 5669,
+    "by_rule": {
+      "community.assigned-undefined": 5626,
+      "typescript.security.settimeout-string": 10,
+      "typescript.security.process-exit": 9,
+      "community.express-check-csurf-middleware-usage": 6,
+      "community.useless-assignment": 6,
+      "community.aead-no-final": 6,
+      "community.sequelize-raw-query-1": 6,
+      "community.sequelize-raw-query-2": 6,
+      "community.sequelize-raw-query-4": 6,
+      "community.sequelize-raw-query-6": 6,
+      "community.disallow-old-tls-versions2": 6,
+      "typescript.security.hardcoded-secret": 3
+    },
+    "highlights": [
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/fixture/server/tasks/test.ts",
+        "line": 10,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/fixture/server/routes/wait-until.ts",
+        "line": 5,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/fixture/server/routes/context.ts",
+        "line": 5,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "examples/vite-ssr-html/app/entry-server.ts",
+        "line": 21,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "examples/cached-handler/server.ts",
+        "line": 6,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a secrets manager"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "test/tests.ts",
+        "line": 96,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/vite/hmr.test.ts",
+        "line": 121,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/vite/hmr.test.ts",
+        "line": 149,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "test/presets/azure-swa.test.ts",
+        "line": 54,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "typescript.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a secrets manager"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "test/fixture/nitro.config.ts",
+        "line": 123,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      }
+    ]
+  },
+  "github": {
+    "cve_issues": [],
+    "advisories": []
+  }
+}
