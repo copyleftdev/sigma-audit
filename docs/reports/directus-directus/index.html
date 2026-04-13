@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sigma Stack Audit: directus/directus</title>
+<style>
+  :root { --bg: #0f172a; --surface: #1e293b; --border: #334155; --text: #e2e8f0; --text2: #94a3b8;
+           --red: #ef4444; --orange: #f97316; --yellow: #eab308; --green: #22c55e; --blue: #3b82f6;
+           --purple: #a855f7; --cyan: #06b6d4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; padding: 24px; }
+  h1 { font-size: 1.8rem; margin-bottom: 4px; }
+  h2 { font-size: 1.3rem; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1rem; color: var(--text2); margin: 16px 0 8px; }
+  a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
+  code { background: rgba(255,255,255,0.06); padding: 1px 4px; border-radius: 3px; font-size: 0.8rem; }
+  .subtitle { color: var(--text2); font-size: 0.9rem; margin-bottom: 24px; }
+  .header { margin-bottom: 32px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .stat-num { font-size: 1.6rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-risk .stat-num { color: var(--red); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th { background: var(--surface); text-align: left; padding: 10px 12px; font-size: 0.75rem; color: var(--text2);
+       text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.85rem; vertical-align: top; }
+  tr:hover { background: rgba(59,130,246,0.04); }
+  .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+  .badge-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .badge-medium { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge-low, .badge-none { background: rgba(148,163,184,0.1); color: var(--text2); }
+  .badge-warning { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge-error { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-info { background: rgba(59,130,246,0.1); color: var(--blue); }
+  .badge-kev { background: rgba(239,68,68,0.2); color: var(--red); margin-left: 4px; }
+  .mat-badge { padding: 2px 6px; border-radius: 3px; font-size: 0.65rem; font-weight: 700; }
+  .mat-weap { background: rgba(239,68,68,0.2); color: var(--red); }
+  .mat-func { background: rgba(249,115,22,0.2); color: var(--orange); }
+  .mat-poc { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .mat-none { background: rgba(148,163,184,0.1); color: var(--text2); }
+  .cve-id { font-weight: 700; font-size: 0.9rem; }
+  .cve-pkg { color: var(--text2); font-size: 0.75rem; }
+  .cve-desc { color: var(--text2); font-size: 0.78rem; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cve-pub { color: var(--text2); font-size: 0.7rem; margin-top: 2px; }
+  .epss-val { font-weight: 700; font-size: 0.9rem; }
+  .epss-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin: 4px 0; }
+  .epss-fill { height: 100%; background: var(--orange); border-radius: 2px; }
+  .epss-pct { color: var(--text2); font-size: 0.7rem; }
+  .exploit-count { color: var(--text2); font-size: 0.7rem; margin: 4px 0; }
+  .exploit-link { font-size: 0.75rem; margin: 2px 0; }
+  .exploit-more { font-size: 0.7rem; color: var(--text2); }
+  .tech-badge { display: inline-block; padding: 1px 6px; background: rgba(6,182,212,0.12); color: var(--cyan);
+                 border-radius: 3px; font-size: 0.7rem; margin: 1px; font-weight: 600; }
+  .tech-more { font-size: 0.7rem; color: var(--text2); }
+  .cwe-badge { display: inline-block; padding: 1px 6px; background: rgba(168,85,247,0.12); color: var(--purple);
+                border-radius: 3px; font-size: 0.7rem; margin: 1px; }
+  .tech-col { max-width: 220px; }
+  .rem-entry { font-size: 0.78rem; margin: 2px 0; }
+  .gh-issue { display: block; font-size: 0.75rem; margin: 2px 0; padding: 2px 6px; border-radius: 3px; }
+  .issue-open { background: rgba(34,197,94,0.1); }
+  .issue-closed { background: rgba(148,163,184,0.05); color: var(--text2); }
+  .no-issue { color: var(--text2); font-size: 0.7rem; }
+  .surface-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .chain { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .chain-risk { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+  .chain-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .chain-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .chain-mat { color: var(--text2); font-size: 0.7rem; margin-left: 8px; }
+  .chain-path { color: var(--text2); font-size: 0.75rem; margin-top: 4px; }
+  .techs-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+  .exploits { margin-top: 4px; }
+  section { margin-bottom: 32px; }
+  .tools-bar { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .tool-badge { padding: 6px 14px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border);
+                 font-size: 0.8rem; font-weight: 600; }
+  .footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text2); font-size: 0.75rem; text-align: center; }
+  @media (max-width: 768px) {
+    body { padding: 12px; }
+    .surface-summary { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.75rem; }
+    td, th { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Sigma Stack Audit</h1>
+  <div class="subtitle">
+    <a href="https://github.com/directus/directus" target="_blank">directus/directus</a>
+    &middot; 2026-04-13 03:24 UTC
+  </div>
+  <div class="tools-bar">
+    <span class="tool-badge">Vajra</span>
+    <span class="tool-badge">Semgrep</span>
+    <span class="tool-badge">Zentinel</span>
+    <span class="tool-badge">VulnGraph MCP</span>
+    <span class="tool-badge">GitHub</span>
+  </div>
+</div>
+
+<section id="overview">
+  <h2>Overview</h2>
+  <div class="summary-grid">
+    <div class="stat-card"><div class="stat-num">316</div><div class="stat-label">Dependencies</div></div>
+    <div class="stat-card"><div class="stat-num">2678</div><div class="stat-label">TS/TSX Files</div></div>
+    <div class="stat-card"><div class="stat-num">102</div><div class="stat-label">CVEs Found</div></div>
+    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Critical</div></div>
+    <div class="stat-card"><div class="stat-num">29</div><div class="stat-label">High</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">SAST Findings</div></div>
+    <div class="stat-card"><div class="stat-num">41794</div><div class="stat-label">Pattern Findings</div></div>
+    <div class="stat-card stat-risk"><div class="stat-num">3</div><div class="stat-label">Exploitable</div></div>
+  </div>
+</section>
+
+<section id="cve-intel">
+  <h2>CVE Intelligence &amp; Exploitability</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+    Each CVE is enriched with EPSS exploit probability, proof-of-concept references,
+    ATT&CK technique mapping (via CAPEC bridge), and GitHub issue cross-reference.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>CVE / Package</th>
+        <th>Severity</th>
+        <th>EPSS</th>
+        <th>Exploitability</th>
+        <th>ATT&CK / CWE</th>
+        <th>Remediation / Issues</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-54313" target="_blank">CVE-2025-54313</a></div>
+            <div class="cve-pkg">npm:eslint-config-prettier@catalog:</div>
+            <div class="cve-desc">eslint-config-prettier 8.10.1, 9.1.1, 10.1.6, and 10.1.7 has embedded malicious code for a supply chain compromise. Installing an affected package executes an install.js file that launches the node-gyp.dll malware on Windows.</div>
+            <div class="cve-pub">Published: 2025-07-19</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.5
+          </td>
+          <td>
+            <div class="epss-val">10.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:10.462000221014023%"></div></div>
+            <div class="epss-pct">top 6.8%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-weap">WEAPONIZED</span>
+            <span class="badge badge-kev">KEV</span>
+            <div class="exploit-count">2 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2025-54313+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2025-54313:0</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2025-54313+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2025-54313:1</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/506.html" target="_blank" class="cwe-badge">CWE-506</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1027/009" target="_blank" class="tech-badge">T1027.009</a> <a href="https://attack.mitre.org/techniques/T1195/001" target="_blank" class="tech-badge">T1195.001</a> <a href="https://attack.mitre.org/techniques/T1218/001" target="_blank" class="tech-badge">T1218.001</a> <a href="https://attack.mitre.org/techniques/T1195/002" target="_blank" class="tech-badge">T1195.002</a> <a href="https://attack.mitre.org/techniques/T1027/003" target="_blank" class="tech-badge">T1027.003</a> <a href="https://attack.mitre.org/techniques/T1027/004" target="_blank" class="tech-badge">T1027.004</a> <a href="https://attack.mitre.org/techniques/T1221" target="_blank" class="tech-badge">T1221</a> <a href="https://attack.mitre.org/techniques/T1001/002" target="_blank" class="tech-badge">T1001.002</a></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:eslint-config-prettier: >= 8.10.1 &rarr; <strong>8.10.2</strong></div><div class='rem-entry'>npm:eslint-config-prettier: >= 9.1.1 &rarr; <strong>9.1.2</strong></div><div class='rem-entry'>npm:eslint-config-prettier: >= 10.1.6 &rarr; <strong>10.1.8</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-32804" target="_blank">CVE-2021-32804</a></div>
+            <div class="cve-pkg">npm:tar@catalog:</div>
+            <div class="cve-desc">The npm package "tar" (aka node-tar) before versions 6.1.1, 5.0.6, 4.4.14, and 3.3.2 has a arbitrary File Creation/Overwrite vulnerability due to insufficient absolute path sanitization. node-tar aims to prevent extraction of absolute file paths by turning absolute paths into relative paths when the</div>
+            <div class="cve-pub">Published: 2021-08-03</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 8.2
+          </td>
+          <td>
+            <div class="epss-val">85.0%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:84.98200178146362%"></div></div>
+            <div class="epss-pct">top 0.6%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-func">FUNCTIONAL</span>
+            
+            <div class="exploit-count">1 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2021-32804+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2021-32804:0</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank" class="cwe-badge">CWE-22</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:tar: all versions &rarr; <strong>3.2.2</strong></div><div class='rem-entry'>npm:tar: >= 4.0.0 &rarr; <strong>4.4.14</strong></div><div class='rem-entry'>npm:tar: >= 5.0.0 &rarr; <strong>5.0.6</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10542" target="_blank">CVE-2016-10542</a></div>
+            <div class="cve-pkg">npm:ws@catalog:</div>
+            <div class="cve-desc">ws is a "simple to use, blazing fast and thoroughly tested websocket client, server and console for node.js, up-to-date against RFC-6455". By sending an overly long websocket payload to a `ws` server, it is possible to crash the node process. This affects ws 1.1.0 and earlier.</div>
+            <div class="cve-pub">Published: 2018-05-31</div>
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">66.1%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:66.07499718666077%"></div></div>
+            <div class="epss-pct">top 1.5%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank" class="cwe-badge">CWE-400</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1499" target="_blank" class="tech-badge">T1499</a></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:ws: all versions &rarr; <strong>1.1.1</strong></div><div class='rem-entry'>cpe:HackerOne:ws node module: >= <=1.1.0 &rarr; <strong>no fix</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2013-4660" target="_blank">CVE-2013-4660</a></div>
+            <div class="cve-pkg">npm:js-yaml@catalog:</div>
+            <div class="cve-desc">The JS-YAML module before 2.0.5 for Node.js parses input without properly considering the unsafe !!js/function tag, which allows remote attackers to execute arbitrary code via a crafted string that triggers an eval operation.</div>
+            <div class="cve-pub">Published: 2013-06-28</div>
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">64.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:64.50700163841248%"></div></div>
+            <div class="epss-pct">top 1.5%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-func">FUNCTIONAL</span>
+            
+            <div class="exploit-count">1 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://www.exploit-db.com/exploits/28655" target="_blank">EDB:28655</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:js-yaml: all versions &rarr; <strong>2.0.5</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2015-9235" target="_blank">CVE-2015-9235</a></div>
+            <div class="cve-pkg">npm:jsonwebtoken@catalog:</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">32.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:32.46999979019165%"></div></div>
+            <div class="epss-pct">top 3.1%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">4 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2015-9235+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2015-9235:0</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2015-9235+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2015-9235:1</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2015-9235+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2015-9235:2</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2015-9235+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2015-9235:3</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank" class="cwe-badge">CWE-20</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1574/007" target="_blank" class="tech-badge">T1574.007</a> <a href="https://attack.mitre.org/techniques/T1539" target="_blank" class="tech-badge">T1539</a> <a href="https://attack.mitre.org/techniques/T1553/002" target="_blank" class="tech-badge">T1553.002</a> <a href="https://attack.mitre.org/techniques/T1574/006" target="_blank" class="tech-badge">T1574.006</a> <a href="https://attack.mitre.org/techniques/T1562/003" target="_blank" class="tech-badge">T1562.003</a> <a href="https://attack.mitre.org/techniques/T1027" target="_blank" class="tech-badge">T1027</a> <a href="https://attack.mitre.org/techniques/T1036/001" target="_blank" class="tech-badge">T1036.001</a></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10742" target="_blank">CVE-2019-10742</a></div>
+            <div class="cve-pkg">npm:axios@catalog:</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">13.1%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:13.089999556541443%"></div></div>
+            <div class="epss-pct">top 5.9%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">1 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2019-10742+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2019-10742:0</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-3749" target="_blank">CVE-2021-3749</a></div>
+            <div class="cve-pkg">npm:axios@catalog:</div>
+            <div class="cve-desc">axios is vulnerable to Inefficient Regular Expression Complexity</div>
+            <div class="cve-pub">Published: 2021-08-31</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.5
+          </td>
+          <td>
+            <div class="epss-val">8.3%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:8.262000232934952%"></div></div>
+            <div class="epss-pct">top 7.8%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">1 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2021-3749+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2021-3749:0</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/1333.html" target="_blank" class="cwe-badge">CWE-1333</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:axios: all versions &rarr; <strong>0.21.2</strong></div><div class='rem-entry'>cpe:axios:axios/axios: >= unspecified &rarr; <strong>0.21.1</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-23337" target="_blank">CVE-2021-23337</a></div>
+            <div class="cve-pkg">npm:lodash-es@catalog:</div>
+            <div class="cve-desc">Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.</div>
+            <div class="cve-pub">Published: 2021-02-15</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.2
+          </td>
+          <td>
+            <div class="epss-val">4.3%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:4.314000159502029%"></div></div>
+            <div class="epss-pct">top 11.1%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">2 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2021-23337+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2021-23337:0</a></div><div class='exploit-link'><a href="https://github.com/projectdiscovery/nuclei-templates/search?q=CVE-2021-23337" target="_blank">Nuclei:CVE-2021-23337</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:lodash.template: all versions &rarr; <strong>no fix</strong></div><div class='rem-entry'>npm:lodash: all versions &rarr; <strong>4.17.21</strong></div><div class='rem-entry'>RubyGems:lodash-rails: all versions &rarr; <strong>4.17.21</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2020-8203" target="_blank">CVE-2020-8203</a></div>
+            <div class="cve-pkg">npm:lodash-es@catalog:</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">3.6%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:3.57000008225441%"></div></div>
+            <div class="epss-pct">top 12.3%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/770.html" target="_blank" class="cwe-badge">CWE-770</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1498/001" target="_blank" class="tech-badge">T1498.001</a> <a href="https://attack.mitre.org/techniques/T1499/001" target="_blank" class="tech-badge">T1499.001</a> <a href="https://attack.mitre.org/techniques/T1499/003" target="_blank" class="tech-badge">T1499.003</a> <a href="https://attack.mitre.org/techniques/T1498/002" target="_blank" class="tech-badge">T1498.002</a> <a href="https://attack.mitre.org/techniques/T1499/002" target="_blank" class="tech-badge">T1499.002</a> <a href="https://attack.mitre.org/techniques/T1499" target="_blank" class="tech-badge">T1499</a></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10744" target="_blank">CVE-2019-10744</a></div>
+            <div class="cve-pkg">npm:lodash-es@catalog:</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">3.3%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:3.254000097513199%"></div></div>
+            <div class="epss-pct">top 12.9%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-39338" target="_blank">CVE-2024-39338</a></div>
+            <div class="cve-pkg">npm:axios@catalog:</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 4.0
+          </td>
+          <td>
+            <div class="epss-val">2.9%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:2.879999950528145%"></div></div>
+            <div class="epss-pct">top 13.7%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-26144" target="_blank">CVE-2023-26144</a></div>
+            <div class="cve-pkg">npm:graphql@catalog:</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 5.3
+          </td>
+          <td>
+            <div class="epss-val">2.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:2.5289999321103096%"></div></div>
+            <div class="epss-pct">top 14.6%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">1 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2023-26144+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2023-26144:0</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank" class="cwe-badge">CWE-400</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1499" target="_blank" class="tech-badge">T1499</a></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</section>
+
+
+        <section id="attack-surface">
+          <h2>Attack Surface &amp; Kill Chains</h2>
+          <div class="surface-summary">
+            <div class="stat-card"><div class="stat-num">97</div><div class="stat-label">Attack Chains</div></div>
+            <div class="stat-card"><div class="stat-num">74</div><div class="stat-label">ATT&CK Techniques</div></div>
+            <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Threat Actors</div></div>
+            <div class="stat-card stat-risk"><div class="stat-num">HIGH</div><div class="stat-label">Overall Risk</div></div>
+          </div>
+          <h3>Top Kill Chains</h3>
+          <div class="chains">
+            <div class="chain">
+              <span class="chain-risk chain-high">HIGH</span>
+              <strong>npm:tar</strong> &rarr; CVE-2021-32804
+              <span class="chain-mat">FUNCTIONAL</span>
+              <div class="chain-path">vulnerability:CVE-2021-32804 &rarr; weakness:CWE-22</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-high">HIGH</span>
+              <strong>npm:tar</strong> &rarr; CVE-2021-32804
+              <span class="chain-mat">FUNCTIONAL</span>
+              <div class="chain-path">vulnerability:CVE-2021-32804 &rarr; weakness:CWE-22</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-high">HIGH</span>
+              <strong>npm:tar</strong> &rarr; CVE-2021-32804
+              <span class="chain-mat">FUNCTIONAL</span>
+              <div class="chain-path">vulnerability:CVE-2021-32804 &rarr; weakness:CWE-22</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-high">HIGH</span>
+              <strong>npm:tar</strong> &rarr; CVE-2021-32804
+              <span class="chain-mat">FUNCTIONAL</span>
+              <div class="chain-path">vulnerability:CVE-2021-32804 &rarr; weakness:CWE-22</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-high">HIGH</span>
+              <strong>npm:axios</strong> &rarr; CVE-2025-62718
+              <span class="chain-mat">NONE</span>
+              <div class="chain-path">vulnerability:CVE-2025-62718 &rarr; weakness:CWE-918 &rarr; weakness:CWE-441 &rarr; technique:T1090.001</div>
+            </div></div>
+          <h3>Exposed ATT&CK Techniques</h3>
+          <div class="techs-grid"><a href="https://attack.mitre.org/techniques/T1574/007" target="_blank" class="tech-badge">T1574.007</a> <a href="https://attack.mitre.org/techniques/T1574/006" target="_blank" class="tech-badge">T1574.006</a> <a href="https://attack.mitre.org/techniques/T1562/003" target="_blank" class="tech-badge">T1562.003</a> <a href="https://attack.mitre.org/techniques/T1027" target="_blank" class="tech-badge">T1027</a> <a href="https://attack.mitre.org/techniques/T1033" target="_blank" class="tech-badge">T1033</a> <a href="https://attack.mitre.org/techniques/T1592" target="_blank" class="tech-badge">T1592</a> <a href="https://attack.mitre.org/techniques/T1069" target="_blank" class="tech-badge">T1069</a> <a href="https://attack.mitre.org/techniques/T1615" target="_blank" class="tech-badge">T1615</a> <a href="https://attack.mitre.org/techniques/T1036/005" target="_blank" class="tech-badge">T1036.005</a> <a href="https://attack.mitre.org/techniques/T1007" target="_blank" class="tech-badge">T1007</a> <a href="https://attack.mitre.org/techniques/T1135" target="_blank" class="tech-badge">T1135</a> <a href="https://attack.mitre.org/techniques/T1120" target="_blank" class="tech-badge">T1120</a> <a href="https://attack.mitre.org/techniques/T1082" target="_blank" class="tech-badge">T1082</a> <a href="https://attack.mitre.org/techniques/T1217" target="_blank" class="tech-badge">T1217</a> <a href="https://attack.mitre.org/techniques/T1595" target="_blank" class="tech-badge">T1595</a> <a href="https://attack.mitre.org/techniques/T1016" target="_blank" class="tech-badge">T1016</a> <a href="https://attack.mitre.org/techniques/T1087" target="_blank" class="tech-badge">T1087</a> <a href="https://attack.mitre.org/techniques/T1083" target="_blank" class="tech-badge">T1083</a> <a href="https://attack.mitre.org/techniques/T1049" target="_blank" class="tech-badge">T1049</a> <a href="https://attack.mitre.org/techniques/T1134/001" target="_blank" class="tech-badge">T1134.001</a></div>
+        </section>
+
+<section id="semgrep">
+  <h2>Static Analysis (Semgrep)</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">0 findings across the codebase.</p>
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section id="zentinel">
+  <h2>Security Patterns (Zentinel)</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+    41794 findings in 500 files.
+    394 errors, 40608 warnings.
+  </p>
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr>
+          <td><span class="badge badge-error">ERROR</span></td>
+          <td>community.aead-no-final</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to </td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-1</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-2</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-4</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-6</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.disallow-old-tls-versions2</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-error">ERROR</span></td>
+          <td>community.aead-no-final</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to </td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-1</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-2</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-4</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-6</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.disallow-old-tls-versions2</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:106</code></td>
+          <td>"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-error">ERROR</span></td>
+          <td>community.aead-no-final</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to </td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-1</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-2</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-4</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-6</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.disallow-old-tls-versions2</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-error">ERROR</span></td>
+          <td>community.aead-no-final</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to </td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>community.sequelize-raw-query-1</td>
+          <td><code>tests/blackbox/tests/db/websocket/auth.test.ts:156</code></td>
+          <td>"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data re</td>
+        </tr></tbody>
+  </table>
+</section>
+
+<div class="footer">
+  Generated by Sigma Stack Audit &middot; Vajra + Semgrep + Zentinel + VulnGraph MCP &middot; 2026-04-13 03:24 UTC
+</div>
+</body>
+</html>

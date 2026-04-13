@@ -71,6 +71,24 @@
       "top_cve_cvss": 0.0,
       "top_cve_epss": 0.3246999979019165,
       "risk": "HIGH"
+    },
+    {
+      "slug": "directus-directus",
+      "repo": "directus/directus",
+      "date": "2026-04-13",
+      "total_cves": 102,
+      "critical": 2,
+      "high": 29,
+      "dependencies": 316,
+      "sast_findings": 0,
+      "pattern_findings": 41794,
+      "exploitable": 3,
+      "attack_chains": 97,
+      "techniques": 74,
+      "top_cve": "CVE-2025-54313",
+      "top_cve_cvss": 7.5,
+      "top_cve_epss": 0.10462000221014023,
+      "risk": "HIGH"
     }
   ]
 }
