@@ -1,0 +1,557 @@
+{
+  "meta": {
+    "repo": "django/django",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 6,
+    "source_files": {
+      "ts": 0,
+      "tsx": 0,
+      "py": 2893,
+      "go": 0
+    },
+    "total_cves": 5,
+    "severity": {
+      "MEDIUM": 2,
+      "HIGH": 3
+    },
+    "sast_findings": 625,
+    "pattern_findings": 0,
+    "exploitable": 1
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2019-5786",
+      "package": "npm:puppeteer@24.22.0",
+      "severity": "MEDIUM",
+      "cvss": 6.5,
+      "epss_score": 0.8938400149345398,
+      "epss_percentile": 0.9954400062561035,
+      "exploit_maturity": "WEAPONIZED",
+      "maturity_rationale": "KEV-listed; 3 public PoCs",
+      "kev_listed": true,
+      "exploit_count": 3,
+      "exploits": [
+        "EDB:46812",
+        "EDB:46812",
+        "GitHub-PoC:CVE-2019-5786:0"
+      ],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2020-7729",
+      "package": "npm:grunt@1.6.1",
+      "severity": "HIGH",
+      "cvss": 7.099999904632568,
+      "epss_score": 0.02418999932706356,
+      "epss_percentile": 0.8512700200080872,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2022-1537",
+      "package": "npm:grunt@1.6.1",
+      "severity": "HIGH",
+      "cvss": 7.800000190734863,
+      "epss_score": 0.002460000105202198,
+      "epss_percentile": 0.4789600074291229,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-367"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2022-0436",
+      "package": "npm:grunt@1.6.1",
+      "severity": "HIGH",
+      "cvss": 7.099999904632568,
+      "epss_score": 0.0010000000474974513,
+      "epss_percentile": 0.27761000394821167,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-22"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2025-50537",
+      "package": "npm:eslint@9.39.1",
+      "severity": "MEDIUM",
+      "cvss": 5.5,
+      "epss_score": 0.0002099999983329326,
+      "epss_percentile": 0.056699998676776886,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 5,
+    "overall_risk": "CRITICAL",
+    "techniques": [],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "npm:puppeteer",
+        "cve": "CVE-2019-5786",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          "vulnerability:CVE-2019-5786"
+        ]
+      },
+      {
+        "entry": "npm:grunt",
+        "cve": "CVE-2020-7729",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2020-7729"
+        ]
+      },
+      {
+        "entry": "npm:grunt",
+        "cve": "CVE-2022-1537",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2022-1537",
+          "weakness:CWE-367"
+        ]
+      },
+      {
+        "entry": "npm:grunt",
+        "cve": "CVE-2022-0436",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2022-0436",
+          "weakness:CWE-22"
+        ]
+      },
+      {
+        "entry": "npm:eslint",
+        "cve": "CVE-2025-50537",
+        "risk": "LOW",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2025-50537"
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 625,
+    "by_severity": {
+      "WARNING": 454,
+      "INFO": 94,
+      "ERROR": 77
+    },
+    "by_rule": {
+      "custom-expression-as-sql": 160,
+      "template-blocktranslate-no-escape": 84,
+      "sqlalchemy-execute-raw-query": 76,
+      "extends-custom-expression": 60,
+      "avoid-mark-safe": 47,
+      "filter-with-is-safe": 39,
+      "non-literal-import": 34,
+      "formatted-sql-query": 34,
+      "direct-use-of-httpresponse": 18,
+      "avoid-pickle": 15,
+      "template-translate-as-no-escape": 10,
+      "avoid-raw-sql": 6,
+      "html-safe": 6,
+      "direct-use-of-jinja2": 5,
+      "unvalidated-password": 4
+    },
+    "findings": [
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/apps/config.py",
+        "line": 111,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/apps/config.py",
+        "line": 123,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/apps/config.py",
+        "line": 178,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/apps/config.py",
+        "line": 193,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/apps/config.py",
+        "line": 210,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/apps/config.py",
+        "line": 269,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "non-literal-import",
+        "severity": "WARNING",
+        "path": "django/conf/__init__.py",
+        "line": 162,
+        "message": "Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic values in `importlib.import_module()` or use a whitelist to prevent running untrus"
+      },
+      {
+        "rule": "avoid-mark-safe",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/helpers.py",
+        "line": 161,
+        "message": "'mark_safe()' is used to mark a string as \"safe\" for HTML output. This disables escaping and could therefore subject the content to XSS attacks. Use 'django.utils.html.format_html()' to build HTML for"
+      },
+      {
+        "rule": "avoid-mark-safe",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/helpers.py",
+        "line": 193,
+        "message": "'mark_safe()' is used to mark a string as \"safe\" for HTML output. This disables escaping and could therefore subject the content to XSS attacks. Use 'django.utils.html.format_html()' to build HTML for"
+      },
+      {
+        "rule": "avoid-mark-safe",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/helpers.py",
+        "line": 200,
+        "message": "'mark_safe()' is used to mark a string as \"safe\" for HTML output. This disables escaping and could therefore subject the content to XSS attacks. Use 'django.utils.html.format_html()' to build HTML for"
+      },
+      {
+        "rule": "avoid-mark-safe",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/options.py",
+        "line": 383,
+        "message": "'mark_safe()' is used to mark a string as \"safe\" for HTML output. This disables escaping and could therefore subject the content to XSS attacks. Use 'django.utils.html.format_html()' to build HTML for"
+      },
+      {
+        "rule": "avoid-mark-safe",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/options.py",
+        "line": 385,
+        "message": "'mark_safe()' is used to mark a string as \"safe\" for HTML output. This disables escaping and could therefore subject the content to XSS attacks. Use 'django.utils.html.format_html()' to build HTML for"
+      },
+      {
+        "rule": "open-redirect",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/options.py",
+        "line": 1501,
+        "message": "Data from request (redirect_url) is passed to redirect(). This is an open redirect and could be exploited. Ensure you are redirecting to safe URLs by using django.utils.http.is_safe_url(). See https:/"
+      },
+      {
+        "rule": "open-redirect",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/options.py",
+        "line": 1572,
+        "message": "Data from request (redirect_url) is passed to redirect(). This is an open redirect and could be exploited. Ensure you are redirecting to safe URLs by using django.utils.http.is_safe_url(). See https:/"
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/static/admin/js/inlines.js",
+        "line": 26,
+        "message": "RegExp() called with a `prefix` function argument, this might allow an attacker to cause a Regular Expression Denial-of-Service (ReDoS) within your application as RegExP blocks the main thread. For th"
+      },
+      {
+        "rule": "template-translate-as-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/actions.html",
+        "line": 8,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/actions.html",
+        "line": 16,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/auth/user/change_password.html",
+        "line": 30,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/auth/user/change_password.html",
+        "line": 34,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/auth/user/change_password.html",
+        "line": 36,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/change_form.html",
+        "line": 22,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/change_form.html",
+        "line": 46,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/change_list.html",
+        "line": 54,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/change_list_object_tools.html",
+        "line": 8,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/change_list_results.html",
+        "line": 17,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/date_hierarchy.html",
+        "line": 4,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/delete_confirmation.html",
+        "line": 25,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/delete_confirmation.html",
+        "line": 30,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/delete_confirmation.html",
+        "line": 35,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/delete_selected_confirmation.html",
+        "line": 23,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/delete_selected_confirmation.html",
+        "line": 26,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/delete_selected_confirmation.html",
+        "line": 29,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/filter.html",
+        "line": 4,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/login.html",
+        "line": 24,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/login.html",
+        "line": 40,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "django-no-csrf-token",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/templates/admin/login.html",
+        "line": 47,
+        "message": "Manually-created forms in django templates should specify a csrf_token to prevent CSRF attacks."
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/object_history.html",
+        "line": 38,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/object_history.html",
+        "line": 52,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/pagination.html",
+        "line": 4,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/search_form.html",
+        "line": 4,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/search_form.html",
+        "line": 11,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/search_form.html",
+        "line": 11,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/widgets/related_widget_wrapper.html",
+        "line": 11,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/widgets/related_widget_wrapper.html",
+        "line": 19,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/widgets/related_widget_wrapper.html",
+        "line": 27,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/admin/widgets/related_widget_wrapper.html",
+        "line": 34,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-translate-as-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/registration/password_change_form.html",
+        "line": 4,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/registration/password_change_form.html",
+        "line": 27,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      },
+      {
+        "rule": "template-autoescape-off",
+        "severity": "WARNING",
+        "path": "django/contrib/admin/templates/registration/password_reset_email.html",
+        "line": 1,
+        "message": "Detected a template block where autoescaping is explicitly disabled with '{% autoescape off %}'. This allows rendering of raw HTML in this segment. Turn autoescaping on to prevent cross-site scripting"
+      },
+      {
+        "rule": "template-blocktranslate-no-escape",
+        "severity": "INFO",
+        "path": "django/contrib/admin/templates/registration/password_reset_email.html",
+        "line": 2,
+        "message": "Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators could include malicious script tags in their translations. Consider using `force_esc"
+      }
+    ]
+  },
+  "zentinel": {
+    "total": 0,
+    "by_rule": {},
+    "highlights": []
+  },
+  "github": {
+    "cve_issues": [],
+    "advisories": []
+  }
+}

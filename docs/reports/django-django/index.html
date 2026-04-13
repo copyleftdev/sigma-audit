@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sigma Stack Audit: django/django</title>
+<style>
+  :root { --bg: #0f172a; --surface: #1e293b; --border: #334155; --text: #e2e8f0; --text2: #94a3b8;
+           --red: #ef4444; --orange: #f97316; --yellow: #eab308; --green: #22c55e; --blue: #3b82f6;
+           --purple: #a855f7; --cyan: #06b6d4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; padding: 24px; }
+  h1 { font-size: 1.8rem; margin-bottom: 4px; }
+  h2 { font-size: 1.3rem; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1rem; color: var(--text2); margin: 16px 0 8px; }
+  a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
+  code { background: rgba(255,255,255,0.06); padding: 1px 4px; border-radius: 3px; font-size: 0.8rem; }
+  .subtitle { color: var(--text2); font-size: 0.9rem; margin-bottom: 24px; }
+  .header { margin-bottom: 32px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .stat-num { font-size: 1.6rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-risk .stat-num { color: var(--red); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th { background: var(--surface); text-align: left; padding: 10px 12px; font-size: 0.75rem; color: var(--text2);
+       text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.85rem; vertical-align: top; }
+  tr:hover { background: rgba(59,130,246,0.04); }
+  .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+  .badge-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .badge-medium { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge-low, .badge-none { background: rgba(148,163,184,0.1); color: var(--text2); }
+  .badge-warning { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge-error { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-info { background: rgba(59,130,246,0.1); color: var(--blue); }
+  .badge-kev { background: rgba(239,68,68,0.2); color: var(--red); margin-left: 4px; }
+  .mat-badge { padding: 2px 6px; border-radius: 3px; font-size: 0.65rem; font-weight: 700; }
+  .mat-weap { background: rgba(239,68,68,0.2); color: var(--red); }
+  .mat-func { background: rgba(249,115,22,0.2); color: var(--orange); }
+  .mat-poc { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .mat-none { background: rgba(148,163,184,0.1); color: var(--text2); }
+  .cve-id { font-weight: 700; font-size: 0.9rem; }
+  .cve-pkg { color: var(--text2); font-size: 0.75rem; }
+  .cve-desc { color: var(--text2); font-size: 0.78rem; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cve-pub { color: var(--text2); font-size: 0.7rem; margin-top: 2px; }
+  .epss-val { font-weight: 700; font-size: 0.9rem; }
+  .epss-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin: 4px 0; }
+  .epss-fill { height: 100%; background: var(--orange); border-radius: 2px; }
+  .epss-pct { color: var(--text2); font-size: 0.7rem; }
+  .exploit-count { color: var(--text2); font-size: 0.7rem; margin: 4px 0; }
+  .exploit-link { font-size: 0.75rem; margin: 2px 0; }
+  .exploit-more { font-size: 0.7rem; color: var(--text2); }
+  .tech-badge { display: inline-block; padding: 1px 6px; background: rgba(6,182,212,0.12); color: var(--cyan);
+                 border-radius: 3px; font-size: 0.7rem; margin: 1px; font-weight: 600; }
+  .tech-more { font-size: 0.7rem; color: var(--text2); }
+  .cwe-badge { display: inline-block; padding: 1px 6px; background: rgba(168,85,247,0.12); color: var(--purple);
+                border-radius: 3px; font-size: 0.7rem; margin: 1px; }
+  .tech-col { max-width: 220px; }
+  .rem-entry { font-size: 0.78rem; margin: 2px 0; }
+  .gh-issue { display: block; font-size: 0.75rem; margin: 2px 0; padding: 2px 6px; border-radius: 3px; }
+  .issue-open { background: rgba(34,197,94,0.1); }
+  .issue-closed { background: rgba(148,163,184,0.05); color: var(--text2); }
+  .no-issue { color: var(--text2); font-size: 0.7rem; }
+  .surface-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .chain { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .chain-risk { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+  .chain-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .chain-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .chain-mat { color: var(--text2); font-size: 0.7rem; margin-left: 8px; }
+  .chain-path { color: var(--text2); font-size: 0.75rem; margin-top: 4px; }
+  .techs-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+  .exploits { margin-top: 4px; }
+  section { margin-bottom: 32px; }
+  .tools-bar { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .tool-badge { padding: 6px 14px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border);
+                 font-size: 0.8rem; font-weight: 600; }
+  .footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text2); font-size: 0.75rem; text-align: center; }
+  @media (max-width: 768px) {
+    body { padding: 12px; }
+    .surface-summary { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.75rem; }
+    td, th { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Sigma Stack Audit</h1>
+  <div class="subtitle">
+    <a href="https://github.com/django/django" target="_blank">django/django</a>
+    &middot; 2026-04-13 03:43 UTC
+  </div>
+  <div class="tools-bar">
+    <span class="tool-badge">Vajra</span>
+    <span class="tool-badge">Semgrep</span>
+    <span class="tool-badge">Zentinel</span>
+    <span class="tool-badge">VulnGraph MCP</span>
+    <span class="tool-badge">GitHub</span>
+  </div>
+</div>
+
+<section id="overview">
+  <h2>Overview</h2>
+  <div class="summary-grid">
+    <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Dependencies</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">TS/TSX Files</div></div>
+    <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">CVEs Found</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Critical</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">High</div></div>
+    <div class="stat-card"><div class="stat-num">625</div><div class="stat-label">SAST Findings</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Pattern Findings</div></div>
+    <div class="stat-card stat-risk"><div class="stat-num">1</div><div class="stat-label">Exploitable</div></div>
+  </div>
+</section>
+
+<section id="cve-intel">
+  <h2>CVE Intelligence &amp; Exploitability</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+    Each CVE is enriched with EPSS exploit probability, proof-of-concept references,
+    ATT&CK technique mapping (via CAPEC bridge), and GitHub issue cross-reference.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>CVE / Package</th>
+        <th>Severity</th>
+        <th>EPSS</th>
+        <th>Exploitability</th>
+        <th>ATT&CK / CWE</th>
+        <th>Remediation / Issues</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5786" target="_blank">CVE-2019-5786</a></div>
+            <div class="cve-pkg">npm:puppeteer@24.22.0</div>
+            <div class="cve-desc">Object lifetime issue in Blink in Google Chrome prior to 72.0.3626.121 allowed a remote attacker to potentially perform out of bounds memory access via a crafted HTML page.</div>
+            <div class="cve-pub">Published: 2019-06-27</div>
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 6.5
+          </td>
+          <td>
+            <div class="epss-val">89.4%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:89.38400149345398%"></div></div>
+            <div class="epss-pct">top 0.5%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-weap">WEAPONIZED</span>
+            <span class="badge badge-kev">KEV</span>
+            <div class="exploit-count">3 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://www.exploit-db.com/exploits/46812" target="_blank">EDB:46812</a></div><div class='exploit-link'><a href="https://www.exploit-db.com/exploits/46812" target="_blank">EDB:46812</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2019-5786+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2019-5786:0</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>cpe:Google:Chrome: >= unspecified &rarr; <strong>72.0.3626.121</strong></div><div class='rem-entry'>npm:puppeteer: all versions &rarr; <strong>1.13.0</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2020-7729" target="_blank">CVE-2020-7729</a></div>
+            <div class="cve-pkg">npm:grunt@1.6.1</div>
+            <div class="cve-desc">The package grunt before 1.3.0 are vulnerable to Arbitrary Code Execution due to the default usage of the function load() instead of its secure replacement safeLoad() of the package js-yaml inside grunt.file.readYAML.</div>
+            <div class="cve-pub">Published: 2020-09-03</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.1
+          </td>
+          <td>
+            <div class="epss-val">2.4%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:2.418999932706356%"></div></div>
+            <div class="epss-pct">top 14.9%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:grunt: all versions &rarr; <strong>1.3.0</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-1537" target="_blank">CVE-2022-1537</a></div>
+            <div class="cve-pkg">npm:grunt@1.6.1</div>
+            <div class="cve-desc">file.copy operations in GruntJS are vulnerable to a TOCTOU race condition leading to arbitrary file write in GitHub repository gruntjs/grunt prior to 1.5.3. This vulnerability is capable of arbitrary file writes which can lead to local privilege escalation to the GruntJS user if a lower-privileged u</div>
+            <div class="cve-pub">Published: 2022-05-10</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.8
+          </td>
+          <td>
+            <div class="epss-val">0.2%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.2460000105202198%"></div></div>
+            <div class="epss-pct">top 52.1%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/367.html" target="_blank" class="cwe-badge">CWE-367</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:grunt: all versions &rarr; <strong>1.5.3</strong></div><div class='rem-entry'>cpe:gruntjs:gruntjs/grunt: >= unspecified &rarr; <strong>1.5.3</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-0436" target="_blank">CVE-2022-0436</a></div>
+            <div class="cve-pkg">npm:grunt@1.6.1</div>
+            <div class="cve-desc">Path Traversal in GitHub repository gruntjs/grunt prior to 1.5.2.</div>
+            <div class="cve-pub">Published: 2022-04-12</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.1
+          </td>
+          <td>
+            <div class="epss-val">0.1%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.10000000474974513%"></div></div>
+            <div class="epss-pct">top 72.2%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank" class="cwe-badge">CWE-22</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>npm:grunt: all versions &rarr; <strong>1.5.2</strong></div><div class='rem-entry'>cpe:gruntjs:gruntjs/grunt: >= unspecified &rarr; <strong>1.5.2</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-50537" target="_blank">CVE-2025-50537</a></div>
+            <div class="cve-pkg">npm:eslint@9.39.1</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 5.5
+          </td>
+          <td>
+            <div class="epss-val">0.0%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.02099999983329326%"></div></div>
+            <div class="epss-pct">top 94.3%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</section>
+
+
+        <section id="attack-surface">
+          <h2>Attack Surface &amp; Kill Chains</h2>
+          <div class="surface-summary">
+            <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Attack Chains</div></div>
+            <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">ATT&CK Techniques</div></div>
+            <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Threat Actors</div></div>
+            <div class="stat-card stat-risk"><div class="stat-num">CRITICAL</div><div class="stat-label">Overall Risk</div></div>
+          </div>
+          <h3>Top Kill Chains</h3>
+          <div class="chains">
+            <div class="chain">
+              <span class="chain-risk chain-critical">CRITICAL</span>
+              <strong>npm:puppeteer</strong> &rarr; CVE-2019-5786
+              <span class="chain-mat">WEAPONIZED</span>
+              <div class="chain-path">vulnerability:CVE-2019-5786</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>npm:grunt</strong> &rarr; CVE-2020-7729
+              <span class="chain-mat">NONE</span>
+              <div class="chain-path">vulnerability:CVE-2020-7729</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>npm:grunt</strong> &rarr; CVE-2022-1537
+              <span class="chain-mat">NONE</span>
+              <div class="chain-path">vulnerability:CVE-2022-1537 &rarr; weakness:CWE-367</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>npm:grunt</strong> &rarr; CVE-2022-0436
+              <span class="chain-mat">NONE</span>
+              <div class="chain-path">vulnerability:CVE-2022-0436 &rarr; weakness:CWE-22</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-low">LOW</span>
+              <strong>npm:eslint</strong> &rarr; CVE-2025-50537
+              <span class="chain-mat">NONE</span>
+              <div class="chain-path">vulnerability:CVE-2025-50537</div>
+            </div></div>
+          <h3>Exposed ATT&CK Techniques</h3>
+          <div class="techs-grid"></div>
+        </section>
+
+<section id="semgrep">
+  <h2>Static Analysis (Semgrep)</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">625 findings across the codebase.</p>
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/apps/config.py:111</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/apps/config.py:123</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/apps/config.py:178</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/apps/config.py:193</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/apps/config.py:210</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/apps/config.py:269</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>non-literal-import</td>
+          <td><code>django/conf/__init__.py:162</code></td>
+          <td>Untrusted user input in `importlib.import_module()` function allows an attacker to load arbitrary code. Avoid dynamic va</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>avoid-mark-safe</td>
+          <td><code>django/contrib/admin/helpers.py:161</code></td>
+          <td>'mark_safe()' is used to mark a string as "safe" for HTML output. This disables escaping and could therefore subject the</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>avoid-mark-safe</td>
+          <td><code>django/contrib/admin/helpers.py:193</code></td>
+          <td>'mark_safe()' is used to mark a string as "safe" for HTML output. This disables escaping and could therefore subject the</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>avoid-mark-safe</td>
+          <td><code>django/contrib/admin/helpers.py:200</code></td>
+          <td>'mark_safe()' is used to mark a string as "safe" for HTML output. This disables escaping and could therefore subject the</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>avoid-mark-safe</td>
+          <td><code>django/contrib/admin/options.py:383</code></td>
+          <td>'mark_safe()' is used to mark a string as "safe" for HTML output. This disables escaping and could therefore subject the</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>avoid-mark-safe</td>
+          <td><code>django/contrib/admin/options.py:385</code></td>
+          <td>'mark_safe()' is used to mark a string as "safe" for HTML output. This disables escaping and could therefore subject the</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>open-redirect</td>
+          <td><code>django/contrib/admin/options.py:1501</code></td>
+          <td>Data from request (redirect_url) is passed to redirect(). This is an open redirect and could be exploited. Ensure you ar</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>open-redirect</td>
+          <td><code>django/contrib/admin/options.py:1572</code></td>
+          <td>Data from request (redirect_url) is passed to redirect(). This is an open redirect and could be exploited. Ensure you ar</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>detect-non-literal-regexp</td>
+          <td><code>django/contrib/admin/static/admin/js/inlines.js:26</code></td>
+          <td>RegExp() called with a `prefix` function argument, this might allow an attacker to cause a Regular Expression Denial-of-</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-info">INFO</span></td>
+          <td>template-translate-as-no-escape</td>
+          <td><code>django/contrib/admin/templates/admin/actions.html:8</code></td>
+          <td>Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators coul</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-info">INFO</span></td>
+          <td>template-blocktranslate-no-escape</td>
+          <td><code>django/contrib/admin/templates/admin/actions.html:16</code></td>
+          <td>Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators coul</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-info">INFO</span></td>
+          <td>template-blocktranslate-no-escape</td>
+          <td><code>django/contrib/admin/templates/admin/auth/user/change_password.html:30</code></td>
+          <td>Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators coul</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-info">INFO</span></td>
+          <td>template-blocktranslate-no-escape</td>
+          <td><code>django/contrib/admin/templates/admin/auth/user/change_password.html:34</code></td>
+          <td>Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators coul</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-info">INFO</span></td>
+          <td>template-blocktranslate-no-escape</td>
+          <td><code>django/contrib/admin/templates/admin/auth/user/change_password.html:36</code></td>
+          <td>Translated strings will not be escaped when rendered in a template. This leads to a vulnerability where translators coul</td>
+        </tr></tbody>
+  </table>
+</section>
+
+<section id="zentinel">
+  <h2>Security Patterns (Zentinel)</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+    0 findings in 0 files.
+    0 errors, 0 warnings.
+  </p>
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<div class="footer">
+  Generated by Sigma Stack Audit &middot; Vajra + Semgrep + Zentinel + VulnGraph MCP &middot; 2026-04-13 03:43 UTC
+</div>
+</body>
+</html>

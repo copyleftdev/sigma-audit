@@ -179,6 +179,24 @@
       "top_cve_cvss": 0.0,
       "top_cve_epss": 0.9005900025367737,
       "risk": "CRITICAL"
+    },
+    {
+      "slug": "django-django",
+      "repo": "django/django",
+      "date": "2026-04-13",
+      "total_cves": 5,
+      "critical": 0,
+      "high": 3,
+      "dependencies": 6,
+      "sast_findings": 625,
+      "pattern_findings": 0,
+      "exploitable": 1,
+      "attack_chains": 5,
+      "techniques": 0,
+      "top_cve": "CVE-2019-5786",
+      "top_cve_cvss": 6.5,
+      "top_cve_epss": 0.8938400149345398,
+      "risk": "CRITICAL"
     }
   ]
 }
