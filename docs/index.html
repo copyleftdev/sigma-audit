@@ -27,8 +27,7 @@ background:linear-gradient(135deg,var(--text) 0%,var(--accent) 50%,var(--cyan) 1
 .hero .tagline{color:var(--text2);font-size:1rem;margin-bottom:24px;max-width:600px;margin-left:auto;margin-right:auto}
 .tools-bar{display:flex;justify-content:center;gap:10px;margin:20px 0;flex-wrap:wrap}
 .tool-pill{padding:5px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;letter-spacing:0.03em;
-border:1px solid var(--border);background:var(--surface);opacity:0;transform:translateY(8px);
-transition:all 0.4s ease}
+border:1px solid var(--border);background:var(--surface);opacity:0;transform:translateY(8px);transition:all 0.4s ease}
 .tool-pill.show{opacity:1;transform:translateY(0)}
 .tool-pill[data-t="vajra"]{border-color:rgba(34,197,94,0.3);color:var(--green)}
 .tool-pill[data-t="semgrep"]{border-color:rgba(249,115,22,0.3);color:var(--orange)}
@@ -39,7 +38,7 @@ transition:all 0.4s ease}
 .container{max-width:1100px;margin:0 auto;padding:0 24px 64px}
 
 /* ── Aggregate Stats ──────────────── */
-.agg-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:40px}
+.agg-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:32px}
 .agg-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;
 opacity:0;transform:translateY(16px);transition:all 0.5s ease}
 .agg-card.show{opacity:1;transform:translateY(0)}
@@ -47,17 +46,49 @@ opacity:0;transform:translateY(16px);transition:all 0.5s ease}
 .agg-card .l{font-size:0.65rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px}
 .agg-card.danger .n{color:var(--red)}
 
+/* ── Controls bar ─────────────────── */
+.controls{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.search-box{flex:1;min-width:200px;padding:10px 16px 10px 40px;background:var(--surface);border:1px solid var(--border);
+border-radius:10px;color:var(--text);font-size:0.9rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+font-family:inherit}
+.search-box:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,0.12)}
+.search-box::placeholder{color:var(--text2)}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text2);pointer-events:none;width:16px;height:16px}
+
+.sort-btn,.filter-btn{padding:8px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;
+color:var(--text2);font-size:0.75rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;
+display:flex;align-items:center;gap:6px;white-space:nowrap}
+.sort-btn:hover,.filter-btn:hover{border-color:var(--accent);color:var(--text)}
+.sort-btn.active,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,0.06)}
+.sort-btn .arrow{font-size:0.6rem;opacity:0.5}
+.sort-btn.active .arrow{opacity:1}
+
+.filter-pills{display:flex;gap:6px;flex-wrap:wrap}
+.risk-pill{padding:4px 12px;border-radius:6px;font-size:0.68rem;font-weight:700;cursor:pointer;
+text-transform:uppercase;letter-spacing:0.04em;border:1px solid transparent;transition:all 0.2s;opacity:0.4}
+.risk-pill:hover{opacity:0.7}
+.risk-pill.on{opacity:1;border-color:currentColor}
+.risk-pill.r-CRITICAL{background:rgba(239,68,68,0.12);color:var(--red)}
+.risk-pill.r-HIGH{background:rgba(249,115,22,0.12);color:var(--orange)}
+.risk-pill.r-MEDIUM{background:rgba(234,179,8,0.12);color:var(--yellow)}
+.risk-pill.r-LOW{background:rgba(34,197,94,0.12);color:var(--green)}
+.risk-pill.r-ALL{background:rgba(148,163,184,0.08);color:var(--text2)}
+
+.results-meta{font-size:0.75rem;color:var(--text2);margin-bottom:12px}
+
 /* ── Report Cards ─────────────────── */
-.reports-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.reports-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .reports-header h2{font-size:1.3rem;font-weight:700}
 .reports-header .count{color:var(--text2);font-size:0.85rem}
 .report-grid{display:flex;flex-direction:column;gap:12px}
 
 .report-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;
-padding:24px;transition:all 0.3s ease;opacity:0;transform:translateY(20px);cursor:pointer;
-text-decoration:none;color:var(--text);display:block}
-.report-card.show{opacity:1;transform:translateY(0)}
+padding:24px;transition:all 0.3s ease;cursor:pointer;text-decoration:none;color:var(--text);display:block}
+.report-card.entering{opacity:0;transform:translateY(20px)}
+.report-card:not(.entering){opacity:1;transform:translateY(0)}
 .report-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,130,246,0.1);text-decoration:none}
+.report-card.hidden{display:none}
 
 .rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
 .rc-repo{font-size:1.15rem;font-weight:700}
@@ -67,6 +98,7 @@ text-decoration:none;color:var(--text);display:block}
 .rc-risk.HIGH{background:rgba(249,115,22,0.15);color:var(--orange)}
 .rc-risk.MEDIUM{background:rgba(234,179,8,0.15);color:var(--yellow)}
 .rc-risk.LOW{background:rgba(34,197,94,0.15);color:var(--green)}
+.rc-risk.NONE{background:rgba(148,163,184,0.1);color:var(--text2)}
 
 .rc-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:16px}
 .rc-stat{background:rgba(255,255,255,0.02);border-radius:8px;padding:10px;text-align:center}
@@ -83,10 +115,11 @@ background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.1);border-radi
 .rc-footer{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:0.78rem;color:var(--accent);font-weight:600}
 .rc-footer svg{width:14px;height:14px}
 
-/* ── Empty State ──────────────────── */
-.empty{text-align:center;padding:80px 24px;color:var(--text2)}
-.empty h3{font-size:1.2rem;color:var(--text);margin-bottom:8px}
+/* ── Empty ────────────────────────── */
+.empty{text-align:center;padding:60px 24px;color:var(--text2)}
+.empty h3{font-size:1.1rem;color:var(--text);margin-bottom:8px}
 .empty code{font-size:0.85rem;background:var(--surface);padding:8px 16px;border-radius:8px;display:inline-block;margin-top:12px}
+.no-results{text-align:center;padding:40px;color:var(--text2);font-size:0.9rem}
 
 /* ── Footer ───────────────────────── */
 .footer{text-align:center;padding:32px 24px;color:var(--text2);font-size:0.75rem;border-top:1px solid var(--border);margin-top:48px}
@@ -100,6 +133,10 @@ border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 12px}
 @media(max-width:768px){
   .hero h1{font-size:1.8rem}
   .hero .tagline{font-size:0.85rem}
+  .hero{padding:48px 16px 32px}
+  .controls{flex-direction:column;gap:8px}
+  .search-wrap{width:100%}
+  .filter-pills{justify-content:center}
   .rc-stats{grid-template-columns:repeat(3,1fr)}
   .agg-stats{grid-template-columns:repeat(2,1fr)}
 }
@@ -122,10 +159,24 @@ border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 12px}
 <div class="container">
   <div class="agg-stats" id="agg-stats"></div>
 
-  <div class="reports-header">
-    <h2>Audit Reports</h2>
-    <span class="count" id="report-count"></span>
+  <div class="controls" id="controls" style="display:none">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-box" id="search" type="text" placeholder="Search repos, CVEs, risk levels..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="filter-pills" id="risk-filters">
+      <span class="risk-pill r-ALL on" data-risk="ALL">All</span>
+      <span class="risk-pill r-CRITICAL on" data-risk="CRITICAL">Critical</span>
+      <span class="risk-pill r-HIGH on" data-risk="HIGH">High</span>
+      <span class="risk-pill r-MEDIUM on" data-risk="MEDIUM">Medium</span>
+      <span class="risk-pill r-LOW on" data-risk="LOW">Low</span>
+    </div>
+    <button class="sort-btn active" id="sort-btn" data-field="total_cves" data-dir="desc">
+      Sort: CVEs <span class="arrow">&#9660;</span>
+    </button>
   </div>
+
+  <div class="results-meta" id="results-meta"></div>
 
   <div id="reports" class="report-grid">
     <div class="loading"><div class="spinner"></div>Loading reports...</div>
@@ -139,6 +190,22 @@ border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 12px}
 
 <script>
 const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+const SORT_FIELDS=[
+  {field:'total_cves',label:'CVEs'},
+  {field:'critical',label:'Critical'},
+  {field:'attack_chains',label:'Chains'},
+  {field:'techniques',label:'Techniques'},
+  {field:'pattern_findings',label:'Patterns'},
+  {field:'dependencies',label:'Deps'},
+  {field:'date',label:'Date'},
+  {field:'repo',label:'Name'},
+];
+
+let allReports=[];
+let sortField='total_cves';
+let sortDir='desc';
+let searchQuery='';
+let activeRisks=new Set(['CRITICAL','HIGH','MEDIUM','LOW','NONE']);
 
 function animateNum(el,target,dur=1200){
   const start=performance.now();
@@ -150,82 +217,56 @@ function animateNum(el,target,dur=1200){
   })(performance.now());
 }
 
-async function main(){
-  // Stagger tool pills
-  document.querySelectorAll('.tool-pill').forEach((el,i)=>
-    setTimeout(()=>el.classList.add('show'),300+i*100));
-
-  // Fetch manifest
-  let manifest;
-  try{
-    const resp=await fetch('reports/manifest.json');
-    manifest=await resp.json();
-  }catch(e){
-    document.getElementById('reports').innerHTML=
-      '<div class="empty"><h3>No audits yet</h3><p>Run your first audit:</p><code>python3 sigma-audit.py owner/repo --publish</code></div>';
-    return;
-  }
-
-  const reports=manifest.reports||[];
-  if(!reports.length){
-    document.getElementById('reports').innerHTML=
-      '<div class="empty"><h3>No audits yet</h3><p>Run your first audit:</p><code>python3 sigma-audit.py owner/repo --publish</code></div>';
-    return;
-  }
-
-  document.getElementById('report-count').textContent=`${reports.length} audit${reports.length>1?'s':''}`;
-
-  // Aggregate stats across all audits
-  let totalCves=0,totalCrit=0,totalExpl=0,totalChains=0,totalTechs=0,totalDeps=0;
-  for(const r of reports){
-    totalCves+=r.total_cves||0;
-    totalCrit+=r.critical||0;
-    totalExpl+=r.exploitable||0;
-    totalChains+=r.attack_chains||0;
-    totalTechs+=r.techniques||0;
-    totalDeps+=r.dependencies||0;
-  }
-
-  const aggEl=document.getElementById('agg-stats');
-  const aggCards=[
-    {n:reports.length,l:'Repos Audited'},
-    {n:totalDeps,l:'Dependencies'},
-    {n:totalCves,l:'CVEs Found'},
-    {n:totalCrit,l:'Critical',d:true},
-    {n:totalExpl,l:'Exploitable',d:true},
-    {n:totalChains,l:'Attack Chains'},
-    {n:totalTechs,l:'ATT&CK Techniques'},
-  ];
-  aggEl.innerHTML=aggCards.map(c=>
-    `<div class="agg-card ${c.d?'danger':''}"><div class="n" data-target="${c.n}">0</div><div class="l">${c.l}</div></div>`
-  ).join('');
-
-  // Animate agg cards
-  document.querySelectorAll('.agg-card').forEach((el,i)=>{
-    setTimeout(()=>{
-      el.classList.add('show');
-      const numEl=el.querySelector('.n');
-      if(numEl.dataset.target)animateNum(numEl,parseInt(numEl.dataset.target));
-    },100+i*80);
+function getFiltered(){
+  return allReports.filter(r=>{
+    if(!activeRisks.has(r.risk||'NONE'))return false;
+    if(searchQuery){
+      const q=searchQuery.toLowerCase();
+      const hay=[r.repo,r.risk,r.top_cve||'',r.date,r.slug].join(' ').toLowerCase();
+      if(!hay.includes(q))return false;
+    }
+    return true;
   });
+}
 
-  // Render report cards
+function getSorted(list){
+  const cmp=sortField==='repo'||sortField==='date'
+    ?(a,b)=>(a[sortField]||'').localeCompare(b[sortField]||'')
+    :(a,b)=>(a[sortField]||0)-(b[sortField]||0);
+  const sorted=[...list].sort(cmp);
+  return sortDir==='desc'?sorted.reverse():sorted;
+}
+
+function renderCards(){
+  const filtered=getFiltered();
+  const sorted=getSorted(filtered);
+
+  document.getElementById('results-meta').textContent=
+    filtered.length===allReports.length
+      ?`${allReports.length} audits`
+      :`Showing ${filtered.length} of ${allReports.length} audits`;
+
   const container=document.getElementById('reports');
-  container.innerHTML=reports.sort((a,b)=>b.date.localeCompare(a.date)).map(r=>{
+  if(!sorted.length){
+    container.innerHTML='<div class="no-results">No audits match your filters</div>';
+    return;
+  }
+
+  container.innerHTML=sorted.map(r=>{
     const topCveHtml=r.top_cve?`
       <div class="rc-top-cve">
         <span class="cve-id">${r.top_cve}</span>
-        CVSS ${r.top_cve_cvss.toFixed(1)} &middot; EPSS ${(r.top_cve_epss*100).toFixed(0)}%
+        CVSS ${(r.top_cve_cvss||0).toFixed(1)} &middot; EPSS ${((r.top_cve_epss||0)*100).toFixed(0)}%
         <span class="cve-meta">Top finding</span>
       </div>`:'';
 
-    return`<a class="report-card" href="reports/${r.slug}/">
+    return`<a class="report-card entering" href="reports/${r.slug}/" data-risk="${r.risk}">
       <div class="rc-top">
         <div>
           <div class="rc-repo">${r.repo}</div>
           <div class="rc-date">${r.date}</div>
         </div>
-        <span class="rc-risk ${r.risk}">${r.risk}</span>
+        <span class="rc-risk ${r.risk||'NONE'}">${r.risk||'NONE'}</span>
       </div>
       <div class="rc-stats">
         <div class="rc-stat"><div class="v">${r.total_cves}</div><div class="k">CVEs</div></div>
@@ -242,9 +283,128 @@ async function main(){
     </a>`;
   }).join('');
 
-  // Stagger card reveal
-  document.querySelectorAll('.report-card').forEach((el,i)=>
-    setTimeout(()=>el.classList.add('show'),400+i*150));
+  // Stagger reveal
+  container.querySelectorAll('.report-card').forEach((el,i)=>
+    setTimeout(()=>el.classList.remove('entering'),50+i*80));
+}
+
+function updateSortBtn(){
+  const btn=document.getElementById('sort-btn');
+  const label=SORT_FIELDS.find(f=>f.field===sortField)?.label||sortField;
+  const arrow=sortDir==='desc'?'&#9660;':'&#9650;';
+  btn.innerHTML=`Sort: ${label} <span class="arrow">${arrow}</span>`;
+}
+
+function cycleSortField(){
+  const idx=SORT_FIELDS.findIndex(f=>f.field===sortField);
+  const next=(idx+1)%SORT_FIELDS.length;
+  sortField=SORT_FIELDS[next].field;
+  // String fields default to asc, numbers to desc
+  sortDir=(sortField==='repo'||sortField==='date')?'asc':'desc';
+  updateSortBtn();
+  renderCards();
+}
+
+function toggleSortDir(){
+  sortDir=sortDir==='desc'?'asc':'desc';
+  updateSortBtn();
+  renderCards();
+}
+
+async function main(){
+  document.querySelectorAll('.tool-pill').forEach((el,i)=>
+    setTimeout(()=>el.classList.add('show'),300+i*100));
+
+  let manifest;
+  try{
+    const resp=await fetch('reports/manifest.json');
+    manifest=await resp.json();
+  }catch(e){
+    document.getElementById('reports').innerHTML=
+      '<div class="empty"><h3>No audits yet</h3><p>Run your first audit:</p><code>python3 sigma-audit.py owner/repo --publish</code></div>';
+    return;
+  }
+
+  allReports=manifest.reports||[];
+  if(!allReports.length){
+    document.getElementById('reports').innerHTML=
+      '<div class="empty"><h3>No audits yet</h3><p>Run your first audit:</p><code>python3 sigma-audit.py owner/repo --publish</code></div>';
+    return;
+  }
+
+  // Aggregate stats
+  let totalCves=0,totalCrit=0,totalExpl=0,totalChains=0,totalTechs=0,totalDeps=0;
+  for(const r of allReports){
+    totalCves+=r.total_cves||0;totalCrit+=r.critical||0;totalExpl+=r.exploitable||0;
+    totalChains+=r.attack_chains||0;totalTechs+=r.techniques||0;totalDeps+=r.dependencies||0;
+  }
+
+  document.getElementById('agg-stats').innerHTML=[
+    {n:allReports.length,l:'Repos Audited'},
+    {n:totalDeps,l:'Dependencies'},
+    {n:totalCves,l:'CVEs Found'},
+    {n:totalCrit,l:'Critical',d:true},
+    {n:totalExpl,l:'Exploitable',d:true},
+    {n:totalChains,l:'Attack Chains'},
+    {n:totalTechs,l:'ATT&CK Techniques'},
+  ].map(c=>
+    `<div class="agg-card ${c.d?'danger':''}"><div class="n" data-target="${c.n}">0</div><div class="l">${c.l}</div></div>`
+  ).join('');
+
+  document.querySelectorAll('.agg-card').forEach((el,i)=>{
+    setTimeout(()=>{
+      el.classList.add('show');
+      const numEl=el.querySelector('.n');
+      if(numEl.dataset.target)animateNum(numEl,parseInt(numEl.dataset.target));
+    },100+i*80);
+  });
+
+  // Show controls
+  document.getElementById('controls').style.display='flex';
+
+  // Search
+  const searchEl=document.getElementById('search');
+  let debounce;
+  searchEl.addEventListener('input',()=>{
+    clearTimeout(debounce);
+    debounce=setTimeout(()=>{searchQuery=searchEl.value.trim();renderCards()},120);
+  });
+
+  // Risk filter pills
+  document.querySelectorAll('.risk-pill').forEach(pill=>{
+    pill.addEventListener('click',()=>{
+      const risk=pill.dataset.risk;
+      if(risk==='ALL'){
+        // Toggle all
+        const allOn=activeRisks.size>=4;
+        if(allOn){activeRisks.clear()}
+        else{activeRisks=new Set(['CRITICAL','HIGH','MEDIUM','LOW','NONE'])}
+      }else{
+        if(activeRisks.has(risk))activeRisks.delete(risk);
+        else activeRisks.add(risk);
+      }
+      // Update pill state
+      document.querySelectorAll('.risk-pill').forEach(p=>{
+        if(p.dataset.risk==='ALL'){p.classList.toggle('on',activeRisks.size>=4)}
+        else{p.classList.toggle('on',activeRisks.has(p.dataset.risk))}
+      });
+      renderCards();
+    });
+  });
+
+  // Sort button: click cycles field, right-click toggles direction
+  const sortBtn=document.getElementById('sort-btn');
+  sortBtn.addEventListener('click',(e)=>{
+    e.preventDefault();
+    cycleSortField();
+  });
+  sortBtn.addEventListener('contextmenu',(e)=>{
+    e.preventDefault();
+    toggleSortDir();
+  });
+
+  // Initial render
+  renderCards();
 }
 
 main();
