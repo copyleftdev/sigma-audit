@@ -1,0 +1,1433 @@
+{
+  "meta": {
+    "repo": "drizzle-team/drizzle-orm",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 130,
+    "source_files": {
+      "ts": 937,
+      "tsx": 0,
+      "py": 0,
+      "go": 0
+    },
+    "total_cves": 24,
+    "severity": {
+      "HIGH": 9,
+      "NONE": 5,
+      "CRITICAL": 2,
+      "MEDIUM": 7,
+      "LOW": 1
+    },
+    "sast_findings": 53,
+    "pattern_findings": 102894,
+    "exploitable": 2
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2025-54313",
+      "package": "npm:eslint-config-prettier@9.1.0",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.10462000221014023,
+      "epss_percentile": 0.9323499798774719,
+      "exploit_maturity": "WEAPONIZED",
+      "maturity_rationale": "KEV-listed; 2 public PoCs",
+      "kev_listed": true,
+      "exploit_count": 2,
+      "exploits": [
+        "GitHub-PoC:CVE-2025-54313:0",
+        "GitHub-PoC:CVE-2025-54313:1"
+      ],
+      "cwes": [
+        "CWE-506"
+      ],
+      "techniques": [
+        {
+          "id": "T1027.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1195.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1218.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1195.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027.004",
+          "source": "cwe"
+        },
+        {
+          "id": "T1221",
+          "source": "cwe"
+        },
+        {
+          "id": "T1001.002",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2017-16082",
+      "package": "npm:pg@8.11.5",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.7081500291824341,
+      "epss_percentile": 0.9869800209999084,
+      "exploit_maturity": "FUNCTIONAL",
+      "maturity_rationale": "1 PoCs, EPSS 0.7082",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2017-16082:0"
+      ],
+      "cwes": [
+        "CWE-94"
+      ],
+      "techniques": [
+        {
+          "id": "T1027.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1564.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027.006",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21512",
+      "package": "npm:mysql2@3.14.1",
+      "severity": "HIGH",
+      "cvss": 8.199999809265137,
+      "epss_score": 0.6834099888801575,
+      "epss_percentile": 0.9860699772834778,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1321"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.010",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2016-10542",
+      "package": "npm:ws@8.18.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.6607499718666077,
+      "epss_percentile": 0.9851400256156921,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-400"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-21508",
+      "package": "npm:mysql2@3.14.1",
+      "severity": "CRITICAL",
+      "cvss": 9.800000190734863,
+      "epss_score": 0.5558800101280212,
+      "epss_percentile": 0.9808400273323059,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-94"
+      ],
+      "techniques": [
+        {
+          "id": "T1027.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1564.009",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027.006",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2015-8855",
+      "package": "npm:semver@7.7.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.01092000026255846,
+      "epss_percentile": 0.7795900106430054,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2022-25883",
+      "package": "npm:semver@7.7.2",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.005979999899864197,
+      "epss_percentile": 0.6939899921417236,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-21509",
+      "package": "npm:mysql2@3.14.1",
+      "severity": "MEDIUM",
+      "cvss": 6.5,
+      "epss_score": 0.005849999841302633,
+      "epss_percentile": 0.6906800270080566,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-1321"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.010",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-37890",
+      "package": "npm:ws@8.18.2",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.005410000216215849,
+      "epss_percentile": 0.6767200231552124,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-476"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2022-0235",
+      "package": "npm:node-fetch@3.3.2",
+      "severity": "HIGH",
+      "cvss": 8.800000190734863,
+      "epss_score": 0.0053400001488626,
+      "epss_percentile": 0.6743800044059753,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-200"
+      ],
+      "techniques": [
+        {
+          "id": "T1033",
+          "source": "cwe"
+        },
+        {
+          "id": "T1592",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1069",
+          "source": "cwe"
+        },
+        {
+          "id": "T1615",
+          "source": "cwe"
+        },
+        {
+          "id": "T1036.005",
+          "source": "cwe"
+        },
+        {
+          "id": "T1007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1135",
+          "source": "cwe"
+        },
+        {
+          "id": "T1120",
+          "source": "cwe"
+        },
+        {
+          "id": "T1082",
+          "source": "cwe"
+        },
+        {
+          "id": "T1217",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1595",
+          "source": "cwe"
+        },
+        {
+          "id": "T1016",
+          "source": "cwe"
+        },
+        {
+          "id": "T1087",
+          "source": "cwe"
+        },
+        {
+          "id": "T1083",
+          "source": "cwe"
+        },
+        {
+          "id": "T1049",
+          "source": "cwe"
+        },
+        {
+          "id": "T1134.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1057",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1590",
+          "source": "cwe"
+        },
+        {
+          "id": "T1550.004",
+          "source": "cwe"
+        },
+        {
+          "id": "T1111",
+          "source": "cwe"
+        },
+        {
+          "id": "T1018",
+          "source": "cwe"
+        },
+        {
+          "id": "T1046",
+          "source": "cwe"
+        },
+        {
+          "id": "T1124",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2022-3517",
+      "package": "npm:minimatch@7.4.3",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.004900000058114529,
+      "epss_percentile": 0.6558099985122681,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-400"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-32640",
+      "package": "npm:ws@8.18.2",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.004519999958574772,
+      "epss_percentile": 0.6377000212669373,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-400"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2016-10540",
+      "package": "npm:minimatch@7.4.3",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.004350000061094761,
+      "epss_percentile": 0.6295099854469299,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-400"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2016-10518",
+      "package": "npm:ws@8.18.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.003449999960139394,
+      "epss_percentile": 0.5711399912834167,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-201"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-21507",
+      "package": "npm:mysql2@3.14.1",
+      "severity": "MEDIUM",
+      "cvss": 6.5,
+      "epss_score": 0.003220000071451068,
+      "epss_percentile": 0.5527899861335754,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-20"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1539",
+          "source": "cwe"
+        },
+        {
+          "id": "T1553.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027",
+          "source": "cwe"
+        },
+        {
+          "id": "T1036.001",
+          "source": "cwe"
+        }
+      ]
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 49,
+    "overall_risk": "HIGH",
+    "techniques": [
+      "T1574.007",
+      "T1539",
+      "T1553.002",
+      "T1574.006",
+      "T1562.003",
+      "T1027",
+      "T1036.001",
+      "T1574.010",
+      "T1027.009",
+      "T1564.009",
+      "T1027.006",
+      "T1499",
+      "T1498.001",
+      "T1499.001",
+      "T1499.003",
+      "T1498.002",
+      "T1499.002",
+      "T1033",
+      "T1592",
+      "T1069",
+      "T1615",
+      "T1036.005",
+      "T1007",
+      "T1135",
+      "T1120",
+      "T1082",
+      "T1217",
+      "T1595",
+      "T1016",
+      "T1087",
+      "T1083",
+      "T1049",
+      "T1134.001",
+      "T1057",
+      "T1590",
+      "T1550.004",
+      "T1111",
+      "T1018",
+      "T1046",
+      "T1124"
+    ],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "npm:mysql2",
+        "cve": "CVE-2024-21511",
+        "risk": "HIGH",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-21511",
+          "weakness:CWE-94",
+          "technique:T1027.009",
+          "technique:T1564.009",
+          "technique:T1027.006"
+        ]
+      },
+      {
+        "entry": "npm:mysql2",
+        "cve": "CVE-2024-21508",
+        "risk": "HIGH",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-21508",
+          "weakness:CWE-94",
+          "technique:T1027.009",
+          "technique:T1564.009",
+          "technique:T1027.006"
+        ]
+      },
+      {
+        "entry": "npm:mysql2",
+        "cve": "CVE-2024-21512",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-21512",
+          "weakness:CWE-1321",
+          "technique:T1574.010"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2022-3517",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2022-3517",
+          "weakness:CWE-400",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2026-27904",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-27904",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2026-27904",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-27904",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2026-27904",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-27904",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2026-27904",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-27904",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2026-27904",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-27904",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:minimatch",
+        "cve": "CVE-2026-27904",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-27904",
+          "weakness:CWE-1333"
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 53,
+    "by_severity": {
+      "WARNING": 52,
+      "INFO": 1
+    },
+    "by_rule": {
+      "node-mysql-sqli": 25,
+      "path-join-resolve-traversal": 23,
+      "bypass-tls-verification": 3,
+      "unsafe-formatstring": 1,
+      "prototype-pollution-loop": 1
+    },
+    "findings": [
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/imports-checker/checker.ts",
+        "line": 286,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/imports-checker/checker.ts",
+        "line": 287,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 115,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 117,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 241,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 243,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 358,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 360,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 468,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 567,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 569,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 679,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/introspect.ts",
+        "line": 681,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/commands/utils.ts",
+        "line": 913,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "bypass-tls-verification",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/connections.ts",
+        "line": 194,
+        "message": "Checks for setting the environment variable NODE_TLS_REJECT_UNAUTHORIZED to 0, which disables TLS verification. This should only be used for debugging purposes. Setting the option rejectUnauthorized t"
+      },
+      {
+        "rule": "bypass-tls-verification",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/connections.ts",
+        "line": 348,
+        "message": "Checks for setting the environment variable NODE_TLS_REJECT_UNAUTHORIZED to 0, which disables TLS verification. This should only be used for debugging purposes. Setting the option rejectUnauthorized t"
+      },
+      {
+        "rule": "bypass-tls-verification",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/cli/connections.ts",
+        "line": 449,
+        "message": "Checks for setting the environment variable NODE_TLS_REJECT_UNAUTHORIZED to 0, which disables TLS verification. This should only be used for debugging purposes. Setting the option rejectUnauthorized t"
+      },
+      {
+        "rule": "unsafe-formatstring",
+        "severity": "INFO",
+        "path": "drizzle-kit/src/cli/index.ts",
+        "line": 12,
+        "message": "Detected string concatenation with a non-literal variable in a util.format / console.log function. If an attacker injects a format specifier in the string, it will forge the log message. Try to use co"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/loader.mjs",
+        "line": 31,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/index.ts",
+        "line": 83,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/index.ts",
+        "line": 87,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/index.ts",
+        "line": 87,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/mysqlSerializer.ts",
+        "line": 577,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/mysqlSerializer.ts",
+        "line": 593,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/mysqlSerializer.ts",
+        "line": 742,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/mysqlSerializer.ts",
+        "line": 790,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/singlestoreSerializer.ts",
+        "line": 447,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/singlestoreSerializer.ts",
+        "line": 461,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/serializer/singlestoreSerializer.ts",
+        "line": 629,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/utils.ts",
+        "line": 97,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/utils.ts",
+        "line": 98,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/utils.ts",
+        "line": 100,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/utils.ts",
+        "line": 109,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "path-join-resolve-traversal",
+        "severity": "WARNING",
+        "path": "drizzle-kit/src/utils.ts",
+        "line": 109,
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in t"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql-core/db.ts",
+        "line": 477,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 261,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 261,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 278,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 278,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 303,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 303,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 306,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/mysql2/session.ts",
+        "line": 306,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore-core/db.ts",
+        "line": 477,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore/session.ts",
+        "line": 257,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore/session.ts",
+        "line": 257,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore/session.ts",
+        "line": 274,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore/session.ts",
+        "line": 274,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore/session.ts",
+        "line": 298,
+        "message": "Detected a `mysql2/promise` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQ"
+      },
+      {
+        "rule": "node-mysql-sqli",
+        "severity": "WARNING",
+        "path": "drizzle-orm/src/singlestore/session.ts",
+        "line": 298,
+        "message": "Detected a `mysql2` SQL statement that comes from a function argument. This could lead to SQL injection if the variable is user-controlled and is not properly sanitized. In order to prevent SQL inject"
+      }
+    ]
+  },
+  "zentinel": {
+    "total": 102894,
+    "files_scanned": 500,
+    "errors": 124,
+    "warnings": 102521,
+    "by_rule": {
+      "community.assigned-undefined": 101840,
+      "community.express-check-csurf-middleware-usage": 124,
+      "community.useless-assignment": 124,
+      "community.aead-no-final": 124,
+      "community.sequelize-raw-query-1": 124,
+      "community.sequelize-raw-query-2": 124,
+      "community.sequelize-raw-query-4": 124,
+      "community.sequelize-raw-query-6": 124,
+      "community.disallow-old-tls-versions2": 124,
+      "typescript.security.settimeout-string": 35,
+      "typescript.security.hardcoded-secret": 26,
+      "typescript.security.crypto-createhash-md5": 1
+    },
+    "highlights": [
+      {
+        "rule": "typescript.security.settimeout-string",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/mysql-returning.test.ts",
+        "line": 76,
+        "message": "setTimeout() with a string argument acts like eval() \u2014 pass a function instead"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 71,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 93,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 116,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 116,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 116,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 116,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "integration-tests/tests/sqlite/sqlite-proxy-batch.test.ts",
+        "line": 116,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      }
+    ]
+  },
+  "github": {
+    "cve_issues": [],
+    "advisories": [
+      {
+        "ghsa_id": "GHSA-gpj5-g38j-94v9",
+        "cve_id": "CVE-2026-39356",
+        "url": "https://api.github.com/repos/drizzle-team/drizzle-orm/security-advisories/GHSA-gpj5-g38j-94v9",
+        "html_url": "https://github.com/drizzle-team/drizzle-orm/security/advisories/GHSA-gpj5-g38j-94v9",
+        "summary": "Drizzle ORM has SQL injection via improperly escaped SQL identifiers",
+        "description": "### Summary\r\n\r\nDrizzle ORM improperly escaped quoted SQL identifiers in its dialect-specific `escapeName()` implementations. In affected versions, embedded identifier delimiters were not escaped before the identifier was wrapped in quotes or backticks.\r\n\r\nAs a result, applications that pass attacker-controlled input to APIs that construct SQL identifiers or aliases, such as `sql.identifier()`, `.as()`, may allow an attacker to terminate the quoted identifier and inject SQL.\r\n\r\n### Affected components\r\n\r\nThe issue affects the identifier escaping logic used by the PostgreSQL, MySQL, SQLite, SingleStore, and Gel dialects.\r\n\r\n### Impact\r\n\r\nThis issue only affects applications that pass untrusted runtime input into identifier or alias construction. Common examples include dynamic sorting, dynamic report builders, and CTE or alias names derived from request parameters.\r\n\r\nDepending on the database dialect, query context, and database permissions, successful exploitation may enable blind or direct data disclosure, schema enumeration, query manipulation, privilege escalation, or destructive operations.\r\n\r\nApplications that use only static schema objects, or that strictly map user input through an allowlist of known column or alias names, are not affected.\r\n\r\n### Details\r\n\r\nIn affected versions, `escapeName()` wrapped the identifier but did not escape the quote delimiter inside the identifier value:\r\n\r\n- PostgreSQL / SQLite / Gel: `\"` was not doubled to `\"\"`\r\n- MySQL / SingleStore: `` ` `` was not doubled to `` `` ``\r\n\r\nBecause of this, crafted input containing the dialect-specific identifier delimiter could break out of the quoted identifier and be interpreted as SQL syntax.\r\n\r\nA representative vulnerable pattern is dynamic sorting using untrusted input:\r\n\r\n```ts\r\nconst sortField = req.query.sort || 'id';\r\n\r\nconst rows = await db\r\n  .select()\r\n  .from(users)\r\n  .orderBy(sql.identifier(sortField));",
+        "severity": "high",
+        "author": null,
+        "publisher": {
+          "login": "AndriiSherman",
+          "id": 29543764,
+          "node_id": "MDQ6VXNlcjI5NTQzNzY0",
+          "avatar_url": "https://avatars.githubusercontent.com/u/29543764?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/AndriiSherman",
+          "html_url": "https://github.com/AndriiSherman",
+          "followers_url": "https://api.github.com/users/AndriiSherman/followers",
+          "following_url": "https://api.github.com/users/AndriiSherman/following{/other_user}",
+          "gists_url": "https://api.github.com/users/AndriiSherman/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/AndriiSherman/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/AndriiSherman/subscriptions",
+          "organizations_url": "https://api.github.com/users/AndriiSherman/orgs",
+          "repos_url": "https://api.github.com/users/AndriiSherman/repos",
+          "events_url": "https://api.github.com/users/AndriiSherman/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/AndriiSherman/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-gpj5-g38j-94v9",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2026-39356",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2026-04-06T22:10:57Z",
+        "published_at": "2026-04-06T19:27:07Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "npm",
+              "name": "drizzle-orm"
+            },
+            "vulnerable_version_range": "<= 0.45.1",
+            "patched_versions": "0.45.2",
+            "vulnerable_functions": []
+          },
+          {
+            "package": {
+              "ecosystem": "npm",
+              "name": "drizzle-orm"
+            },
+            "vulnerable_version_range": "<= 1.0.0-beta.19",
+            "patched_versions": "1.0.0-beta.20",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "score": 7.5
+          },
+          "cvss_v4": {
+            "vector_string": null,
+            "score": null
+          }
+        },
+        "cwes": [
+          {
+            "cwe_id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+          }
+        ],
+        "cwe_ids": [
+          "CWE-89"
+        ],
+        "credits": [
+          {
+            "login": "EthanKim88",
+            "type": "reporter"
+          },
+          {
+            "login": "0x90sh",
+            "type": "reporter"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "EthanKim88",
+              "id": 213258576,
+              "node_id": "U_kgDODLYRUA",
+              "avatar_url": "https://avatars.githubusercontent.com/u/213258576?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/EthanKim88",
+              "html_url": "https://github.com/EthanKim88",
+              "followers_url": "https://api.github.com/users/EthanKim88/followers",
+              "following_url": "https://api.github.com/users/EthanKim88/following{/other_user}",
+              "gists_url": "https://api.github.com/users/EthanKim88/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/EthanKim88/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/EthanKim88/subscriptions",
+              "organizations_url": "https://api.github.com/users/EthanKim88/orgs",
+              "repos_url": "https://api.github.com/users/EthanKim88/repos",
+              "events_url": "https://api.github.com/users/EthanKim88/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/EthanKim88/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          },
+          {
+            "user": {
+              "login": "0x90sh",
+              "id": 44007757,
+              "node_id": "MDQ6VXNlcjQ0MDA3NzU3",
+              "avatar_url": "https://avatars.githubusercontent.com/u/44007757?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/0x90sh",
+              "html_url": "https://github.com/0x90sh",
+              "followers_url": "https://api.github.com/users/0x90sh/followers",
+              "following_url": "https://api.github.com/users/0x90sh/following{/other_user}",
+              "gists_url": "https://api.github.com/users/0x90sh/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/0x90sh/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/0x90sh/subscriptions",
+              "organizations_url": "https://api.github.com/users/0x90sh/orgs",
+              "repos_url": "https://api.github.com/users/0x90sh/repos",
+              "events_url": "https://api.github.com/users/0x90sh/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/0x90sh/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "score": 7.5
+        }
+      }
+    ]
+  }
+}

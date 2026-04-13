@@ -125,6 +125,24 @@
       "top_cve_cvss": 5.699999809265137,
       "top_cve_epss": 0.0020800000056624413,
       "risk": "HIGH"
+    },
+    {
+      "slug": "drizzle-team-drizzle-orm",
+      "repo": "drizzle-team/drizzle-orm",
+      "date": "2026-04-13",
+      "total_cves": 24,
+      "critical": 2,
+      "high": 9,
+      "dependencies": 130,
+      "sast_findings": 53,
+      "pattern_findings": 102894,
+      "exploitable": 2,
+      "attack_chains": 49,
+      "techniques": 40,
+      "top_cve": "CVE-2025-54313",
+      "top_cve_cvss": 7.5,
+      "top_cve_epss": 0.10462000221014023,
+      "risk": "HIGH"
     }
   ]
 }
