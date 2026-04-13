@@ -1,0 +1,371 @@
+{
+  "collected_at": "2026-04-13T05:04:56.874864+00:00",
+  "evidence": [
+    {
+      "category": "SINGLE_MAINTAINER",
+      "claim": "axios has 1 npm maintainer(s) with full publish access",
+      "source": "https://registry.npmjs.org/axios",
+      "data": {
+        "package": "axios",
+        "maintainers": [
+          {
+            "name": "jasonsaayman",
+            "email": "jasonsaayman@gmail.com"
+          }
+        ],
+        "version_count": 134,
+        "created": "2014-08-29",
+        "latest_version": "0.31.0",
+        "latest_publish": "2026-04-12T09:59:51Z"
+      },
+      "sha256_prefix": "b80a6fa6df57afc6",
+      "collected": "2026-04-13T05:04:57.070775+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/axios\" | jq \".maintainers\""
+    },
+    {
+      "category": "SINGLE_MAINTAINER",
+      "claim": "mysql2 has 1 npm maintainer(s) with full publish access",
+      "source": "https://registry.npmjs.org/mysql2",
+      "data": {
+        "package": "mysql2",
+        "maintainers": [
+          {
+            "name": "sidorares",
+            "email": "andrey.sidorov@gmail.com"
+          }
+        ],
+        "version_count": 278,
+        "created": "2013-04-17",
+        "latest_version": "3.22.1-canary.cb5adccb",
+        "latest_publish": "2026-04-10T14:57:09Z"
+      },
+      "sha256_prefix": "7dc9e0b739c1ce44",
+      "collected": "2026-04-13T05:04:57.252984+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/mysql2\" | jq \".maintainers\""
+    },
+    {
+      "category": "SINGLE_MAINTAINER",
+      "claim": "h3 has 1 npm maintainer(s) with full publish access",
+      "source": "https://registry.npmjs.org/h3",
+      "data": {
+        "package": "h3",
+        "maintainers": [
+          {
+            "name": "pi0",
+            "email": "pyapar@gmail.com"
+          }
+        ],
+        "version_count": 139,
+        "created": "2016-07-18",
+        "latest_version": "1.15.11",
+        "latest_publish": "2026-04-01T17:06:09Z"
+      },
+      "sha256_prefix": "bb18a7e1c2ff8780",
+      "collected": "2026-04-13T05:04:57.427321+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/h3\" | jq \".maintainers\""
+    },
+    {
+      "category": "SINGLE_MAINTAINER",
+      "claim": "elysia has 1 npm maintainer(s) with full publish access",
+      "source": "https://registry.npmjs.org/elysia",
+      "data": {
+        "package": "elysia",
+        "maintainers": [
+          {
+            "name": "aomkirby123",
+            "email": "saltyaom@gmail.com"
+          }
+        ],
+        "version_count": 678,
+        "created": "2022-12-04",
+        "latest_version": "1.4.28",
+        "latest_publish": "2026-03-16T22:28:40Z"
+      },
+      "sha256_prefix": "690f50c157e8ea02",
+      "collected": "2026-04-13T05:04:57.707131+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/elysia\" | jq \".maintainers\""
+    },
+    {
+      "category": "MAINTAINER_TURNOVER",
+      "claim": "jsonwebtoken maintainers have completely changed from original auth0 team",
+      "source": "https://registry.npmjs.org/jsonwebtoken",
+      "data": {
+        "package": "jsonwebtoken",
+        "current_maintainers": [
+          {
+            "email": "charles.rea@auth0.com",
+            "name": "charlesrea"
+          },
+          {
+            "email": "madhuri.ravindramohan@okta.com",
+            "name": "madhuri.rm23"
+          },
+          {
+            "email": "julien.wollscheid@auth0.com",
+            "name": "julien.wollscheid"
+          },
+          {
+            "email": "jquevedo@gmail.com",
+            "name": "javierquevedo"
+          }
+        ],
+        "original_author": {
+          "name": "auth0"
+        },
+        "created": "2013-07-01",
+        "version_count": 82,
+        "weekly_downloads_source": "https://api.npmjs.org/downloads/point/last-week/jsonwebtoken"
+      },
+      "sha256_prefix": "29566803ad3aad62",
+      "collected": "2026-04-13T05:04:57.842911+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/jsonwebtoken\" | jq \"{maintainers,author}\""
+    },
+    {
+      "category": "BOT_PUBLISHING",
+      "claim": "next is published by bot accounts with no human maintainer approval gate",
+      "source": "https://registry.npmjs.org/next",
+      "data": {
+        "package": "next",
+        "maintainers": [
+          {
+            "name": "vercel-release-bot",
+            "email": "infra+release@vercel.com"
+          },
+          {
+            "name": "zeit-bot",
+            "email": "team@zeit.co"
+          }
+        ],
+        "bot_accounts": [
+          {
+            "name": "vercel-release-bot",
+            "email": "infra+release@vercel.com"
+          },
+          {
+            "name": "zeit-bot",
+            "email": "team@zeit.co"
+          }
+        ],
+        "version_count": 3730
+      },
+      "sha256_prefix": "90aee3200cc82b7d",
+      "collected": "2026-04-13T05:04:58.557289+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/next\" | jq \".maintainers\""
+    },
+    {
+      "category": "BOT_PUBLISHING",
+      "claim": "react-dom is published by bot accounts with no human maintainer approval gate",
+      "source": "https://registry.npmjs.org/react-dom",
+      "data": {
+        "package": "react-dom",
+        "maintainers": [
+          {
+            "name": "fb",
+            "email": "opensource+npm@fb.com"
+          },
+          {
+            "name": "react-bot",
+            "email": "react-core@meta.com"
+          }
+        ],
+        "bot_accounts": [
+          {
+            "name": "react-bot",
+            "email": "react-core@meta.com"
+          }
+        ],
+        "version_count": 2732
+      },
+      "sha256_prefix": "29087f4b86d6d2bc",
+      "collected": "2026-04-13T05:04:58.959990+00:00",
+      "verify": "curl -s \"https://registry.npmjs.org/react-dom\" | jq \".maintainers\""
+    },
+    {
+      "category": "SHARED_CVE",
+      "claim": "CVE-2015-9235 affects 4 audited projects simultaneously",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2015-9235",
+      "data": {
+        "cve_id": "CVE-2015-9235",
+        "affected_projects": [
+          "calcom/cal.com",
+          "directus/directus",
+          "payloadcms/payload",
+          "strapi/strapi"
+        ],
+        "cvss": 0.0,
+        "epss_score": 0.3246999979019165,
+        "exploit_maturity": "POC",
+        "exploit_count": 4,
+        "cwes": [
+          "CWE-20"
+        ],
+        "package": "npm:jsonwebtoken@9.0.0"
+      },
+      "sha256_prefix": "741170e27dc49aa1",
+      "collected": "2026-04-13T05:04:58.968216+00:00",
+      "verify": "curl -s \"https://api.first.org/data/v1/epss?cve=CVE-2015-9235\""
+    },
+    {
+      "category": "SHARED_CVE",
+      "claim": "CVE-2019-10742 affects 3 audited projects simultaneously",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2019-10742",
+      "data": {
+        "cve_id": "CVE-2019-10742",
+        "affected_projects": [
+          "calcom/cal.com",
+          "directus/directus",
+          "strapi/strapi"
+        ],
+        "cvss": 0.0,
+        "epss_score": 0.13089999556541443,
+        "exploit_maturity": "POC",
+        "exploit_count": 1,
+        "cwes": [],
+        "package": "npm:axios@1.6.0"
+      },
+      "sha256_prefix": "08c24592fc856617",
+      "collected": "2026-04-13T05:04:58.968238+00:00",
+      "verify": "curl -s \"https://api.first.org/data/v1/epss?cve=CVE-2019-10742\""
+    },
+    {
+      "category": "SHARED_CVE",
+      "claim": "CVE-2021-3749 affects 3 audited projects simultaneously",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2021-3749",
+      "data": {
+        "cve_id": "CVE-2021-3749",
+        "affected_projects": [
+          "calcom/cal.com",
+          "directus/directus",
+          "strapi/strapi"
+        ],
+        "cvss": 7.5,
+        "epss_score": 0.08262000232934952,
+        "exploit_maturity": "POC",
+        "exploit_count": 1,
+        "cwes": [
+          "CWE-1333"
+        ],
+        "package": "npm:axios@1.6.0"
+      },
+      "sha256_prefix": "1005649c976f6f87",
+      "collected": "2026-04-13T05:04:58.968249+00:00",
+      "verify": "curl -s \"https://api.first.org/data/v1/epss?cve=CVE-2021-3749\""
+    },
+    {
+      "category": "SHARED_CVE",
+      "claim": "CVE-2021-23337 affects 3 audited projects simultaneously",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2021-23337",
+      "data": {
+        "cve_id": "CVE-2021-23337",
+        "affected_projects": [
+          "calcom/cal.com",
+          "directus/directus",
+          "strapi/strapi"
+        ],
+        "cvss": 7.199999809265137,
+        "epss_score": 0.043140001595020294,
+        "exploit_maturity": "POC",
+        "exploit_count": 2,
+        "cwes": [],
+        "package": "npm:lodash@4.17.20"
+      },
+      "sha256_prefix": "34b169408c47844b",
+      "collected": "2026-04-13T05:04:58.968259+00:00",
+      "verify": "curl -s \"https://api.first.org/data/v1/epss?cve=CVE-2021-23337\""
+    },
+    {
+      "category": "SHARED_CVE",
+      "claim": "CVE-2020-8203 affects 3 audited projects simultaneously",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2020-8203",
+      "data": {
+        "cve_id": "CVE-2020-8203",
+        "affected_projects": [
+          "calcom/cal.com",
+          "directus/directus",
+          "strapi/strapi"
+        ],
+        "cvss": 0.0,
+        "epss_score": 0.0357000008225441,
+        "exploit_maturity": "NONE",
+        "exploit_count": 0,
+        "cwes": [
+          "CWE-770"
+        ],
+        "package": "npm:lodash@4.17.20"
+      },
+      "sha256_prefix": "3333462fbdd28e78",
+      "collected": "2026-04-13T05:04:58.968267+00:00",
+      "verify": "curl -s \"https://api.first.org/data/v1/epss?cve=CVE-2020-8203\""
+    },
+    {
+      "category": "DOWNLOAD_IMPACT",
+      "claim": "axios has 98,025,551 weekly npm downloads \u2014 blast radius of a compromise",
+      "source": "https://api.npmjs.org/downloads/point/last-week/axios",
+      "data": {
+        "downloads": 98025551,
+        "start": "2026-04-06",
+        "end": "2026-04-12",
+        "package": "axios"
+      },
+      "sha256_prefix": "bf833b5e7a14f28a",
+      "collected": "2026-04-13T05:04:59.226860+00:00",
+      "verify": "curl -s \"https://api.npmjs.org/downloads/point/last-week/axios\""
+    },
+    {
+      "category": "DOWNLOAD_IMPACT",
+      "claim": "jsonwebtoken has 38,377,944 weekly npm downloads \u2014 blast radius of a compromise",
+      "source": "https://api.npmjs.org/downloads/point/last-week/jsonwebtoken",
+      "data": {
+        "downloads": 38377944,
+        "start": "2026-04-06",
+        "end": "2026-04-12",
+        "package": "jsonwebtoken"
+      },
+      "sha256_prefix": "c8dc4c33eccfa774",
+      "collected": "2026-04-13T05:04:59.361853+00:00",
+      "verify": "curl -s \"https://api.npmjs.org/downloads/point/last-week/jsonwebtoken\""
+    },
+    {
+      "category": "DOWNLOAD_IMPACT",
+      "claim": "next has 36,597,085 weekly npm downloads \u2014 blast radius of a compromise",
+      "source": "https://api.npmjs.org/downloads/point/last-week/next",
+      "data": {
+        "downloads": 36597085,
+        "start": "2026-04-05",
+        "end": "2026-04-11",
+        "package": "next"
+      },
+      "sha256_prefix": "0cb6df835355d7ba",
+      "collected": "2026-04-13T05:04:59.502461+00:00",
+      "verify": "curl -s \"https://api.npmjs.org/downloads/point/last-week/next\""
+    },
+    {
+      "category": "DOWNLOAD_IMPACT",
+      "claim": "mysql2 has 8,592,941 weekly npm downloads \u2014 blast radius of a compromise",
+      "source": "https://api.npmjs.org/downloads/point/last-week/mysql2",
+      "data": {
+        "downloads": 8592941,
+        "start": "2026-04-06",
+        "end": "2026-04-12",
+        "package": "mysql2"
+      },
+      "sha256_prefix": "e7fca1db8a3b5d24",
+      "collected": "2026-04-13T05:04:59.741148+00:00",
+      "verify": "curl -s \"https://api.npmjs.org/downloads/point/last-week/mysql2\""
+    },
+    {
+      "category": "DOWNLOAD_IMPACT",
+      "claim": "lodash has 133,124,413 weekly npm downloads \u2014 blast radius of a compromise",
+      "source": "https://api.npmjs.org/downloads/point/last-week/lodash",
+      "data": {
+        "downloads": 133124413,
+        "start": "2026-04-06",
+        "end": "2026-04-12",
+        "package": "lodash"
+      },
+      "sha256_prefix": "a8be9234574db548",
+      "collected": "2026-04-13T05:04:59.937663+00:00",
+      "verify": "curl -s \"https://api.npmjs.org/downloads/point/last-week/lodash\""
+    }
+  ]
+}
