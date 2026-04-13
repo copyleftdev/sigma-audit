@@ -844,11 +844,93 @@ def generate_html_report(owner_repo, file_counts, deps, semgrep, zentinel,
 
 # ─── Main ─────────────────────────────────────────────────────
 
+REGISTRY_REPO = os.environ.get("SIGMA_AUDIT_REPO", "copyleftdev/sigma-audit")
+
+def publish_to_registry(owner_repo, report_path, data_json, overview, intel, attack_surface):
+    """Push report + data to the sigma-audit registry repo and update the manifest."""
+    log("Publishing to registry...")
+    slug = owner_repo.replace("/", "-")
+    registry_dir = tempfile.mkdtemp(prefix="sigma-registry-")
+
+    try:
+        # Clone the registry repo
+        cmd = f"gh repo clone {REGISTRY_REPO} {registry_dir} -- --depth 1 2>&1"
+        out = run(cmd, timeout=60)
+        if not os.path.isdir(os.path.join(registry_dir, ".git")):
+            log(f"Failed to clone registry: {out[:200]}", "err")
+            return False
+
+        # Create report directory
+        report_dir = os.path.join(registry_dir, "docs", "reports", slug)
+        os.makedirs(report_dir, exist_ok=True)
+
+        # Copy report and data
+        import shutil
+        shutil.copy2(report_path, os.path.join(report_dir, "index.html"))
+        with open(os.path.join(report_dir, "data.json"), "w") as f:
+            json.dump(data_json, f, indent=2)
+
+        # Update manifest
+        manifest_path = os.path.join(registry_dir, "docs", "reports", "manifest.json")
+        if os.path.exists(manifest_path):
+            manifest = json.load(open(manifest_path))
+        else:
+            manifest = {"reports": []}
+
+        # Remove existing entry for this repo (update in place)
+        manifest["reports"] = [r for r in manifest["reports"] if r.get("slug") != slug]
+
+        surf = attack_surface or {}
+        entry = {
+            "slug": slug,
+            "repo": owner_repo,
+            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "total_cves": overview.get("total_cves", 0),
+            "critical": overview.get("severity", {}).get("CRITICAL", 0),
+            "high": overview.get("severity", {}).get("HIGH", 0),
+            "dependencies": overview.get("dependencies", 0),
+            "sast_findings": overview.get("sast_findings", 0),
+            "pattern_findings": overview.get("pattern_findings", 0),
+            "exploitable": overview.get("exploitable", 0),
+            "attack_chains": surf.get("chains_found", 0),
+            "techniques": len(surf.get("techniques", [])),
+            "top_cve": intel[0]["cve_id"] if intel else None,
+            "top_cve_cvss": intel[0]["cvss"] if intel else 0,
+            "top_cve_epss": intel[0]["epss_score"] if intel else 0,
+            "risk": surf.get("overall_risk", "?"),
+        }
+        manifest["reports"].append(entry)
+
+        with open(manifest_path, "w") as f:
+            json.dump(manifest, f, indent=2)
+
+        # Commit and push
+        cmds = [
+            f"cd {registry_dir} && git add docs/reports/{slug}/ docs/reports/manifest.json",
+            f'cd {registry_dir} && git commit -m "audit: {owner_repo} — {entry[\"total_cves\"]} CVEs, risk {entry[\"risk\"]}"',
+            f"cd {registry_dir} && git push",
+        ]
+        for cmd in cmds:
+            out = run(cmd, timeout=30)
+
+        log(f"Published to {REGISTRY_REPO} — dashboard will update automatically", "ok")
+        return True
+
+    except Exception as e:
+        log(f"Publish failed: {e}", "err")
+        return False
+    finally:
+        import shutil
+        shutil.rmtree(registry_dir, ignore_errors=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Sigma Stack Audit")
     parser.add_argument("repo", help="GitHub owner/repo (e.g., calcom/cal.com)")
     parser.add_argument("--branch", default="main", help="Branch to audit (default: main)")
     parser.add_argument("--output", default=None, help="Output HTML path (default: <repo>-audit.html)")
+    parser.add_argument("--publish", action="store_true",
+                        help="Push report to sigma-audit registry repo and update dashboard")
     args = parser.parse_args()
 
     owner_repo = args.repo
@@ -859,6 +941,8 @@ def main():
     print(f"  \033[1mSigma Stack Audit: {owner_repo}\033[0m")
     print(f"  Branch: {branch}")
     print(f"  Tools: Vajra + Semgrep + Zentinel + VulnGraph MCP + GitHub")
+    if args.publish:
+        print(f"  Publish: {REGISTRY_REPO}")
     print()
 
     t0 = time.time()
@@ -894,10 +978,59 @@ def main():
         generate_html_report(owner_repo, file_counts, all_deps, semgrep, zentinel,
                              vulngraph, github, output)
 
+        # Build structured data for publishing
+        data_json = {
+            "meta": {
+                "repo": owner_repo,
+                "branch": branch,
+                "audit_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                "tools": ["Vajra", "Semgrep", "Zentinel", "VulnGraph MCP", "GitHub"],
+            },
+            "overview": {
+                "dependencies": total,
+                "source_files": file_counts,
+                "total_cves": vulngraph.get("total_cves", 0) if vulngraph else 0,
+                "severity": {},
+                "sast_findings": semgrep.get("total", 0) if semgrep else 0,
+                "pattern_findings": zentinel.get("total", 0) if zentinel else 0,
+                "exploitable": len([i for i in (vulngraph or {}).get("intel", [])
+                                    if i.get("exploit_maturity") in ("WEAPONIZED", "FUNCTIONAL")]),
+            },
+            "intel": vulngraph.get("intel", []) if vulngraph else [],
+            "attack_surface": vulngraph.get("attack_surface") if vulngraph else {},
+            "semgrep": semgrep,
+            "zentinel": zentinel,
+            "github": github,
+        }
+        # Compute severity counts
+        if vulngraph:
+            for f in vulngraph.get("findings", []):
+                s = f.get("severity", "NONE")
+                data_json["overview"]["severity"][s] = data_json["overview"]["severity"].get(s, 0) + 1
+
+        # Write data.json alongside report
+        data_path = output.replace(".html", "-data.json")
+        with open(data_path, "w") as f:
+            json.dump(data_json, f, indent=2)
+        log(f"Data written to {data_path}", "ok")
+
+        # Publish to registry if requested
+        if args.publish:
+            print()
+            publish_to_registry(
+                owner_repo, output, data_json,
+                data_json["overview"],
+                data_json.get("intel", []),
+                data_json.get("attack_surface"),
+            )
+
         elapsed = time.time() - t0
         print()
         print(f"  \033[1mAudit complete in {elapsed:.0f}s\033[0m")
         print(f"  Report: \033[4m{output}\033[0m")
+        if args.publish:
+            slug = owner_repo.replace("/", "-")
+            print(f"  Live:   \033[4mhttps://copyleftdev.github.io/sigma-audit/reports/{slug}/\033[0m")
         print()
 
     finally:

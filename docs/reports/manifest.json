@@ -1,0 +1,22 @@
+{
+  "reports": [
+    {
+      "slug": "calcom-cal.com",
+      "repo": "calcom/cal.com",
+      "date": "2026-04-13",
+      "total_cves": 146,
+      "critical": 6,
+      "high": 33,
+      "dependencies": 377,
+      "sast_findings": 10,
+      "pattern_findings": 17102,
+      "exploitable": 4,
+      "attack_chains": 108,
+      "techniques": 64,
+      "top_cve": "CVE-2025-29927",
+      "top_cve_cvss": 9.100000381469727,
+      "top_cve_epss": 0.9295499920845032,
+      "risk": "CRITICAL"
+    }
+  ]
+}

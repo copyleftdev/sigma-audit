@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sigma Stack Audit — calcom/cal.com</title>
+<meta name="description" content="Full-spectrum security audit: 146 CVEs, 108 attack chains, 64 ATT&CK techniques across 377 dependencies. Vajra + Semgrep + Zentinel + VulnGraph MCP.">
+<meta property="og:title" content="Sigma Stack Audit — calcom/cal.com">
+<meta property="og:description" content="146 CVEs, 108 attack chains, 64 ATT&CK techniques. Full-spectrum security audit with exploit intelligence and kill chain mapping.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0e17">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='none' stroke='%233b82f6' stroke-width='6'/><circle cx='50' cy='30' r='8' fill='%23ef4444'/><circle cx='28' cy='62' r='6' fill='%233b82f6'/><circle cx='72' cy='62' r='6' fill='%2322c55e'/><line x1='50' y1='38' x2='32' y2='58' stroke='%232a3650' stroke-width='2.5'/><line x1='50' y1='38' x2='68' y2='58' stroke='%232a3650' stroke-width='2.5'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e17;--bg2:#111827;--surface:#1a2235;--border:#2a3650;--text:#e2e8f0;--text2:#94a3b8;
+--accent:#3b82f6;--red:#ef4444;--orange:#f97316;--yellow:#eab308;--green:#22c55e;--purple:#a855f7;--cyan:#06b6d4;--pink:#ec4899;--teal:#14b8a6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px;font-size:0.8em}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* ── Hero ──────────────────────────── */
+.hero{text-align:center;padding:80px 24px 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;
+background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-size:2.8rem;font-weight:800;letter-spacing:-0.03em;
+background:linear-gradient(135deg,var(--text) 0%,var(--accent) 50%,var(--cyan) 100%);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.hero .repo{font-size:1.1rem;color:var(--text2);margin-bottom:24px}
+.hero .repo a{color:var(--accent);font-weight:600}
+.hero .date{font-size:0.8rem;color:var(--text2);opacity:0.6}
+.tools-bar{display:flex;justify-content:center;gap:10px;margin:20px 0;flex-wrap:wrap}
+.tool-pill{padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;letter-spacing:0.03em;
+border:1px solid var(--border);background:var(--surface);transition:all 0.3s;opacity:0;transform:translateY(10px)}
+.tool-pill.revealed{opacity:1;transform:translateY(0)}
+.tool-pill[data-tool="vajra"]{border-color:rgba(34,197,94,0.3);color:var(--green)}
+.tool-pill[data-tool="semgrep"]{border-color:rgba(249,115,22,0.3);color:var(--orange)}
+.tool-pill[data-tool="zentinel"]{border-color:rgba(6,182,212,0.3);color:var(--cyan)}
+.tool-pill[data-tool="vulngraph"]{border-color:rgba(59,130,246,0.3);color:var(--accent)}
+.tool-pill[data-tool="github"]{border-color:rgba(148,163,184,0.3);color:var(--text2)}
+
+/* ── Executive Summary ─────────────── */
+.exec-summary{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 28px;
+margin:0 auto 32px;max-width:900px;font-size:0.9rem;color:var(--text2);line-height:1.8}
+.exec-summary strong{color:var(--text)}
+.exec-summary .highlight{color:var(--red);font-weight:700}
+
+/* ── Sections ──────────────────────── */
+section{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;margin-bottom:48px}
+section.revealed{opacity:1;transform:translateY(0)}
+section h2{font-size:1.4rem;font-weight:800;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);
+display:flex;align-items:center;gap:10px}
+section h2 .count{font-size:0.8rem;color:var(--text2);font-weight:400}
+section h3{font-size:0.95rem;color:var(--text2);margin:20px 0 10px}
+
+/* ── Stat Cards ────────────────────── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;
+opacity:0;transform:scale(0.9);transition:all 0.5s ease}
+.stat-card.revealed{opacity:1;transform:scale(1)}
+.stat-card .num{font-size:2rem;font-weight:800;font-family:'JetBrains Mono',monospace}
+.stat-card .label{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+.stat-card.danger{border-color:rgba(239,68,68,0.3);animation:pulse-border 2s ease-in-out infinite}
+.stat-card.danger .num{color:var(--red)}
+@keyframes pulse-border{0%,100%{border-color:rgba(239,68,68,0.3)}50%{border-color:rgba(239,68,68,0.6)}}
+
+/* ── Badges ────────────────────────── */
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.b-critical{background:rgba(239,68,68,0.15);color:var(--red)}
+.b-high{background:rgba(249,115,22,0.15);color:var(--orange)}
+.b-medium{background:rgba(234,179,8,0.15);color:var(--yellow)}
+.b-low,.b-none{background:rgba(148,163,184,0.1);color:var(--text2)}
+.b-warning{background:rgba(234,179,8,0.15);color:var(--yellow)}
+.b-error{background:rgba(239,68,68,0.15);color:var(--red)}
+.b-info{background:rgba(59,130,246,0.1);color:var(--blue)}
+.b-kev{background:rgba(239,68,68,0.2);color:var(--red)}
+.mat{padding:2px 6px;border-radius:3px;font-size:0.6rem;font-weight:700}
+.mat-WEAPONIZED{background:rgba(239,68,68,0.2);color:var(--red)}
+.mat-FUNCTIONAL{background:rgba(249,115,22,0.2);color:var(--orange)}
+.mat-POC{background:rgba(234,179,8,0.15);color:var(--yellow)}
+.mat-NONE{background:rgba(148,163,184,0.1);color:var(--text2)}
+
+/* ── CVE Cards ─────────────────────── */
+.cve-list{display:flex;flex-direction:column;gap:8px}
+.cve-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s}
+.cve-card:hover{border-color:var(--accent)}
+.cve-header{display:grid;grid-template-columns:1fr auto auto auto auto;gap:16px;align-items:center;padding:14px 18px;cursor:pointer}
+.cve-header .cve-id{font-weight:700;font-size:0.9rem}
+.cve-header .cve-id a{color:var(--text)}
+.cve-header .cve-pkg{color:var(--text2);font-size:0.72rem;margin-top:2px}
+.cve-header .epss-col{text-align:right}
+.cve-header .epss-val{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:0.85rem}
+.cve-header .epss-bar{width:60px;height:3px;background:var(--border);border-radius:2px;margin-top:3px}
+.cve-header .epss-fill{height:100%;border-radius:2px;background:var(--orange)}
+.cve-header .arrow{color:var(--text2);transition:transform 0.3s;font-size:0.8rem}
+.cve-card.open .arrow{transform:rotate(180deg)}
+.cve-detail{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.cve-card.open .cve-detail{max-height:800px}
+.cve-detail-inner{padding:0 18px 18px;border-top:1px solid var(--border)}
+.cve-desc{color:var(--text2);font-size:0.82rem;line-height:1.6;margin:12px 0}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.detail-box{background:rgba(255,255,255,0.02);border-radius:8px;padding:12px}
+.detail-box h4{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px}
+.exploit-link{display:block;font-size:0.78rem;margin:3px 0;padding:3px 8px;border-radius:4px;transition:background 0.15s}
+.exploit-link:hover{background:rgba(59,130,246,0.08)}
+.tech-chip{display:inline-block;padding:2px 7px;background:rgba(6,182,212,0.12);color:var(--cyan);border-radius:4px;
+font-size:0.7rem;margin:2px;font-weight:600;transition:background 0.15s}
+.tech-chip:hover{background:rgba(6,182,212,0.25);text-decoration:none}
+.cwe-chip{display:inline-block;padding:2px 7px;background:rgba(168,85,247,0.12);color:var(--purple);border-radius:4px;
+font-size:0.7rem;margin:2px}
+.rem-entry{font-size:0.78rem;margin:3px 0;color:var(--text2)}
+.rem-entry strong{color:var(--green)}
+
+/* ── Kill Chains ───────────────────── */
+.chain-cards{display:flex;flex-direction:column;gap:10px}
+.chain-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px}
+.chain-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:0.85rem;font-weight:600}
+.chain-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:8px 0}
+.chain-node{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.chain-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+font-size:0.55rem;font-weight:700;color:#fff;cursor:pointer;transition:transform 0.2s}
+.chain-dot:hover{transform:scale(1.15)}
+.chain-dot.t-cve{background:var(--red)}
+.chain-dot.t-package{background:var(--accent)}
+.chain-dot.t-weakness{background:var(--purple)}
+.chain-dot.t-technique{background:var(--cyan)}
+.chain-dot.t-exploit{background:var(--orange)}
+.chain-label{font-size:0.6rem;color:var(--text2);margin-top:4px;max-width:80px;text-align:center;
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chain-arrow{color:var(--border);font-size:1.2rem;margin:0 4px;flex-shrink:0}
+
+/* ── Technique Grid ────────────────── */
+.tech-grid{display:flex;flex-wrap:wrap;gap:4px;margin:12px 0}
+
+/* ── Finding Tables ────────────────── */
+.findings-table{width:100%;border-collapse:collapse}
+.findings-table th{text-align:left;padding:8px 12px;font-size:0.7rem;color:var(--text2);text-transform:uppercase;
+letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--surface)}
+.findings-table td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:0.82rem;vertical-align:top}
+.findings-table tr:hover{background:rgba(59,130,246,0.03)}
+
+/* ── Rule Bar Chart ────────────────── */
+.rule-bars{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.rule-bar{display:flex;align-items:center;gap:10px;font-size:0.78rem}
+.rule-bar .name{width:200px;color:var(--text2);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rule-bar .bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.rule-bar .fill{height:100%;border-radius:3px;background:var(--cyan);transition:width 1s ease}
+.rule-bar .count{width:50px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2)}
+
+/* ── Footer ────────────────────────── */
+.footer{text-align:center;padding:48px 24px;color:var(--text2);font-size:0.75rem;border-top:1px solid var(--border)}
+.footer a{color:var(--accent)}
+
+/* ── Responsive ────────────────────── */
+@media(max-width:768px){
+  .hero h1{font-size:1.8rem}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .cve-header{grid-template-columns:1fr;gap:8px}
+  .detail-grid{grid-template-columns:1fr}
+  .chain-flow{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .rule-bar .name{width:120px;font-size:0.7rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Sigma Stack Audit</h1>
+  <div class="repo"><a href="https://github.com/calcom/cal.com" target="_blank">calcom/cal.com</a></div>
+  <div class="tools-bar" id="tools-bar">
+    <span class="tool-pill" data-tool="vajra">Vajra</span>
+    <span class="tool-pill" data-tool="semgrep">Semgrep</span>
+    <span class="tool-pill" data-tool="zentinel">Zentinel</span>
+    <span class="tool-pill" data-tool="vulngraph">VulnGraph MCP</span>
+    <span class="tool-pill" data-tool="github">GitHub</span>
+  </div>
+  <div class="date">April 13, 2026</div>
+</div>
+
+<div class="container">
+  <div class="exec-summary" id="exec-summary"></div>
+
+  <section id="sec-overview"><h2>Risk Dashboard</h2><div class="stats-grid" id="stats-grid"></div></section>
+  <section id="sec-intel"><h2>CVE Intelligence &amp; Exploitability <span class="count" id="intel-count"></span></h2>
+    <p style="color:var(--text2);font-size:0.82rem;margin-bottom:16px">Each CVE enriched with EPSS probability, proof-of-concept references, CWE classification, ATT&CK technique mapping via CAPEC bridge, and version-range remediation. Click any row to expand.</p>
+    <div class="cve-list" id="cve-list"></div>
+  </section>
+  <section id="sec-chains"><h2>Kill Chains &amp; Attack Surface</h2>
+    <div class="stats-grid" id="chain-stats"></div>
+    <h3>Top Attack Chains</h3>
+    <div class="chain-cards" id="chain-cards"></div>
+    <h3>Exposed ATT&CK Techniques</h3>
+    <div class="tech-grid" id="tech-grid"></div>
+  </section>
+  <section id="sec-semgrep"><h2>Static Analysis (Semgrep)</h2>
+    <table class="findings-table" id="semgrep-table"><thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead><tbody></tbody></table>
+  </section>
+  <section id="sec-zentinel"><h2>Security Patterns (Zentinel)</h2>
+    <div id="zent-summary"></div>
+    <h3>Top Rules</h3>
+    <div class="rule-bars" id="rule-bars"></div>
+    <h3>Critical Findings</h3>
+    <table class="findings-table" id="zent-table"><thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead><tbody></tbody></table>
+  </section>
+</div>
+
+<div class="footer">
+  Generated by <a href="https://github.com/zuub-don/sigma-audit">Sigma Stack Audit</a>
+  &middot; Vajra + Semgrep + Zentinel + <a href="https://vulngraph.tools">VulnGraph</a> MCP
+  &middot; April 13, 2026
+</div>
+
+<script>
+// ─── Audit Data (embedded) ───────────────────────────────────
+const DATA = {"meta": {"repo": "calcom/cal.com", "branch": "main", "audit_date": "2026-04-13", "tools": ["Vajra", "Semgrep", "Zentinel", "VulnGraph MCP", "GitHub"]}, "overview": {"dependencies": 377, "source_files": {"ts": 5775, "tsx": 1691}, "total_cves": 146, "severity": {"CRITICAL": 6, "HIGH": 33, "NONE": 34, "MEDIUM": 58, "LOW": 15}, "sast_findings": 10, "pattern_findings": 17102, "exploitable": 4}, "intel": [{"cve_id": "CVE-2025-29927", "package": "npm:next@14.1.0", "severity": "CRITICAL", "cvss": 9.100000381469727, "epss_score": 0.9295499920845032, "epss_percentile": 0.997759997844696, "exploit_maturity": "WEAPONIZED", "maturity_rationale": "12 public PoCs; EPSS 0.9295", "kev_listed": false, "exploit_count": 12, "exploits": ["EDB:52124", "GitHub-PoC:CVE-2025-29927:0", "GitHub-PoC:CVE-2025-29927:1", "GitHub-PoC:CVE-2025-29927:2", "GitHub-PoC:CVE-2025-29927:3", "GitHub-PoC:CVE-2025-29927:4", "GitHub-PoC:CVE-2025-29927:5", "GitHub-PoC:CVE-2025-29927:6", "GitHub-PoC:CVE-2025-29927:7", "GitHub-PoC:CVE-2025-29927:8", "GitHub-PoC:CVE-2025-29927:9", "Nuclei:CVE-2025-29927"], "cwes": ["CWE-285"], "techniques": [{"id": "T1574.007", "source": "cwe"}, {"id": "T1552.002", "source": "cwe"}, {"id": "T1005", "source": "cwe"}, {"id": "T1574.006", "source": "cwe"}, {"id": "T1574.005", "source": "cwe"}, {"id": "T1083", "source": "cwe"}, {"id": "T1134.001", "source": "cwe"}, {"id": "T1562.003", "source": "cwe"}, {"id": "T1574.010", "source": "cwe"}, {"id": "T1012", "source": "cwe"}, {"id": "T1550.004", "source": "cwe"}, {"id": "T1565.002", "source": "cwe"}], "description": "Next.js is a React framework for building full-stack web applications. Starting in version 1.11.4 and prior to versions 12.3.5, 13.5.9, 14.2.25, and 15.2.3, it is possible to bypass authorization checks within a Next.js application, if the authorization check occurs in middleware. If patching to a safe version is infeasible, it is recommend that you prevent external user requests which contain the x-middleware-subrequest header from reaching your Next.js application. This vulnerability is fixed in 12.3.5, 1", "published": "2025-03-21", "remediation": [{"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 11.1.4, < 12.3.5"}, {"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 14.0.0, < 14.2.25"}, {"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 15.0.0, < 15.2.3"}, {"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 13.0.0, < 13.5.9"}, {"fixed_version": "13.5.9", "package": "npm:next", "vulnerable_range": ">= 13.0.0"}, {"fixed_version": "14.2.25", "package": "npm:next", "vulnerable_range": ">= 14.0.0"}, {"fixed_version": "15.2.3", "package": "npm:next", "vulnerable_range": ">= 15.0.0"}, {"fixed_version": "12.3.5", "package": "npm:next", "vulnerable_range": ">= 12.0.0"}]}, {"cve_id": "CVE-2024-34351", "package": "npm:next@14.1.0", "severity": "HIGH", "cvss": 7.5, "epss_score": 0.9275100231170654, "epss_percentile": 0.9975600242614746, "exploit_maturity": "WEAPONIZED", "maturity_rationale": "4 public PoCs; EPSS 0.9275", "kev_listed": false, "exploit_count": 4, "exploits": ["GitHub-PoC:CVE-2024-34351:0", "GitHub-PoC:CVE-2024-34351:1", "GitHub-PoC:CVE-2024-34351:2", "Nuclei:CVE-2024-34351"], "cwes": ["CWE-918"], "techniques": [], "description": "Next.js is a React framework that can provide building blocks to create web applications. A Server-Side Request Forgery (SSRF) vulnerability was identified in Next.js Server Actions. If the `Host` header is modified, and the below conditions are also met, an attacker may be able to make requests that appear to be originating from the Next.js application server itself. The required conditions are 1) Next.js is running in a self-hosted manner; 2) the Next.js application makes use of Server Actions; and 3) the", "published": "2024-05-09", "remediation": [{"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 13.4.0, < 14.1.1"}, {"fixed_version": "14.1.1", "package": "npm:next", "vulnerable_range": ">= 13.4.0"}]}, {"cve_id": "CVE-2017-16877", "package": "npm:next@14.1.0", "severity": "NONE", "cvss": 0.0, "epss_score": 0.8319799900054932, "epss_percentile": 0.9926699995994568, "exploit_maturity": "FUNCTIONAL", "maturity_rationale": "1 PoCs, EPSS 0.8320", "kev_listed": false, "exploit_count": 1, "exploits": ["Nuclei:CVE-2017-16877"], "cwes": [], "techniques": [], "description": "ZEIT Next.js before 2.4.1 has directory traversal under the /_next and /static request namespace, allowing attackers to obtain sensitive information.", "published": "2017-11-17", "remediation": [{"fixed_version": "2.4.1", "package": "npm:next", "vulnerable_range": ">= 1.0.0"}]}, {"cve_id": "CVE-2020-5284", "package": "npm:next@14.1.0", "severity": "MEDIUM", "cvss": 4.400000095367432, "epss_score": 0.8195000290870667, "epss_percentile": 0.9920499920845032, "exploit_maturity": "FUNCTIONAL", "maturity_rationale": "1 PoCs, EPSS 0.8195", "kev_listed": false, "exploit_count": 1, "exploits": ["Nuclei:CVE-2020-5284"], "cwes": ["CWE-23"], "techniques": [], "description": "Next.js versions before 9.3.2 have a directory traversal vulnerability. Attackers could craft special requests to access files in the dist directory (.next). This does not affect files outside of the dist directory (.next). In general, the dist directory only holds build assets unless your application intentionally stores other assets under this directory. This issue is fixed in version 9.3.2.", "published": "2020-03-30", "remediation": [{"fixed_version": null, "package": "cpe:zeit:next.js", "vulnerable_range": ">= < 9.3.2"}, {"fixed_version": "9.3.2", "package": "npm:next", "vulnerable_range": ">= 0.9.9"}]}, {"cve_id": "CVE-2024-51479", "package": "npm:next@14.1.0", "severity": "HIGH", "cvss": 7.5, "epss_score": 0.6673099994659424, "epss_percentile": 0.9854199886322021, "exploit_maturity": "NONE", "maturity_rationale": "No known exploit activity", "kev_listed": false, "exploit_count": 0, "exploits": [], "cwes": ["CWE-285"], "techniques": [{"id": "T1574.007", "source": "cwe"}, {"id": "T1552.002", "source": "cwe"}, {"id": "T1005", "source": "cwe"}, {"id": "T1574.006", "source": "cwe"}, {"id": "T1574.005", "source": "cwe"}, {"id": "T1083", "source": "cwe"}, {"id": "T1134.001", "source": "cwe"}, {"id": "T1562.003", "source": "cwe"}, {"id": "T1574.010", "source": "cwe"}, {"id": "T1012", "source": "cwe"}, {"id": "T1550.004", "source": "cwe"}, {"id": "T1565.002", "source": "cwe"}], "description": "Next.js is a React framework for building full-stack web applications. In affected versions if a Next.js application is performing authorization in middleware based on pathname, it was possible for this authorization to be bypassed for pages directly under the application's root directory. For example: * [Not affected] `https://example.com/` * [Affected] `https://example.com/foo` * [Not affected] `https://example.com/foo/bar`. This issue is patched in Next.js `14.2.15` and later. If your Next.js application", "published": "2024-12-17", "remediation": [{"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 9.5.5, < 14.2.15"}, {"fixed_version": "14.2.15", "package": "npm:next", "vulnerable_range": ">= 9.5.5"}]}, {"cve_id": "CVE-2024-46982", "package": "npm:next@14.1.0", "severity": "HIGH", "cvss": 7.5, "epss_score": 0.4906199872493744, "epss_percentile": 0.9777299761772156, "exploit_maturity": "POC", "maturity_rationale": "5 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 5, "exploits": ["GitHub-PoC:CVE-2024-46982:0", "GitHub-PoC:CVE-2024-46982:1", "GitHub-PoC:CVE-2024-46982:2", "GitHub-PoC:CVE-2024-46982:3", "GitHub-PoC:CVE-2024-46982:4"], "cwes": ["CWE-639"], "techniques": [], "description": "Next.js is a React framework for building full-stack web applications. By sending a crafted HTTP request, it is possible to poison the cache of a non-dynamic server-side rendered route in the pages router (this does not affect the app router). When this crafted request is sent it could coerce Next.js to cache a route that is meant to not be cached and send a `Cache-Control: s-maxage=1, stale-while-revalidate` header which some upstream CDNs may cache as well. To be potentially affected all of the following ", "published": "2024-09-17", "remediation": [{"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 13.5.1, < 13.5.7"}, {"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= >= 14.0.0, < 14.2.10"}, {"fixed_version": "13.5.7", "package": "npm:next", "vulnerable_range": ">= 13.5.1"}, {"fixed_version": "14.2.10", "package": "npm:next", "vulnerable_range": ">= 14.0.0"}]}, {"cve_id": "CVE-2015-9235", "package": "npm:jsonwebtoken@9.0.0", "severity": "NONE", "cvss": 0.0, "epss_score": 0.3246999979019165, "epss_percentile": 0.9685199856758118, "exploit_maturity": "POC", "maturity_rationale": "4 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 4, "exploits": ["GitHub-PoC:CVE-2015-9235:0", "GitHub-PoC:CVE-2015-9235:1", "GitHub-PoC:CVE-2015-9235:2", "GitHub-PoC:CVE-2015-9235:3"], "cwes": ["CWE-20"], "techniques": [{"id": "T1574.007", "source": "cwe"}, {"id": "T1539", "source": "cwe"}, {"id": "T1553.002", "source": "cwe"}, {"id": "T1574.006", "source": "cwe"}, {"id": "T1562.003", "source": "cwe"}, {"id": "T1027", "source": "cwe"}, {"id": "T1036.001", "source": "cwe"}], "description": "In jsonwebtoken node module before 4.2.2 it is possible for an attacker to bypass verification when a token digitally signed with an asymmetric key (RS/ES family) of algorithms but instead the attacker send a token digitally signed with a symmetric algorithm (HS* family).", "published": "2018-05-29", "remediation": [{"fixed_version": null, "package": "cpe:HackerOne:jsonwebtoken node module", "vulnerable_range": ">= <4.2.2"}, {"fixed_version": "4.2.2", "package": "npm:jsonwebtoken", "vulnerable_range": "all versions"}]}, {"cve_id": "CVE-2019-19919", "package": "npm:handlebars@4.7.8", "severity": "NONE", "cvss": 0.0, "epss_score": 0.17795999348163605, "epss_percentile": 0.9512400031089783, "exploit_maturity": "POC", "maturity_rationale": "1 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 1, "exploits": ["GitHub-PoC:CVE-2019-19919:0"], "cwes": [], "techniques": [], "description": "Versions of handlebars prior to 4.3.0 are vulnerable to Prototype Pollution leading to Remote Code Execution. Templates may alter an Object's __proto__ and __defineGetter__ properties, which may allow an attacker to execute arbitrary code through crafted payloads.", "published": "2019-12-20", "remediation": [{"fixed_version": null, "package": "RubyGems:bootstrap-wysihtml5-rails", "vulnerable_range": ">= 0.3.3.5"}, {"fixed_version": "4.3.0", "package": "npm:handlebars", "vulnerable_range": ">= 4.0.0"}, {"fixed_version": "3.0.8", "package": "npm:handlebars", "vulnerable_range": "all versions"}]}, {"cve_id": "CVE-2018-6184", "package": "npm:next@14.1.0", "severity": "NONE", "cvss": 0.0, "epss_score": 0.1462399959564209, "epss_percentile": 0.9447600245475769, "exploit_maturity": "POC", "maturity_rationale": "1 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 1, "exploits": ["Nuclei:CVE-2018-6184"], "cwes": [], "techniques": [], "description": "ZEIT Next.js 4 before 4.2.3 has Directory Traversal under the /_next request namespace.", "published": "2018-01-24", "remediation": [{"fixed_version": "4.2.3", "package": "npm:next", "vulnerable_range": ">= 1.0.0"}]}, {"cve_id": "CVE-2019-10742", "package": "npm:axios@1.6.0", "severity": "NONE", "cvss": 0.0, "epss_score": 0.13089999556541443, "epss_percentile": 0.941100001335144, "exploit_maturity": "POC", "maturity_rationale": "1 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 1, "exploits": ["GitHub-PoC:CVE-2019-10742:0"], "cwes": [], "techniques": [], "description": "Axios up to and including 0.18.0 allows attackers to cause a denial of service (application crash) by continuing to accepting content after maxContentLength is exceeded.", "published": "2019-05-07", "remediation": [{"fixed_version": "0.18.1", "package": "npm:axios", "vulnerable_range": "all versions"}, {"fixed_version": null, "package": "cpe:axios:axios", "vulnerable_range": ">= through 0.18.0"}]}, {"cve_id": "CVE-2021-3749", "package": "npm:axios@1.6.0", "severity": "HIGH", "cvss": 7.5, "epss_score": 0.08262000232934952, "epss_percentile": 0.9223700165748596, "exploit_maturity": "POC", "maturity_rationale": "1 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 1, "exploits": ["GitHub-PoC:CVE-2021-3749:0"], "cwes": ["CWE-1333"], "techniques": [], "description": "axios is vulnerable to Inefficient Regular Expression Complexity", "published": "2021-08-31", "remediation": [{"fixed_version": "0.21.2", "package": "npm:axios", "vulnerable_range": "all versions"}, {"fixed_version": "0.21.1", "package": "cpe:axios:axios/axios", "vulnerable_range": ">= unspecified"}]}, {"cve_id": "CVE-2025-57822", "package": "npm:next@14.1.0", "severity": "MEDIUM", "cvss": 6.5, "epss_score": 0.05626000091433525, "epss_percentile": 0.9034799933433533, "exploit_maturity": "POC", "maturity_rationale": "1 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 1, "exploits": ["Nuclei:CVE-2025-57822"], "cwes": ["CWE-918"], "techniques": [], "description": "Next.js is a React framework for building full-stack web applications. Prior to versions 14.2.32 and 15.4.7, when next() was used without explicitly passing the request object, it could lead to SSRF in self-hosted applications that incorrectly forwarded user-supplied headers. This vulnerability has been fixed in Next.js versions 14.2.32 and 15.4.7. All users implementing custom middleware logic in self-hosted environments are strongly encouraged to upgrade and verify correct usage of the next() function.", "published": "2025-08-29", "remediation": [{"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= < 14.2.32"}, {"fixed_version": null, "package": "cpe:vercel:next.js", "vulnerable_range": ">= < 15.4.7"}, {"fixed_version": "14.2.32", "package": "npm:next", "vulnerable_range": ">= 0.9.9"}, {"fixed_version": "15.4.7", "package": "npm:next", "vulnerable_range": ">= 15.0.0-canary.0"}]}, {"cve_id": "CVE-2021-23337", "package": "npm:lodash@4.17.20", "severity": "HIGH", "cvss": 7.199999809265137, "epss_score": 0.043140001595020294, "epss_percentile": 0.8889899849891663, "exploit_maturity": "POC", "maturity_rationale": "2 proof-of-concept(s) available", "kev_listed": false, "exploit_count": 2, "exploits": ["GitHub-PoC:CVE-2021-23337:0", "Nuclei:CVE-2021-23337"], "cwes": [], "techniques": [], "description": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.", "published": "2021-02-15", "remediation": [{"fixed_version": null, "package": "npm:lodash.template", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.21", "package": "npm:lodash", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.21", "package": "RubyGems:lodash-rails", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.21", "package": "npm:lodash-es", "vulnerable_range": "all versions"}, {"fixed_version": null, "package": "npm:lodash-template", "vulnerable_range": "all versions"}]}, {"cve_id": "CVE-2020-8203", "package": "npm:lodash@4.17.20", "severity": "NONE", "cvss": 0.0, "epss_score": 0.0357000008225441, "epss_percentile": 0.8772500157356262, "exploit_maturity": "NONE", "maturity_rationale": "No known exploit activity", "kev_listed": false, "exploit_count": 0, "exploits": [], "cwes": ["CWE-770"], "techniques": [{"id": "T1498.001", "source": "cwe"}, {"id": "T1499.001", "source": "cwe"}, {"id": "T1499.003", "source": "cwe"}, {"id": "T1498.002", "source": "cwe"}, {"id": "T1499.002", "source": "cwe"}, {"id": "T1499", "source": "cwe"}], "description": "Prototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20.", "published": "2020-07-15", "remediation": [{"fixed_version": "4.17.19", "package": "npm:lodash", "vulnerable_range": ">= 3.7.0"}, {"fixed_version": "4.17.19", "package": "RubyGems:lodash-rails", "vulnerable_range": ">= 3.7.0"}, {"fixed_version": null, "package": "npm:lodash.updatewith", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.20", "package": "npm:lodash-es", "vulnerable_range": ">= 3.7.0"}, {"fixed_version": null, "package": "npm:lodash.update", "vulnerable_range": "all versions"}, {"fixed_version": null, "package": "npm:lodash.pick", "vulnerable_range": ">= 4.0.0"}, {"fixed_version": null, "package": "npm:lodash.set", "vulnerable_range": ">= 3.7.0"}, {"fixed_version": null, "package": "npm:lodash.setwith", "vulnerable_range": "all versions"}]}, {"cve_id": "CVE-2019-10744", "package": "npm:lodash@4.17.20", "severity": "NONE", "cvss": 0.0, "epss_score": 0.03254000097513199, "epss_percentile": 0.8713200092315674, "exploit_maturity": "NONE", "maturity_rationale": "No known exploit activity", "kev_listed": false, "exploit_count": 0, "exploits": [], "cwes": [], "techniques": [], "description": "Versions of lodash lower than 4.17.12 are vulnerable to Prototype Pollution. The function defaultsDeep could be tricked into adding or modifying properties of Object.prototype using a constructor payload.", "published": "2019-07-25", "remediation": [{"fixed_version": "4.17.12", "package": "npm:lodash", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.12", "package": "RubyGems:lodash-rails", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.14", "package": "npm:lodash-es", "vulnerable_range": "all versions"}, {"fixed_version": "4.17.13", "package": "npm:lodash-amd", "vulnerable_range": "all versions"}, {"fixed_version": null, "package": "cpe:Snyk:lodash", "vulnerable_range": ">= All versions prior to 4.17.12"}, {"fixed_version": "4.6.1", "package": "npm:lodash.defaultsdeep", "vulnerable_range": "all versions"}]}], "attack_surface": {"chains_found": 108, "overall_risk": "CRITICAL", "techniques": ["T1574.007", "T1539", "T1553.002", "T1574.006", "T1562.003", "T1027", "T1036.001", "T1566.002", "T1598.003", "T1566.001", "T1598.002", "T1534", "T1566", "T1598", "T1566.003", "T1598.001", "T1499", "T1552.002", "T1005", "T1574.005", "T1083", "T1134.001", "T1574.010", "T1012", "T1550.004", "T1565.002", "T1498.001", "T1499.001", "T1499.003", "T1498.002", "T1499.002", "T1033", "T1592", "T1069", "T1615", "T1036.005", "T1007", "T1135", "T1120", "T1082", "T1217", "T1595", "T1016", "T1087", "T1049", "T1057", "T1590", "T1111", "T1018", "T1046", "T1124", "T1090.001", "T1499.004", "T1027.009", "T1564.009", "T1027.006", "T1557", "T1040", "T1185", "T1563", "T1505.003", "T1548", "T1134", "T1550.001"], "actors": [], "top_chains": [{"entry": "npm:next", "cve": "CVE-2024-34351", "risk": "CRITICAL", "maturity": "WEAPONIZED", "path": [{"type": "vulnerability", "id": "CVE-2024-34351", "rel": "affects"}, {"type": "weakness", "id": "CWE-918", "rel": "classified_as"}]}, {"entry": "npm:next", "cve": "CVE-2025-29927", "risk": "CRITICAL", "maturity": "WEAPONIZED", "path": [{"type": "vulnerability", "id": "CVE-2025-29927", "rel": "affects"}, {"type": "weakness", "id": "CWE-285", "rel": "classified_as"}, {"type": "technique", "id": "T1574.007", "rel": "uses_technique"}, {"type": "technique", "id": "T1552.002", "rel": "uses_technique"}, {"type": "technique", "id": "T1005", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.006", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.005", "rel": "uses_technique"}, {"type": "technique", "id": "T1083", "rel": "uses_technique"}, {"type": "technique", "id": "T1134.001", "rel": "uses_technique"}, {"type": "technique", "id": "T1562.003", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.010", "rel": "uses_technique"}, {"type": "technique", "id": "T1012", "rel": "uses_technique"}, {"type": "technique", "id": "T1550.004", "rel": "uses_technique"}, {"type": "technique", "id": "T1565.002", "rel": "uses_technique"}]}, {"entry": "npm:next", "cve": "CVE-2025-29927", "risk": "CRITICAL", "maturity": "WEAPONIZED", "path": [{"type": "vulnerability", "id": "CVE-2025-29927", "rel": "affects"}, {"type": "weakness", "id": "CWE-285", "rel": "classified_as"}, {"type": "technique", "id": "T1574.007", "rel": "uses_technique"}, {"type": "technique", "id": "T1552.002", "rel": "uses_technique"}, {"type": "technique", "id": "T1005", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.006", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.005", "rel": "uses_technique"}, {"type": "technique", "id": "T1083", "rel": "uses_technique"}, {"type": "technique", "id": "T1134.001", "rel": "uses_technique"}, {"type": "technique", "id": "T1562.003", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.010", "rel": "uses_technique"}, {"type": "technique", "id": "T1012", "rel": "uses_technique"}, {"type": "technique", "id": "T1550.004", "rel": "uses_technique"}, {"type": "technique", "id": "T1565.002", "rel": "uses_technique"}]}, {"entry": "npm:next", "cve": "CVE-2025-29927", "risk": "CRITICAL", "maturity": "WEAPONIZED", "path": [{"type": "vulnerability", "id": "CVE-2025-29927", "rel": "affects"}, {"type": "weakness", "id": "CWE-285", "rel": "classified_as"}, {"type": "technique", "id": "T1574.007", "rel": "uses_technique"}, {"type": "technique", "id": "T1552.002", "rel": "uses_technique"}, {"type": "technique", "id": "T1005", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.006", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.005", "rel": "uses_technique"}, {"type": "technique", "id": "T1083", "rel": "uses_technique"}, {"type": "technique", "id": "T1134.001", "rel": "uses_technique"}, {"type": "technique", "id": "T1562.003", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.010", "rel": "uses_technique"}, {"type": "technique", "id": "T1012", "rel": "uses_technique"}, {"type": "technique", "id": "T1550.004", "rel": "uses_technique"}, {"type": "technique", "id": "T1565.002", "rel": "uses_technique"}]}, {"entry": "npm:next", "cve": "CVE-2025-29927", "risk": "CRITICAL", "maturity": "WEAPONIZED", "path": [{"type": "vulnerability", "id": "CVE-2025-29927", "rel": "affects"}, {"type": "weakness", "id": "CWE-285", "rel": "classified_as"}, {"type": "technique", "id": "T1574.007", "rel": "uses_technique"}, {"type": "technique", "id": "T1552.002", "rel": "uses_technique"}, {"type": "technique", "id": "T1005", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.006", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.005", "rel": "uses_technique"}, {"type": "technique", "id": "T1083", "rel": "uses_technique"}, {"type": "technique", "id": "T1134.001", "rel": "uses_technique"}, {"type": "technique", "id": "T1562.003", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.010", "rel": "uses_technique"}, {"type": "technique", "id": "T1012", "rel": "uses_technique"}, {"type": "technique", "id": "T1550.004", "rel": "uses_technique"}, {"type": "technique", "id": "T1565.002", "rel": "uses_technique"}]}, {"entry": "npm:next", "cve": "CVE-2017-16877", "risk": "HIGH", "maturity": "FUNCTIONAL", "path": [{"type": "vulnerability", "id": "CVE-2017-16877", "rel": "affects"}]}, {"entry": "npm:next", "cve": "CVE-2020-5284", "risk": "HIGH", "maturity": "FUNCTIONAL", "path": [{"type": "vulnerability", "id": "CVE-2020-5284", "rel": "affects"}, {"type": "weakness", "id": "CWE-23", "rel": "classified_as"}]}, {"entry": "npm:axios", "cve": "CVE-2025-62718", "risk": "HIGH", "maturity": "NONE", "path": [{"type": "vulnerability", "id": "CVE-2025-62718", "rel": "affects"}, {"type": "weakness", "id": "CWE-918", "rel": "classified_as"}, {"type": "weakness", "id": "CWE-441", "rel": "classified_as"}, {"type": "technique", "id": "T1090.001", "rel": "uses_technique"}]}, {"entry": "npm:axios", "cve": "CVE-2026-40175", "risk": "HIGH", "maturity": "POC", "path": [{"type": "vulnerability", "id": "CVE-2026-40175", "rel": "affects"}, {"type": "weakness", "id": "CWE-918", "rel": "classified_as"}, {"type": "weakness", "id": "CWE-444", "rel": "classified_as"}, {"type": "weakness", "id": "CWE-113", "rel": "classified_as"}, {"type": "technique", "id": "T1539", "rel": "uses_technique"}]}, {"entry": "npm:next", "cve": "CVE-2021-43803", "risk": "MEDIUM", "maturity": "NONE", "path": [{"type": "vulnerability", "id": "CVE-2021-43803", "rel": "affects"}, {"type": "weakness", "id": "CWE-20", "rel": "classified_as"}, {"type": "technique", "id": "T1574.007", "rel": "uses_technique"}, {"type": "technique", "id": "T1539", "rel": "uses_technique"}, {"type": "technique", "id": "T1553.002", "rel": "uses_technique"}, {"type": "technique", "id": "T1574.006", "rel": "uses_technique"}, {"type": "technique", "id": "T1562.003", "rel": "uses_technique"}, {"type": "technique", "id": "T1027", "rel": "uses_technique"}, {"type": "technique", "id": "T1036.001", "rel": "uses_technique"}]}]}, "semgrep": {"total": 10, "findings": [{"rule": "react-dangerouslysetinnerhtml", "severity": "WARNING", "path": "apps/web/pages/router/index.tsx", "line": 25, "message": "Detection of dangerouslySetInnerHTML from non-constant definition. XSS vector."}, {"rule": "detect-non-literal-regexp", "severity": "WARNING", "path": "packages/trpc/server/routers/viewer/apps/updateUserDefaultConferencingApp.handler.ts", "line": 40, "message": "RegExp() called with a variable argument. Potential ReDoS if user-controlled."}, {"rule": "md5-used-as-password", "severity": "WARNING", "path": "packages/trpc/server/routers/viewer/auth.handler.ts", "line": 0, "message": "MD5 used for password hashing. Use bcrypt, scrypt, or argon2 instead."}, {"rule": "unsafe-formatstring", "severity": "INFO", "path": "apps/web/app/api/cron/bookingReminder/route.ts", "line": 99, "message": "String concatenation in console.log. Potential format string injection."}, {"rule": "unsafe-formatstring", "severity": "INFO", "path": "apps/web/app/api/cron/calendar-subscriptions-cleanup/route.ts", "line": 34, "message": "String concatenation in console.log."}]}, "zentinel": {"total": 17102, "files_scanned": 500, "errors": 156, "warnings": 29060, "by_rule": {"community.assigned-undefined": 28228, "express-check-csurf-middleware-usage": 156, "aead-no-final": 156, "sequelize-raw-query-1": 156, "disallow-old-tls-versions2": 156, "hardcoded-secret": 47, "settimeout-string": 2}, "highlights": [{"rule": "hardcoded-secret", "severity": "WARNING", "file": "apps/web/app/api/webhooks/stripe/route.ts", "line": 12, "message": "Hardcoded secret detected in source code."}, {"rule": "hardcoded-secret", "severity": "WARNING", "file": "packages/trpc/server/routers/viewer/webhook.handler.ts", "line": 8, "message": "Hardcoded secret detected."}, {"rule": "aead-no-final", "severity": "ERROR", "file": "packages/lib/crypto.ts", "line": 45, "message": "AEAD cipher used without calling .final(). Ciphertext may be incomplete."}, {"rule": "disallow-old-tls-versions2", "severity": "WARNING", "file": "packages/lib/http.ts", "line": 23, "message": "Old TLS version (TLSv1/TLSv1.1) allowed. Use TLSv1.2+ only."}, {"rule": "sequelize-raw-query-1", "severity": "WARNING", "file": "packages/prisma/extensions.ts", "line": 67, "message": "Raw SQL query detected. Use parameterized queries to prevent SQL injection."}]}, "github": {"advisories_count": 6, "cve_issues": []}};
+
+// ─── Utility ─────────────────────────────────────────────────
+function escHtml(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
+function artifactUrl(id){
+  if(!id)return null;
+  if(id.startsWith('CVE-'))return'https://nvd.nist.gov/vuln/detail/'+id;
+  if(id.startsWith('CWE-'))return'https://cwe.mitre.org/data/definitions/'+id.replace('CWE-','')+'.html';
+  if(id.startsWith('EDB:'))return'https://www.exploit-db.com/exploits/'+id.replace('EDB:','');
+  if(id.startsWith('Nuclei:'))return'https://github.com/projectdiscovery/nuclei-templates/search?q='+encodeURIComponent(id.replace('Nuclei:',''));
+  if(id.startsWith('GitHub-PoC:')){const c=id.split(':')[1];return'https://github.com/search?q='+encodeURIComponent(c+' poc')+'&type=repositories'}
+  if(id.startsWith('Sigma:'))return'https://github.com/SigmaHQ/sigma/search?q='+encodeURIComponent(id.replace('Sigma:',''));
+  if(/^T\d{4}/.test(id)){const p=id.split('.');return p.length>1?'https://attack.mitre.org/techniques/'+p[0]+'/'+p[1]+'/':'https://attack.mitre.org/techniques/'+id+'/'}
+  if(id.startsWith('GHSA-'))return'https://github.com/advisories/'+id;
+  return null;
+}
+function sevClass(s){return'b-'+(s||'none').toLowerCase()}
+function matClass(m){return'mat-'+(m||'NONE')}
+
+// ─── Animated Counters ───────────────────────────────────────
+function animateCounter(el){
+  const target=parseInt(el.dataset.counter);
+  const dur=1500;const start=performance.now();
+  (function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(e*target).toLocaleString();
+    if(p<1)requestAnimationFrame(tick);
+  })(performance.now());
+}
+
+// ─── Scroll Reveal ───────────────────────────────────────────
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('revealed');
+      if(e.target.dataset.counter)animateCounter(e.target);
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+
+// ─── Render ──────────────────────────────────────────────────
+function render(){
+  const o=DATA.overview;
+  const intel=DATA.intel||[];
+  const surf=DATA.attack_surface||{};
+  const sg=DATA.semgrep||{};
+  const zt=DATA.zentinel||{};
+
+  // Tool pills stagger animation
+  document.querySelectorAll('.tool-pill').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('revealed'),200+i*120);
+  });
+
+  // Executive summary
+  const exploitable=intel.filter(i=>i.exploit_maturity==='WEAPONIZED'||i.exploit_maturity==='FUNCTIONAL').length;
+  const topCve=intel[0];
+  document.getElementById('exec-summary').innerHTML=
+    `This audit identified <strong>${o.total_cves} CVEs</strong> across <strong>${o.dependencies} dependencies</strong> in calcom/cal.com. `+
+    `<span class="highlight">${exploitable} vulnerabilities have weaponized or functional exploits.</span> `+
+    (topCve?`The highest-risk finding is <strong><a href="${artifactUrl(topCve.cve_id)}" target="_blank">${topCve.cve_id}</a></strong> `+
+    `(${escHtml((topCve.description||'').slice(0,80))}..., CVSS ${topCve.cvss.toFixed(1)}, EPSS ${(topCve.epss_score*100).toFixed(0)}%). `:'')+
+    `${surf.chains_found||0} attack chains were mapped across ${(surf.techniques||[]).length} MITRE ATT&CK techniques. `+
+    `Semgrep found ${sg.total||0} code-level issues and Zentinel detected ${(zt.total||0).toLocaleString()} security patterns including ${zt.by_rule?.['hardcoded-secret']||0} hardcoded secrets.`;
+
+  // Stats grid
+  const stats=[
+    {n:o.dependencies,l:'Dependencies',d:false},
+    {n:o.source_files.ts+o.source_files.tsx,l:'Source Files',d:false},
+    {n:o.total_cves,l:'CVEs Found',d:false},
+    {n:o.severity?.CRITICAL||0,l:'Critical',d:true},
+    {n:o.severity?.HIGH||0,l:'High',d:false},
+    {n:sg.total||0,l:'SAST Findings',d:false},
+    {n:zt.total||0,l:'Pattern Findings',d:false},
+    {n:exploitable,l:'Exploitable',d:true},
+  ];
+  document.getElementById('stats-grid').innerHTML=stats.map(s=>
+    `<div class="stat-card ${s.d?'danger':''}" data-counter="${s.n}"><div class="num" data-counter="${s.n}">0</div><div class="label">${s.l}</div></div>`
+  ).join('');
+
+  // CVE Intelligence
+  document.getElementById('intel-count').textContent=`(${intel.length} deep-dived of ${o.total_cves})`;
+  document.getElementById('cve-list').innerHTML=intel.map((item,i)=>{
+    const exploitsHtml=item.exploits.slice(0,8).map(eid=>{
+      const url=artifactUrl(eid);
+      return url?`<a class="exploit-link" href="${url}" target="_blank">${escHtml(eid)}</a>`:`<span class="exploit-link">${escHtml(eid)}</span>`;
+    }).join('')+(item.exploit_count>8?`<div style="color:var(--text2);font-size:0.7rem">+${item.exploit_count-8} more</div>`:'');
+
+    const techsHtml=item.techniques.slice(0,10).map(t=>{
+      const url=artifactUrl(t.id);
+      return`<a class="tech-chip" href="${url}" target="_blank">${t.id}</a>`;
+    }).join('')+(item.techniques.length>10?`<span style="color:var(--text2);font-size:0.7rem;margin-left:4px">+${item.techniques.length-10}</span>`:'');
+
+    const cwesHtml=item.cwes.map(c=>`<a class="cwe-chip" href="${artifactUrl(c)}" target="_blank">${c}</a>`).join('');
+
+    const remHtml=(item.remediation||[]).slice(0,3).map(r=>
+      `<div class="rem-entry">${escHtml(r.package)}: ${escHtml(r.vulnerable_range)} &rarr; <strong>${escHtml(r.fixed_version||'no fix')}</strong></div>`
+    ).join('');
+
+    return`<div class="cve-card" data-idx="${i}">
+      <div class="cve-header" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="cve-id"><a href="${artifactUrl(item.cve_id)}" target="_blank" onclick="event.stopPropagation()">${item.cve_id}</a></div><div class="cve-pkg">${escHtml(item.package)}</div></div>
+        <span class="badge ${sevClass(item.severity)}">${item.severity}</span>
+        <span class="mat ${matClass(item.exploit_maturity)}">${item.exploit_maturity}</span>
+        <div class="epss-col"><div class="epss-val">${(item.epss_score*100).toFixed(1)}%</div><div class="epss-bar"><div class="epss-fill" style="width:${item.epss_score*100}%"></div></div></div>
+        <span class="arrow">&#9660;</span>
+      </div>
+      <div class="cve-detail"><div class="cve-detail-inner">
+        ${item.description?`<div class="cve-desc">${escHtml(item.description)}</div>`:''}
+        ${item.published?`<div style="font-size:0.75rem;color:var(--text2)">Published: ${item.published} &middot; CVSS ${item.cvss.toFixed(1)} &middot; EPSS top ${((1-item.epss_percentile)*100).toFixed(1)}%</div>`:''}
+        <div class="detail-grid">
+          <div class="detail-box"><h4>Exploits &amp; PoCs (${item.exploit_count})</h4>${exploitsHtml||'<span style="color:var(--text2);font-size:0.8rem">None known</span>'}</div>
+          <div class="detail-box"><h4>Classification</h4><div style="margin-bottom:6px">${cwesHtml||'—'}</div><div>${techsHtml||'<span style="color:var(--text2);font-size:0.8rem">No ATT&CK mapping</span>'}</div></div>
+          ${remHtml?`<div class="detail-box" style="grid-column:1/-1"><h4>Remediation</h4>${remHtml}</div>`:''}
+        </div>
+      </div></div>
+    </div>`;
+  }).join('');
+
+  // Kill Chains
+  document.getElementById('chain-stats').innerHTML=[
+    {n:surf.chains_found||0,l:'Attack Chains'},
+    {n:(surf.techniques||[]).length,l:'ATT&CK Techniques'},
+    {n:(surf.actors||[]).length,l:'Threat Actors'},
+    {n:0,l:surf.overall_risk||'?',special:true},
+  ].map(s=>s.special
+    ?`<div class="stat-card danger"><div class="num">${s.l}</div><div class="label">Overall Risk</div></div>`
+    :`<div class="stat-card" data-counter="${s.n}"><div class="num" data-counter="${s.n}">0</div><div class="label">${s.l}</div></div>`
+  ).join('');
+
+  const typeColor={vulnerability:'t-cve',cve:'t-cve',package:'t-package',weakness:'t-weakness',technique:'t-technique',exploit:'t-exploit'};
+  document.getElementById('chain-cards').innerHTML=(surf.top_chains||[]).slice(0,6).map(c=>{
+    const flowHtml=c.path.map(step=>{
+      const url=artifactUrl(step.id);
+      const tc=typeColor[step.type]||'t-cve';
+      const label=step.id.length>12?step.id.slice(0,12)+'...':step.id;
+      const dot=url?`<a href="${url}" target="_blank" class="chain-dot ${tc}" title="${step.id}">${step.type.slice(0,3).toUpperCase()}</a>`
+                    :`<div class="chain-dot ${tc}" title="${step.id}">${step.type.slice(0,3).toUpperCase()}</div>`;
+      return`<div class="chain-node">${dot}<div class="chain-label" title="${step.id}">${label}</div></div><span class="chain-arrow">&rarr;</span>`;
+    }).join('');
+    return`<div class="chain-card">
+      <div class="chain-meta"><span class="badge ${sevClass(c.risk)}">${c.risk}</span> <strong>${escHtml(c.entry)}</strong> &rarr; ${c.cve} <span class="mat ${matClass(c.maturity)}">${c.maturity}</span></div>
+      <div class="chain-flow">${flowHtml.replace(/→<\/span>$/,'')}</div>
+    </div>`;
+  }).join('');
+
+  // Technique grid
+  document.getElementById('tech-grid').innerHTML=(surf.techniques||[]).map(t=>
+    `<a class="tech-chip" href="${artifactUrl(t)}" target="_blank">${t}</a>`
+  ).join('');
+
+  // Semgrep
+  const sgBody=document.querySelector('#semgrep-table tbody');
+  sgBody.innerHTML=(sg.findings||[]).map(f=>
+    `<tr><td><span class="badge ${sevClass(f.severity)}">${f.severity}</span></td><td>${escHtml(f.rule)}</td><td><code>${escHtml(f.path)}:${f.line}</code></td><td>${escHtml(f.message)}</td></tr>`
+  ).join('');
+
+  // Zentinel
+  document.getElementById('zent-summary').innerHTML=
+    `<p style="color:var(--text2);font-size:0.85rem">${(zt.total||0).toLocaleString()} findings across ${zt.files_scanned||0} files. ${zt.errors||0} errors, ${(zt.warnings||0).toLocaleString()} warnings.</p>`;
+
+  const maxRule=Math.max(...Object.values(zt.by_rule||{1:1}));
+  document.getElementById('rule-bars').innerHTML=Object.entries(zt.by_rule||{}).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([rule,count])=>
+    `<div class="rule-bar"><span class="name">${escHtml(rule.split('.').pop())}</span><div class="bar"><div class="fill" style="width:${count/maxRule*100}%"></div></div><span class="count">${count.toLocaleString()}</span></div>`
+  ).join('');
+
+  const ztBody=document.querySelector('#zent-table tbody');
+  ztBody.innerHTML=(zt.highlights||[]).map(f=>
+    `<tr><td><span class="badge ${sevClass(f.severity)}">${f.severity}</span></td><td>${escHtml(f.rule)}</td><td><code>${escHtml(f.file)}:${f.line}</code></td><td>${escHtml(f.message)}</td></tr>`
+  ).join('');
+
+  // Observe all sections and stat cards for scroll reveal
+  document.querySelectorAll('section,.stat-card,.exec-summary').forEach(el=>observer.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded',render);
+</script>
+</body>
+</html>

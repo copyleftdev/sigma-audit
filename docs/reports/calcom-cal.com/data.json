@@ -1,0 +1,1439 @@
+{
+  "meta": {
+    "repo": "calcom/cal.com",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 377,
+    "source_files": {
+      "ts": 5775,
+      "tsx": 1691
+    },
+    "total_cves": 146,
+    "severity": {
+      "CRITICAL": 6,
+      "HIGH": 33,
+      "NONE": 34,
+      "MEDIUM": 58,
+      "LOW": 15
+    },
+    "sast_findings": 10,
+    "pattern_findings": 17102,
+    "exploitable": 4
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2025-29927",
+      "package": "npm:next@14.1.0",
+      "severity": "CRITICAL",
+      "cvss": 9.100000381469727,
+      "epss_score": 0.9295499920845032,
+      "epss_percentile": 0.997759997844696,
+      "exploit_maturity": "WEAPONIZED",
+      "maturity_rationale": "12 public PoCs; EPSS 0.9295",
+      "kev_listed": false,
+      "exploit_count": 12,
+      "exploits": [
+        "EDB:52124",
+        "GitHub-PoC:CVE-2025-29927:0",
+        "GitHub-PoC:CVE-2025-29927:1",
+        "GitHub-PoC:CVE-2025-29927:2",
+        "GitHub-PoC:CVE-2025-29927:3",
+        "GitHub-PoC:CVE-2025-29927:4",
+        "GitHub-PoC:CVE-2025-29927:5",
+        "GitHub-PoC:CVE-2025-29927:6",
+        "GitHub-PoC:CVE-2025-29927:7",
+        "GitHub-PoC:CVE-2025-29927:8",
+        "GitHub-PoC:CVE-2025-29927:9",
+        "Nuclei:CVE-2025-29927"
+      ],
+      "cwes": [
+        "CWE-285"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1552.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1005",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.005",
+          "source": "cwe"
+        },
+        {
+          "id": "T1083",
+          "source": "cwe"
+        },
+        {
+          "id": "T1134.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.010",
+          "source": "cwe"
+        },
+        {
+          "id": "T1012",
+          "source": "cwe"
+        },
+        {
+          "id": "T1550.004",
+          "source": "cwe"
+        },
+        {
+          "id": "T1565.002",
+          "source": "cwe"
+        }
+      ],
+      "description": "Next.js is a React framework for building full-stack web applications. Starting in version 1.11.4 and prior to versions 12.3.5, 13.5.9, 14.2.25, and 15.2.3, it is possible to bypass authorization checks within a Next.js application, if the authorization check occurs in middleware. If patching to a safe version is infeasible, it is recommend that you prevent external user requests which contain the x-middleware-subrequest header from reaching your Next.js application. This vulnerability is fixed in 12.3.5, 1",
+      "published": "2025-03-21",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 11.1.4, < 12.3.5"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 14.0.0, < 14.2.25"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 15.0.0, < 15.2.3"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 13.0.0, < 13.5.9"
+        },
+        {
+          "fixed_version": "13.5.9",
+          "package": "npm:next",
+          "vulnerable_range": ">= 13.0.0"
+        },
+        {
+          "fixed_version": "14.2.25",
+          "package": "npm:next",
+          "vulnerable_range": ">= 14.0.0"
+        },
+        {
+          "fixed_version": "15.2.3",
+          "package": "npm:next",
+          "vulnerable_range": ">= 15.0.0"
+        },
+        {
+          "fixed_version": "12.3.5",
+          "package": "npm:next",
+          "vulnerable_range": ">= 12.0.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-34351",
+      "package": "npm:next@14.1.0",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.9275100231170654,
+      "epss_percentile": 0.9975600242614746,
+      "exploit_maturity": "WEAPONIZED",
+      "maturity_rationale": "4 public PoCs; EPSS 0.9275",
+      "kev_listed": false,
+      "exploit_count": 4,
+      "exploits": [
+        "GitHub-PoC:CVE-2024-34351:0",
+        "GitHub-PoC:CVE-2024-34351:1",
+        "GitHub-PoC:CVE-2024-34351:2",
+        "Nuclei:CVE-2024-34351"
+      ],
+      "cwes": [
+        "CWE-918"
+      ],
+      "techniques": [],
+      "description": "Next.js is a React framework that can provide building blocks to create web applications. A Server-Side Request Forgery (SSRF) vulnerability was identified in Next.js Server Actions. If the `Host` header is modified, and the below conditions are also met, an attacker may be able to make requests that appear to be originating from the Next.js application server itself. The required conditions are 1) Next.js is running in a self-hosted manner; 2) the Next.js application makes use of Server Actions; and 3) the",
+      "published": "2024-05-09",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 13.4.0, < 14.1.1"
+        },
+        {
+          "fixed_version": "14.1.1",
+          "package": "npm:next",
+          "vulnerable_range": ">= 13.4.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2017-16877",
+      "package": "npm:next@14.1.0",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.8319799900054932,
+      "epss_percentile": 0.9926699995994568,
+      "exploit_maturity": "FUNCTIONAL",
+      "maturity_rationale": "1 PoCs, EPSS 0.8320",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "Nuclei:CVE-2017-16877"
+      ],
+      "cwes": [],
+      "techniques": [],
+      "description": "ZEIT Next.js before 2.4.1 has directory traversal under the /_next and /static request namespace, allowing attackers to obtain sensitive information.",
+      "published": "2017-11-17",
+      "remediation": [
+        {
+          "fixed_version": "2.4.1",
+          "package": "npm:next",
+          "vulnerable_range": ">= 1.0.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2020-5284",
+      "package": "npm:next@14.1.0",
+      "severity": "MEDIUM",
+      "cvss": 4.400000095367432,
+      "epss_score": 0.8195000290870667,
+      "epss_percentile": 0.9920499920845032,
+      "exploit_maturity": "FUNCTIONAL",
+      "maturity_rationale": "1 PoCs, EPSS 0.8195",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "Nuclei:CVE-2020-5284"
+      ],
+      "cwes": [
+        "CWE-23"
+      ],
+      "techniques": [],
+      "description": "Next.js versions before 9.3.2 have a directory traversal vulnerability. Attackers could craft special requests to access files in the dist directory (.next). This does not affect files outside of the dist directory (.next). In general, the dist directory only holds build assets unless your application intentionally stores other assets under this directory. This issue is fixed in version 9.3.2.",
+      "published": "2020-03-30",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:zeit:next.js",
+          "vulnerable_range": ">= < 9.3.2"
+        },
+        {
+          "fixed_version": "9.3.2",
+          "package": "npm:next",
+          "vulnerable_range": ">= 0.9.9"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-51479",
+      "package": "npm:next@14.1.0",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.6673099994659424,
+      "epss_percentile": 0.9854199886322021,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-285"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1552.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1005",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.005",
+          "source": "cwe"
+        },
+        {
+          "id": "T1083",
+          "source": "cwe"
+        },
+        {
+          "id": "T1134.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.010",
+          "source": "cwe"
+        },
+        {
+          "id": "T1012",
+          "source": "cwe"
+        },
+        {
+          "id": "T1550.004",
+          "source": "cwe"
+        },
+        {
+          "id": "T1565.002",
+          "source": "cwe"
+        }
+      ],
+      "description": "Next.js is a React framework for building full-stack web applications. In affected versions if a Next.js application is performing authorization in middleware based on pathname, it was possible for this authorization to be bypassed for pages directly under the application's root directory. For example: * [Not affected] `https://example.com/` * [Affected] `https://example.com/foo` * [Not affected] `https://example.com/foo/bar`. This issue is patched in Next.js `14.2.15` and later. If your Next.js application",
+      "published": "2024-12-17",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 9.5.5, < 14.2.15"
+        },
+        {
+          "fixed_version": "14.2.15",
+          "package": "npm:next",
+          "vulnerable_range": ">= 9.5.5"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-46982",
+      "package": "npm:next@14.1.0",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.4906199872493744,
+      "epss_percentile": 0.9777299761772156,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "5 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 5,
+      "exploits": [
+        "GitHub-PoC:CVE-2024-46982:0",
+        "GitHub-PoC:CVE-2024-46982:1",
+        "GitHub-PoC:CVE-2024-46982:2",
+        "GitHub-PoC:CVE-2024-46982:3",
+        "GitHub-PoC:CVE-2024-46982:4"
+      ],
+      "cwes": [
+        "CWE-639"
+      ],
+      "techniques": [],
+      "description": "Next.js is a React framework for building full-stack web applications. By sending a crafted HTTP request, it is possible to poison the cache of a non-dynamic server-side rendered route in the pages router (this does not affect the app router). When this crafted request is sent it could coerce Next.js to cache a route that is meant to not be cached and send a `Cache-Control: s-maxage=1, stale-while-revalidate` header which some upstream CDNs may cache as well. To be potentially affected all of the following ",
+      "published": "2024-09-17",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 13.5.1, < 13.5.7"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= >= 14.0.0, < 14.2.10"
+        },
+        {
+          "fixed_version": "13.5.7",
+          "package": "npm:next",
+          "vulnerable_range": ">= 13.5.1"
+        },
+        {
+          "fixed_version": "14.2.10",
+          "package": "npm:next",
+          "vulnerable_range": ">= 14.0.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2015-9235",
+      "package": "npm:jsonwebtoken@9.0.0",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.3246999979019165,
+      "epss_percentile": 0.9685199856758118,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "4 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 4,
+      "exploits": [
+        "GitHub-PoC:CVE-2015-9235:0",
+        "GitHub-PoC:CVE-2015-9235:1",
+        "GitHub-PoC:CVE-2015-9235:2",
+        "GitHub-PoC:CVE-2015-9235:3"
+      ],
+      "cwes": [
+        "CWE-20"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1539",
+          "source": "cwe"
+        },
+        {
+          "id": "T1553.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027",
+          "source": "cwe"
+        },
+        {
+          "id": "T1036.001",
+          "source": "cwe"
+        }
+      ],
+      "description": "In jsonwebtoken node module before 4.2.2 it is possible for an attacker to bypass verification when a token digitally signed with an asymmetric key (RS/ES family) of algorithms but instead the attacker send a token digitally signed with a symmetric algorithm (HS* family).",
+      "published": "2018-05-29",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:HackerOne:jsonwebtoken node module",
+          "vulnerable_range": ">= <4.2.2"
+        },
+        {
+          "fixed_version": "4.2.2",
+          "package": "npm:jsonwebtoken",
+          "vulnerable_range": "all versions"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2019-19919",
+      "package": "npm:handlebars@4.7.8",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.17795999348163605,
+      "epss_percentile": 0.9512400031089783,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2019-19919:0"
+      ],
+      "cwes": [],
+      "techniques": [],
+      "description": "Versions of handlebars prior to 4.3.0 are vulnerable to Prototype Pollution leading to Remote Code Execution. Templates may alter an Object's __proto__ and __defineGetter__ properties, which may allow an attacker to execute arbitrary code through crafted payloads.",
+      "published": "2019-12-20",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "RubyGems:bootstrap-wysihtml5-rails",
+          "vulnerable_range": ">= 0.3.3.5"
+        },
+        {
+          "fixed_version": "4.3.0",
+          "package": "npm:handlebars",
+          "vulnerable_range": ">= 4.0.0"
+        },
+        {
+          "fixed_version": "3.0.8",
+          "package": "npm:handlebars",
+          "vulnerable_range": "all versions"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2018-6184",
+      "package": "npm:next@14.1.0",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.1462399959564209,
+      "epss_percentile": 0.9447600245475769,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "Nuclei:CVE-2018-6184"
+      ],
+      "cwes": [],
+      "techniques": [],
+      "description": "ZEIT Next.js 4 before 4.2.3 has Directory Traversal under the /_next request namespace.",
+      "published": "2018-01-24",
+      "remediation": [
+        {
+          "fixed_version": "4.2.3",
+          "package": "npm:next",
+          "vulnerable_range": ">= 1.0.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2019-10742",
+      "package": "npm:axios@1.6.0",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.13089999556541443,
+      "epss_percentile": 0.941100001335144,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2019-10742:0"
+      ],
+      "cwes": [],
+      "techniques": [],
+      "description": "Axios up to and including 0.18.0 allows attackers to cause a denial of service (application crash) by continuing to accepting content after maxContentLength is exceeded.",
+      "published": "2019-05-07",
+      "remediation": [
+        {
+          "fixed_version": "0.18.1",
+          "package": "npm:axios",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:axios:axios",
+          "vulnerable_range": ">= through 0.18.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-3749",
+      "package": "npm:axios@1.6.0",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.08262000232934952,
+      "epss_percentile": 0.9223700165748596,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2021-3749:0"
+      ],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": [],
+      "description": "axios is vulnerable to Inefficient Regular Expression Complexity",
+      "published": "2021-08-31",
+      "remediation": [
+        {
+          "fixed_version": "0.21.2",
+          "package": "npm:axios",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "0.21.1",
+          "package": "cpe:axios:axios/axios",
+          "vulnerable_range": ">= unspecified"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2025-57822",
+      "package": "npm:next@14.1.0",
+      "severity": "MEDIUM",
+      "cvss": 6.5,
+      "epss_score": 0.05626000091433525,
+      "epss_percentile": 0.9034799933433533,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "Nuclei:CVE-2025-57822"
+      ],
+      "cwes": [
+        "CWE-918"
+      ],
+      "techniques": [],
+      "description": "Next.js is a React framework for building full-stack web applications. Prior to versions 14.2.32 and 15.4.7, when next() was used without explicitly passing the request object, it could lead to SSRF in self-hosted applications that incorrectly forwarded user-supplied headers. This vulnerability has been fixed in Next.js versions 14.2.32 and 15.4.7. All users implementing custom middleware logic in self-hosted environments are strongly encouraged to upgrade and verify correct usage of the next() function.",
+      "published": "2025-08-29",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= < 14.2.32"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:vercel:next.js",
+          "vulnerable_range": ">= < 15.4.7"
+        },
+        {
+          "fixed_version": "14.2.32",
+          "package": "npm:next",
+          "vulnerable_range": ">= 0.9.9"
+        },
+        {
+          "fixed_version": "15.4.7",
+          "package": "npm:next",
+          "vulnerable_range": ">= 15.0.0-canary.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-23337",
+      "package": "npm:lodash@4.17.20",
+      "severity": "HIGH",
+      "cvss": 7.199999809265137,
+      "epss_score": 0.043140001595020294,
+      "epss_percentile": 0.8889899849891663,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "2 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 2,
+      "exploits": [
+        "GitHub-PoC:CVE-2021-23337:0",
+        "Nuclei:CVE-2021-23337"
+      ],
+      "cwes": [],
+      "techniques": [],
+      "description": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.",
+      "published": "2021-02-15",
+      "remediation": [
+        {
+          "fixed_version": null,
+          "package": "npm:lodash.template",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.21",
+          "package": "npm:lodash",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.21",
+          "package": "RubyGems:lodash-rails",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.21",
+          "package": "npm:lodash-es",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": null,
+          "package": "npm:lodash-template",
+          "vulnerable_range": "all versions"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2020-8203",
+      "package": "npm:lodash@4.17.20",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.0357000008225441,
+      "epss_percentile": 0.8772500157356262,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-770"
+      ],
+      "techniques": [
+        {
+          "id": "T1498.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1498.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ],
+      "description": "Prototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20.",
+      "published": "2020-07-15",
+      "remediation": [
+        {
+          "fixed_version": "4.17.19",
+          "package": "npm:lodash",
+          "vulnerable_range": ">= 3.7.0"
+        },
+        {
+          "fixed_version": "4.17.19",
+          "package": "RubyGems:lodash-rails",
+          "vulnerable_range": ">= 3.7.0"
+        },
+        {
+          "fixed_version": null,
+          "package": "npm:lodash.updatewith",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.20",
+          "package": "npm:lodash-es",
+          "vulnerable_range": ">= 3.7.0"
+        },
+        {
+          "fixed_version": null,
+          "package": "npm:lodash.update",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": null,
+          "package": "npm:lodash.pick",
+          "vulnerable_range": ">= 4.0.0"
+        },
+        {
+          "fixed_version": null,
+          "package": "npm:lodash.set",
+          "vulnerable_range": ">= 3.7.0"
+        },
+        {
+          "fixed_version": null,
+          "package": "npm:lodash.setwith",
+          "vulnerable_range": "all versions"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2019-10744",
+      "package": "npm:lodash@4.17.20",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.03254000097513199,
+      "epss_percentile": 0.8713200092315674,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": [],
+      "description": "Versions of lodash lower than 4.17.12 are vulnerable to Prototype Pollution. The function defaultsDeep could be tricked into adding or modifying properties of Object.prototype using a constructor payload.",
+      "published": "2019-07-25",
+      "remediation": [
+        {
+          "fixed_version": "4.17.12",
+          "package": "npm:lodash",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.12",
+          "package": "RubyGems:lodash-rails",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.14",
+          "package": "npm:lodash-es",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": "4.17.13",
+          "package": "npm:lodash-amd",
+          "vulnerable_range": "all versions"
+        },
+        {
+          "fixed_version": null,
+          "package": "cpe:Snyk:lodash",
+          "vulnerable_range": ">= All versions prior to 4.17.12"
+        },
+        {
+          "fixed_version": "4.6.1",
+          "package": "npm:lodash.defaultsdeep",
+          "vulnerable_range": "all versions"
+        }
+      ]
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 108,
+    "overall_risk": "CRITICAL",
+    "techniques": [
+      "T1574.007",
+      "T1539",
+      "T1553.002",
+      "T1574.006",
+      "T1562.003",
+      "T1027",
+      "T1036.001",
+      "T1566.002",
+      "T1598.003",
+      "T1566.001",
+      "T1598.002",
+      "T1534",
+      "T1566",
+      "T1598",
+      "T1566.003",
+      "T1598.001",
+      "T1499",
+      "T1552.002",
+      "T1005",
+      "T1574.005",
+      "T1083",
+      "T1134.001",
+      "T1574.010",
+      "T1012",
+      "T1550.004",
+      "T1565.002",
+      "T1498.001",
+      "T1499.001",
+      "T1499.003",
+      "T1498.002",
+      "T1499.002",
+      "T1033",
+      "T1592",
+      "T1069",
+      "T1615",
+      "T1036.005",
+      "T1007",
+      "T1135",
+      "T1120",
+      "T1082",
+      "T1217",
+      "T1595",
+      "T1016",
+      "T1087",
+      "T1049",
+      "T1057",
+      "T1590",
+      "T1111",
+      "T1018",
+      "T1046",
+      "T1124",
+      "T1090.001",
+      "T1499.004",
+      "T1027.009",
+      "T1564.009",
+      "T1027.006",
+      "T1557",
+      "T1040",
+      "T1185",
+      "T1563",
+      "T1505.003",
+      "T1548",
+      "T1134",
+      "T1550.001"
+    ],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2024-34351",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2024-34351",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-918",
+            "rel": "classified_as"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2025-29927",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2025-29927",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-285",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.007",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1552.002",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.006",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1083",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1134.001",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1562.003",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.010",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1012",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1550.004",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1565.002",
+            "rel": "uses_technique"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2025-29927",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2025-29927",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-285",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.007",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1552.002",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.006",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1083",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1134.001",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1562.003",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.010",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1012",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1550.004",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1565.002",
+            "rel": "uses_technique"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2025-29927",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2025-29927",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-285",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.007",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1552.002",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.006",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1083",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1134.001",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1562.003",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.010",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1012",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1550.004",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1565.002",
+            "rel": "uses_technique"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2025-29927",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2025-29927",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-285",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.007",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1552.002",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.006",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.005",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1083",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1134.001",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1562.003",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.010",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1012",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1550.004",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1565.002",
+            "rel": "uses_technique"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2017-16877",
+        "risk": "HIGH",
+        "maturity": "FUNCTIONAL",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2017-16877",
+            "rel": "affects"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2020-5284",
+        "risk": "HIGH",
+        "maturity": "FUNCTIONAL",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2020-5284",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-23",
+            "rel": "classified_as"
+          }
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2025-62718",
+        "risk": "HIGH",
+        "maturity": "NONE",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2025-62718",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-918",
+            "rel": "classified_as"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-441",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1090.001",
+            "rel": "uses_technique"
+          }
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2026-40175",
+        "risk": "HIGH",
+        "maturity": "POC",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2026-40175",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-918",
+            "rel": "classified_as"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-444",
+            "rel": "classified_as"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-113",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1539",
+            "rel": "uses_technique"
+          }
+        ]
+      },
+      {
+        "entry": "npm:next",
+        "cve": "CVE-2021-43803",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          {
+            "type": "vulnerability",
+            "id": "CVE-2021-43803",
+            "rel": "affects"
+          },
+          {
+            "type": "weakness",
+            "id": "CWE-20",
+            "rel": "classified_as"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.007",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1539",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1553.002",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1574.006",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1562.003",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1027",
+            "rel": "uses_technique"
+          },
+          {
+            "type": "technique",
+            "id": "T1036.001",
+            "rel": "uses_technique"
+          }
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 10,
+    "findings": [
+      {
+        "rule": "react-dangerouslysetinnerhtml",
+        "severity": "WARNING",
+        "path": "apps/web/pages/router/index.tsx",
+        "line": 25,
+        "message": "Detection of dangerouslySetInnerHTML from non-constant definition. XSS vector."
+      },
+      {
+        "rule": "detect-non-literal-regexp",
+        "severity": "WARNING",
+        "path": "packages/trpc/server/routers/viewer/apps/updateUserDefaultConferencingApp.handler.ts",
+        "line": 40,
+        "message": "RegExp() called with a variable argument. Potential ReDoS if user-controlled."
+      },
+      {
+        "rule": "md5-used-as-password",
+        "severity": "WARNING",
+        "path": "packages/trpc/server/routers/viewer/auth.handler.ts",
+        "line": 0,
+        "message": "MD5 used for password hashing. Use bcrypt, scrypt, or argon2 instead."
+      },
+      {
+        "rule": "unsafe-formatstring",
+        "severity": "INFO",
+        "path": "apps/web/app/api/cron/bookingReminder/route.ts",
+        "line": 99,
+        "message": "String concatenation in console.log. Potential format string injection."
+      },
+      {
+        "rule": "unsafe-formatstring",
+        "severity": "INFO",
+        "path": "apps/web/app/api/cron/calendar-subscriptions-cleanup/route.ts",
+        "line": 34,
+        "message": "String concatenation in console.log."
+      }
+    ]
+  },
+  "zentinel": {
+    "total": 17102,
+    "files_scanned": 500,
+    "errors": 156,
+    "warnings": 29060,
+    "by_rule": {
+      "community.assigned-undefined": 28228,
+      "express-check-csurf-middleware-usage": 156,
+      "aead-no-final": 156,
+      "sequelize-raw-query-1": 156,
+      "disallow-old-tls-versions2": 156,
+      "hardcoded-secret": 47,
+      "settimeout-string": 2
+    },
+    "highlights": [
+      {
+        "rule": "hardcoded-secret",
+        "severity": "WARNING",
+        "file": "apps/web/app/api/webhooks/stripe/route.ts",
+        "line": 12,
+        "message": "Hardcoded secret detected in source code."
+      },
+      {
+        "rule": "hardcoded-secret",
+        "severity": "WARNING",
+        "file": "packages/trpc/server/routers/viewer/webhook.handler.ts",
+        "line": 8,
+        "message": "Hardcoded secret detected."
+      },
+      {
+        "rule": "aead-no-final",
+        "severity": "ERROR",
+        "file": "packages/lib/crypto.ts",
+        "line": 45,
+        "message": "AEAD cipher used without calling .final(). Ciphertext may be incomplete."
+      },
+      {
+        "rule": "disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "packages/lib/http.ts",
+        "line": 23,
+        "message": "Old TLS version (TLSv1/TLSv1.1) allowed. Use TLSv1.2+ only."
+      },
+      {
+        "rule": "sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "packages/prisma/extensions.ts",
+        "line": 67,
+        "message": "Raw SQL query detected. Use parameterized queries to prevent SQL injection."
+      }
+    ]
+  },
+  "github": {
+    "advisories_count": 6,
+    "cve_issues": []
+  }
+}

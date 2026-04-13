@@ -1,36 +1,84 @@
 # Sigma Stack Audit
 
-Full-spectrum security audit combining five analysis layers into a single actionable report.
+Full-spectrum security audit combining five analysis layers into a living audit registry.
 
-**[Live Report: calcom/cal.com](https://copyleftdev.github.io/sigma-audit/)**
+**[Dashboard](https://copyleftdev.github.io/sigma-audit/)** | **[cal.com Report](https://copyleftdev.github.io/sigma-audit/reports/calcom-cal.com/)**
 
-## What It Does
+## How It Works
 
-One command audits a GitHub repository across five complementary layers:
+Run the script against any GitHub repo. It audits across five layers, generates an interactive report, and optionally publishes it to the dashboard.
+
+```bash
+# Audit locally
+python3 sigma-audit.py calcom/cal.com
+
+# Audit and publish to the live dashboard
+python3 sigma-audit.py calcom/cal.com --publish
+```
+
+Every `--publish` updates the dashboard automatically — no manual steps.
+
+## Five Layers
 
 | Layer | Tool | Finds |
 |-------|------|-------|
 | **Structure** | [Vajra](https://github.com/copyleftdev/vajra) | Dependency health, structural anomalies |
 | **Code** | [Semgrep](https://semgrep.dev) | XSS, injection, weak crypto (OWASP SAST) |
 | **Patterns** | [Zentinel](https://github.com/copyleftdev/zentinel) | Hardcoded secrets, raw SQL, missing CSRF, old TLS |
-| **Supply Chain** | [VulnGraph MCP](https://vulngraph.tools) | CVE intel, EPSS probability, exploit PoCs, ATT&CK mapping |
-| **Issues** | GitHub API | Existing security advisories and issue cross-reference |
+| **Supply Chain** | [VulnGraph MCP](https://vulngraph.tools) | CVE intel, EPSS, exploit PoCs, ATT&CK mapping |
+| **Issues** | GitHub API | Existing advisories and issue cross-reference |
 
-Each CVE is enriched with:
+## What Each CVE Gets
+
 - **EPSS score** — probability of exploitation in the next 30 days
 - **Exploit maturity** — WEAPONIZED / FUNCTIONAL / POC / NONE
-- **Proof-of-concept links** — ExploitDB, GitHub PoCs, Nuclei templates
+- **Proof-of-concept links** — ExploitDB, GitHub PoCs, Nuclei templates, Sigma rules
 - **CWE classification** — root cause weakness
-- **ATT&CK techniques** — mapped via CAPEC bridge (CWE → CAPEC → ATT&CK)
+- **ATT&CK techniques** — mapped via CAPEC bridge (CWE -> CAPEC -> ATT&CK)
 - **Remediation** — vulnerable version ranges and fix versions
 - **GitHub issues** — whether it's already been reported
 
-## Usage
+## Architecture
 
-```bash
-python3 sigma-audit.py calcom/cal.com
-python3 sigma-audit.py vercel/next.js --branch canary --output nextjs-audit.html
 ```
+  sigma-audit.py calcom/cal.com --publish
+          |
+    +-----+-----+-----+-----+
+    |     |     |     |     |
+  Clone  Deps  SAST  Zent  MCP
+    |     |     |     |     |
+    +-----+-----+-----+-----+
+          |
+    +-----------+
+    | VulnGraph |  analyze_deps -> exploit_intel -> attack_surface
+    |    MCP    |  15 CVEs deep-dived, kill chains mapped
+    +-----------+
+          |
+    GitHub Issues Cross-Reference
+          |
+    Generate Kinetic HTML Report
+          |
+    Push to sigma-audit repo
+          |
+    docs/reports/<slug>/index.html  <- individual report
+    docs/reports/manifest.json      <- dashboard reads this
+    docs/index.html                 <- dashboard auto-populates
+          |
+    GitHub Pages deploys automatically
+```
+
+## Dashboard
+
+The [dashboard](https://copyleftdev.github.io/sigma-audit/) dynamically loads `manifest.json` and renders a card for each audited repo showing:
+
+- CVE count and severity breakdown
+- Exploit maturity (weaponized/functional count)
+- Attack chain count and ATT&CK technique coverage
+- Top CVE with CVSS and EPSS scores
+- Overall risk level
+- Click-through to the full interactive report
+
+Adding a new audit is one command: `python3 sigma-audit.py owner/repo --publish`
 
 ## Requirements
 
@@ -39,56 +87,6 @@ python3 sigma-audit.py vercel/next.js --branch canary --output nextjs-audit.html
 - [Zentinel](https://github.com/copyleftdev/zentinel)
 - [VulnGraph MCP server](https://vulngraph.tools) running locally
 - [GitHub CLI](https://cli.github.com/) (`gh`) authenticated
-
-## Architecture
-
-```
-                    sigma-audit.py
-                         |
-          +--------------+--------------+
-          |              |              |
-     Clone Repo    Extract Deps    Scan Code
-          |              |              |
-          v              v              v
-    +-----------+  +-----------+  +-----------+
-    |  Semgrep  |  | VulnGraph |  | Zentinel  |
-    |   SAST    |  |    MCP    |  |  Patterns |
-    +-----------+  +-----------+  +-----------+
-                         |
-              +----------+----------+
-              |          |          |
-         analyze    exploit    attack
-          deps      intel     surface
-              |          |          |
-              +----------+----------+
-                         |
-                   GitHub Issues
-                   Cross-Reference
-                         |
-                  Kinetic HTML Report
-```
-
-## Report Sections
-
-1. **Executive Summary** — auto-generated prose with key findings
-2. **Risk Dashboard** — animated counters for CVEs, severity, exploitability
-3. **CVE Intelligence** — expandable cards with full exploit intel, PoC links, ATT&CK mapping
-4. **Kill Chains** — visual attack chain flow diagrams (Package → CVE → CWE → Technique)
-5. **ATT&CK Grid** — clickable technique badges linked to MITRE
-6. **Semgrep SAST** — code-level findings with file locations
-7. **Zentinel Patterns** — rule frequency chart and critical findings
-
-## Example Output
-
-The [live report for calcom/cal.com](https://copyleftdev.github.io/sigma-audit/) found:
-
-- **146 CVEs** across 377 npm dependencies
-- **4 weaponized/functional exploits** with public PoCs
-- **108 attack chains** mapped to **64 ATT&CK techniques**
-- **17,102 security pattern findings** including 47 hardcoded secrets
-- **10 SAST findings** including XSS and weak crypto
-
-Top finding: [CVE-2025-29927](https://nvd.nist.gov/vuln/detail/CVE-2025-29927) — Next.js middleware auth bypass (CVSS 9.1, EPSS 93%, 12 public PoCs).
 
 ## License
 
