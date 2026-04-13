@@ -17,6 +17,24 @@
       "top_cve_cvss": 9.100000381469727,
       "top_cve_epss": 0.9295499920845032,
       "risk": "CRITICAL"
+    },
+    {
+      "slug": "fastify-fastify",
+      "repo": "fastify/fastify",
+      "date": "2026-04-13",
+      "total_cves": 45,
+      "critical": 2,
+      "high": 12,
+      "dependencies": 53,
+      "sast_findings": 1,
+      "pattern_findings": 26555,
+      "exploitable": 0,
+      "attack_chains": 59,
+      "techniques": 69,
+      "top_cve": "CVE-2020-7720",
+      "top_cve_cvss": 9.800000190734863,
+      "top_cve_epss": 0.02085000090301037,
+      "risk": "HIGH"
     }
   ]
 }
