@@ -161,6 +161,24 @@
       "top_cve_cvss": 0,
       "top_cve_epss": 0,
       "risk": "NONE"
+    },
+    {
+      "slug": "pallets-flask",
+      "repo": "pallets/flask",
+      "date": "2026-04-13",
+      "total_cves": 31,
+      "critical": 0,
+      "high": 4,
+      "dependencies": 20,
+      "sast_findings": 4,
+      "pattern_findings": 7,
+      "exploitable": 1,
+      "attack_chains": 52,
+      "techniques": 24,
+      "top_cve": "CVE-2019-14322",
+      "top_cve_cvss": 0.0,
+      "top_cve_epss": 0.9005900025367737,
+      "risk": "CRITICAL"
     }
   ]
 }

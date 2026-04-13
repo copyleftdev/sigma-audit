@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sigma Stack Audit: pallets/flask</title>
+<style>
+  :root { --bg: #0f172a; --surface: #1e293b; --border: #334155; --text: #e2e8f0; --text2: #94a3b8;
+           --red: #ef4444; --orange: #f97316; --yellow: #eab308; --green: #22c55e; --blue: #3b82f6;
+           --purple: #a855f7; --cyan: #06b6d4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; padding: 24px; }
+  h1 { font-size: 1.8rem; margin-bottom: 4px; }
+  h2 { font-size: 1.3rem; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1rem; color: var(--text2); margin: 16px 0 8px; }
+  a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
+  code { background: rgba(255,255,255,0.06); padding: 1px 4px; border-radius: 3px; font-size: 0.8rem; }
+  .subtitle { color: var(--text2); font-size: 0.9rem; margin-bottom: 24px; }
+  .header { margin-bottom: 32px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .stat-num { font-size: 1.6rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-risk .stat-num { color: var(--red); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th { background: var(--surface); text-align: left; padding: 10px 12px; font-size: 0.75rem; color: var(--text2);
+       text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.85rem; vertical-align: top; }
+  tr:hover { background: rgba(59,130,246,0.04); }
+  .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+  .badge-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .badge-medium { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge-low, .badge-none { background: rgba(148,163,184,0.1); color: var(--text2); }
+  .badge-warning { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .badge-error { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-info { background: rgba(59,130,246,0.1); color: var(--blue); }
+  .badge-kev { background: rgba(239,68,68,0.2); color: var(--red); margin-left: 4px; }
+  .mat-badge { padding: 2px 6px; border-radius: 3px; font-size: 0.65rem; font-weight: 700; }
+  .mat-weap { background: rgba(239,68,68,0.2); color: var(--red); }
+  .mat-func { background: rgba(249,115,22,0.2); color: var(--orange); }
+  .mat-poc { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .mat-none { background: rgba(148,163,184,0.1); color: var(--text2); }
+  .cve-id { font-weight: 700; font-size: 0.9rem; }
+  .cve-pkg { color: var(--text2); font-size: 0.75rem; }
+  .cve-desc { color: var(--text2); font-size: 0.78rem; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cve-pub { color: var(--text2); font-size: 0.7rem; margin-top: 2px; }
+  .epss-val { font-weight: 700; font-size: 0.9rem; }
+  .epss-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin: 4px 0; }
+  .epss-fill { height: 100%; background: var(--orange); border-radius: 2px; }
+  .epss-pct { color: var(--text2); font-size: 0.7rem; }
+  .exploit-count { color: var(--text2); font-size: 0.7rem; margin: 4px 0; }
+  .exploit-link { font-size: 0.75rem; margin: 2px 0; }
+  .exploit-more { font-size: 0.7rem; color: var(--text2); }
+  .tech-badge { display: inline-block; padding: 1px 6px; background: rgba(6,182,212,0.12); color: var(--cyan);
+                 border-radius: 3px; font-size: 0.7rem; margin: 1px; font-weight: 600; }
+  .tech-more { font-size: 0.7rem; color: var(--text2); }
+  .cwe-badge { display: inline-block; padding: 1px 6px; background: rgba(168,85,247,0.12); color: var(--purple);
+                border-radius: 3px; font-size: 0.7rem; margin: 1px; }
+  .tech-col { max-width: 220px; }
+  .rem-entry { font-size: 0.78rem; margin: 2px 0; }
+  .gh-issue { display: block; font-size: 0.75rem; margin: 2px 0; padding: 2px 6px; border-radius: 3px; }
+  .issue-open { background: rgba(34,197,94,0.1); }
+  .issue-closed { background: rgba(148,163,184,0.05); color: var(--text2); }
+  .no-issue { color: var(--text2); font-size: 0.7rem; }
+  .surface-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .chain { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 8px 0; }
+  .chain-risk { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; }
+  .chain-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .chain-high { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .chain-mat { color: var(--text2); font-size: 0.7rem; margin-left: 8px; }
+  .chain-path { color: var(--text2); font-size: 0.75rem; margin-top: 4px; }
+  .techs-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+  .exploits { margin-top: 4px; }
+  section { margin-bottom: 32px; }
+  .tools-bar { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .tool-badge { padding: 6px 14px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border);
+                 font-size: 0.8rem; font-weight: 600; }
+  .footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text2); font-size: 0.75rem; text-align: center; }
+  @media (max-width: 768px) {
+    body { padding: 12px; }
+    .surface-summary { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.75rem; }
+    td, th { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Sigma Stack Audit</h1>
+  <div class="subtitle">
+    <a href="https://github.com/pallets/flask" target="_blank">pallets/flask</a>
+    &middot; 2026-04-13 03:39 UTC
+  </div>
+  <div class="tools-bar">
+    <span class="tool-badge">Vajra</span>
+    <span class="tool-badge">Semgrep</span>
+    <span class="tool-badge">Zentinel</span>
+    <span class="tool-badge">VulnGraph MCP</span>
+    <span class="tool-badge">GitHub</span>
+  </div>
+</div>
+
+<section id="overview">
+  <h2>Overview</h2>
+  <div class="summary-grid">
+    <div class="stat-card"><div class="stat-num">20</div><div class="stat-label">Dependencies</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">TS/TSX Files</div></div>
+    <div class="stat-card"><div class="stat-num">31</div><div class="stat-label">CVEs Found</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Critical</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">High</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">SAST Findings</div></div>
+    <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Pattern Findings</div></div>
+    <div class="stat-card stat-risk"><div class="stat-num">1</div><div class="stat-label">Exploitable</div></div>
+  </div>
+</section>
+
+<section id="cve-intel">
+  <h2>CVE Intelligence &amp; Exploitability</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+    Each CVE is enriched with EPSS exploit probability, proof-of-concept references,
+    ATT&CK technique mapping (via CAPEC bridge), and GitHub issue cross-reference.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>CVE / Package</th>
+        <th>Severity</th>
+        <th>EPSS</th>
+        <th>Exploitability</th>
+        <th>ATT&CK / CWE</th>
+        <th>Remediation / Issues</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-14322" target="_blank">CVE-2019-14322</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            <div class="cve-desc">In Pallets Werkzeug before 0.15.5, SharedDataMiddleware mishandles drive names (such as C:) in Windows pathnames.</div>
+            <div class="cve-pub">Published: 2019-07-28</div>
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">90.1%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:90.05900025367737%"></div></div>
+            <div class="epss-pct">top 0.4%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-weap">WEAPONIZED</span>
+            
+            <div class="exploit-count">5 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://www.exploit-db.com/exploits/50101" target="_blank">EDB:50101</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2019-14322+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2019-14322:0</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2019-14322+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2019-14322:1</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2019-14322+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2019-14322:2</a></div><div class='exploit-link'><a href="https://github.com/projectdiscovery/nuclei-templates/search?q=CVE-2019-14322" target="_blank">Nuclei:CVE-2019-14322</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>PyPI:werkzeug: all versions &rarr; <strong>0.15.5</strong></div>
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-34069" target="_blank">CVE-2024-34069</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            <div class="cve-desc">Werkzeug is a comprehensive WSGI web application library. The debugger in affected versions of Werkzeug can allow an attacker to execute code on a developer's machine under some circumstances. This requires the attacker to get the developer to interact with a domain and subdomain they control, and e</div>
+            <div class="cve-pub">Published: 2024-05-06</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 7.5
+          </td>
+          <td>
+            <div class="epss-val">38.9%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:38.92900049686432%"></div></div>
+            <div class="epss-pct">top 2.7%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/352.html" target="_blank" class="cwe-badge">CWE-352</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            <div class='rem-entry'>cpe:pallets:werkzeug: >= < 3.0.3 &rarr; <strong>no fix</strong></div><div class='rem-entry'>PyPI:werkzeug: all versions &rarr; <strong>3.0.3</strong></div>
+            <a href="https://github.com/pallets/flask/issues/5991" target="_blank" class="gh-issue issue-closed">#5991 Security: 13 known CVEs in examples/celery/requirements.txt</a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-29361" target="_blank">CVE-2022-29361</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">31.1%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:31.112998723983765%"></div></div>
+            <div class="epss-pct">top 3.3%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">2 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2022-29361+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2022-29361:0</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2022-29361+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2022-29361:1</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <a href="https://github.com/pallets/flask/issues/4638" target="_blank" class="gh-issue issue-closed">#4638 werkzeug critical vulnerability until 2.1.1</a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10906" target="_blank">CVE-2019-10906</a></div>
+            <div class="cve-pkg">PyPI:jinja2@3.1.2</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">3.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:3.48300002515316%"></div></div>
+            <div class="epss-pct">top 12.4%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-28858" target="_blank">CVE-2023-28858</a></div>
+            <div class="cve-pkg">PyPI:redis@4.5.4</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">1.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:1.4879999682307243%"></div></div>
+            <div class="epss-pct">top 19.0%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-49766" target="_blank">CVE-2024-49766</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 6.3
+          </td>
+          <td>
+            <div class="epss-val">1.4%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:1.3919999822974205%"></div></div>
+            <div class="epss-pct">top 19.6%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank" class="cwe-badge">CWE-22</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <a href="https://github.com/pallets/flask/issues/5991" target="_blank" class="gh-issue issue-closed">#5991 Security: 13 known CVEs in examples/celery/requirements.txt</a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-49767" target="_blank">CVE-2024-49767</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 6.9
+          </td>
+          <td>
+            <div class="epss-val">1.1%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:1.0900000110268593%"></div></div>
+            <div class="epss-pct">top 22.1%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank" class="cwe-badge">CWE-400</a> <a href="https://cwe.mitre.org/data/definitions/770.html" target="_blank" class="cwe-badge">CWE-770</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1499" target="_blank" class="tech-badge">T1499</a> <a href="https://attack.mitre.org/techniques/T1498/001" target="_blank" class="tech-badge">T1498.001</a> <a href="https://attack.mitre.org/techniques/T1499/001" target="_blank" class="tech-badge">T1499.001</a> <a href="https://attack.mitre.org/techniques/T1499/003" target="_blank" class="tech-badge">T1499.003</a> <a href="https://attack.mitre.org/techniques/T1498/002" target="_blank" class="tech-badge">T1498.002</a> <a href="https://attack.mitre.org/techniques/T1499/002" target="_blank" class="tech-badge">T1499.002</a></div>
+          </td>
+          <td>
+            
+            <a href="https://github.com/pallets/flask/issues/5991" target="_blank" class="gh-issue issue-closed">#5991 Security: 13 known CVEs in examples/celery/requirements.txt</a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10745" target="_blank">CVE-2016-10745</a></div>
+            <div class="cve-pkg">PyPI:jinja2@3.1.2</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">1.0%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:1.0219999589025974%"></div></div>
+            <div class="epss-pct">top 22.8%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2020-28724" target="_blank">CVE-2020-28724</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">0.9%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.9229999966919422%"></div></div>
+            <div class="epss-pct">top 24.0%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-34064" target="_blank">CVE-2024-34064</a></div>
+            <div class="cve-pkg">PyPI:jinja2@3.1.2</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 5.4
+          </td>
+          <td>
+            <div class="epss-val">0.8%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.8379999548196793%"></div></div>
+            <div class="epss-pct">top 25.3%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">7 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2024-34064+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2024-34064:0</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2024-34064+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2024-34064:1</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2024-34064+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2024-34064:2</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2024-34064+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2024-34064:3</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2024-34064+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2024-34064:4</a></div><div class='exploit-link'><a href="https://github.com/search?q=CVE-2024-34064+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2024-34064:5</a></div><div class='exploit-more'>+1 more</div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank" class="cwe-badge">CWE-79</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <a href="https://github.com/pallets/flask/issues/5991" target="_blank" class="gh-issue issue-closed">#5991 Security: 13 known CVEs in examples/celery/requirements.txt</a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="HIGH">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-46136" target="_blank">CVE-2023-46136</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            <div class="cve-desc">Werkzeug is a comprehensive WSGI web application library. If an upload of a file that starts with CR or LF and then is followed by megabytes of data without these characters: all of these bytes are appended chunk by chunk into internal bytearray and lookup for boundary is performed on growing buffer</div>
+            <div class="cve-pub">Published: 2023-10-24</div>
+          </td>
+          <td>
+            <span class="badge badge-high">HIGH</span><br>
+            CVSS 8.0
+          </td>
+          <td>
+            <div class="epss-val">0.6%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.6219999864697456%"></div></div>
+            <div class="epss-pct">top 29.9%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-poc">POC</span>
+            
+            <div class="exploit-count">1 exploit(s)</div>
+            <div class="exploits"><div class='exploit-link'><a href="https://github.com/search?q=CVE-2023-46136+poc&type=repositories" target="_blank">GitHub-PoC:CVE-2023-46136:0</a></div></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank" class="cwe-badge">CWE-400</a> <a href="https://cwe.mitre.org/data/definitions/407.html" target="_blank" class="cwe-badge">CWE-407</a></div>
+            <div style="margin-top:4px"><a href="https://attack.mitre.org/techniques/T1499" target="_blank" class="tech-badge">T1499</a></div>
+          </td>
+          <td>
+            <div class='rem-entry'>cpe:pallets:werkzeug: >= < 3.0.1 &rarr; <strong>no fix</strong></div><div class='rem-entry'>PyPI:werkzeug: >= 3.0.0 &rarr; <strong>3.0.1</strong></div><div class='rem-entry'>PyPI:werkzeug: all versions &rarr; <strong>2.3.8</strong></div>
+            <a href="https://github.com/pallets/flask/issues/5991" target="_blank" class="gh-issue issue-closed">#5991 Security: 13 known CVEs in examples/celery/requirements.txt</a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2018-1000656" target="_blank">CVE-2018-1000656</a></div>
+            <div class="cve-pkg">PyPI:flask@2.3.2</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">0.6%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.5830000154674053%"></div></div>
+            <div class="epss-pct">top 31.0%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="MEDIUM">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-56201" target="_blank">CVE-2024-56201</a></div>
+            <div class="cve-pkg">PyPI:jinja2@3.1.2</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-medium">MEDIUM</span><br>
+            CVSS 5.4
+          </td>
+          <td>
+            <div class="epss-val">0.5%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.45900000259280205%"></div></div>
+            <div class="epss-pct">top 35.9%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div><a href="https://cwe.mitre.org/data/definitions/150.html" target="_blank" class="cwe-badge">CWE-150</a></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <a href="https://github.com/pallets/flask/issues/5991" target="_blank" class="gh-issue issue-closed">#5991 Security: 13 known CVEs in examples/celery/requirements.txt</a><a href="https://github.com/pallets/flask/issues/5972" target="_blank" class="gh-issue issue-closed">#5972 <spam></a>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2016-10516" target="_blank">CVE-2016-10516</a></div>
+            <div class="cve-pkg">PyPI:werkzeug@2.3.3</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">0.4%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.41100000962615013%"></div></div>
+            <div class="epss-pct">top 38.6%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+        <tr class="intel-row" data-severity="NONE">
+          <td>
+            <div class="cve-id"><a href="https://nvd.nist.gov/vuln/detail/CVE-2019-1010083" target="_blank">CVE-2019-1010083</a></div>
+            <div class="cve-pkg">PyPI:flask@2.3.2</div>
+            
+            
+          </td>
+          <td>
+            <span class="badge badge-none">NONE</span><br>
+            CVSS 0.0
+          </td>
+          <td>
+            <div class="epss-val">0.4%</div>
+            <div class="epss-bar"><div class="epss-fill" style="width:0.39900001138448715%"></div></div>
+            <div class="epss-pct">top 39.4%</div>
+          </td>
+          <td>
+            <span class="mat-badge mat-none">NONE</span>
+            
+            <div class="exploit-count">0 exploit(s)</div>
+            <div class="exploits"></div>
+          </td>
+          <td class="tech-col">
+            <div></div>
+            <div style="margin-top:4px"></div>
+          </td>
+          <td>
+            
+            <span class="no-issue">No issues found</span>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</section>
+
+
+        <section id="attack-surface">
+          <h2>Attack Surface &amp; Kill Chains</h2>
+          <div class="surface-summary">
+            <div class="stat-card"><div class="stat-num">52</div><div class="stat-label">Attack Chains</div></div>
+            <div class="stat-card"><div class="stat-num">24</div><div class="stat-label">ATT&CK Techniques</div></div>
+            <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Threat Actors</div></div>
+            <div class="stat-card stat-risk"><div class="stat-num">CRITICAL</div><div class="stat-label">Overall Risk</div></div>
+          </div>
+          <h3>Top Kill Chains</h3>
+          <div class="chains">
+            <div class="chain">
+              <span class="chain-risk chain-critical">CRITICAL</span>
+              <strong>PyPI:werkzeug</strong> &rarr; CVE-2019-14322
+              <span class="chain-mat">WEAPONIZED</span>
+              <div class="chain-path">vulnerability:CVE-2019-14322</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>PyPI:werkzeug</strong> &rarr; CVE-2023-46136
+              <span class="chain-mat">POC</span>
+              <div class="chain-path">vulnerability:CVE-2023-46136 &rarr; weakness:CWE-400 &rarr; weakness:CWE-407 &rarr; technique:T1499</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>PyPI:werkzeug</strong> &rarr; CVE-2023-46136
+              <span class="chain-mat">POC</span>
+              <div class="chain-path">vulnerability:CVE-2023-46136 &rarr; weakness:CWE-400 &rarr; weakness:CWE-407 &rarr; technique:T1499</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>PyPI:werkzeug</strong> &rarr; CVE-2023-46136
+              <span class="chain-mat">POC</span>
+              <div class="chain-path">vulnerability:CVE-2023-46136 &rarr; weakness:CWE-400 &rarr; weakness:CWE-407 &rarr; technique:T1499</div>
+            </div>
+            <div class="chain">
+              <span class="chain-risk chain-medium">MEDIUM</span>
+              <strong>PyPI:werkzeug</strong> &rarr; CVE-2023-25577
+              <span class="chain-mat">NONE</span>
+              <div class="chain-path">vulnerability:CVE-2023-25577 &rarr; weakness:CWE-770 &rarr; technique:T1498.001 &rarr; technique:T1499.001 &rarr; technique:T1499.003</div>
+            </div></div>
+          <h3>Exposed ATT&CK Techniques</h3>
+          <div class="techs-grid"><a href="https://attack.mitre.org/techniques/T1574/007" target="_blank" class="tech-badge">T1574.007</a> <a href="https://attack.mitre.org/techniques/T1539" target="_blank" class="tech-badge">T1539</a> <a href="https://attack.mitre.org/techniques/T1553/002" target="_blank" class="tech-badge">T1553.002</a> <a href="https://attack.mitre.org/techniques/T1574/006" target="_blank" class="tech-badge">T1574.006</a> <a href="https://attack.mitre.org/techniques/T1562/003" target="_blank" class="tech-badge">T1562.003</a> <a href="https://attack.mitre.org/techniques/T1027" target="_blank" class="tech-badge">T1027</a> <a href="https://attack.mitre.org/techniques/T1036/001" target="_blank" class="tech-badge">T1036.001</a> <a href="https://attack.mitre.org/techniques/T1499" target="_blank" class="tech-badge">T1499</a> <a href="https://attack.mitre.org/techniques/T1498/001" target="_blank" class="tech-badge">T1498.001</a> <a href="https://attack.mitre.org/techniques/T1499/001" target="_blank" class="tech-badge">T1499.001</a> <a href="https://attack.mitre.org/techniques/T1499/003" target="_blank" class="tech-badge">T1499.003</a> <a href="https://attack.mitre.org/techniques/T1498/002" target="_blank" class="tech-badge">T1498.002</a> <a href="https://attack.mitre.org/techniques/T1499/002" target="_blank" class="tech-badge">T1499.002</a> <a href="https://attack.mitre.org/techniques/T1040" target="_blank" class="tech-badge">T1040</a> <a href="https://attack.mitre.org/techniques/T1611" target="_blank" class="tech-badge">T1611</a> <a href="https://attack.mitre.org/techniques/T1574/005" target="_blank" class="tech-badge">T1574.005</a> <a href="https://attack.mitre.org/techniques/T1083" target="_blank" class="tech-badge">T1083</a> <a href="https://attack.mitre.org/techniques/T1574/010" target="_blank" class="tech-badge">T1574.010</a> <a href="https://attack.mitre.org/techniques/T1565/002" target="_blank" class="tech-badge">T1565.002</a> <a href="https://attack.mitre.org/techniques/T1134/001" target="_blank" class="tech-badge">T1134.001</a></div>
+        </section>
+
+<section id="semgrep">
+  <h2>Static Analysis (Semgrep)</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">4 findings across the codebase.</p>
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>eval-detected</td>
+          <td><code>src/flask/cli.py:1023</code></td>
+          <td>Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input fr</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>exec-detected</td>
+          <td><code>src/flask/config.py:209</code></td>
+          <td>Detected the use of exec(). exec() can be dangerous if used to evaluate dynamic content. If this content can be input fr</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>explicit-unescape-with-markup</td>
+          <td><code>src/flask/json/tag.py:188</code></td>
+          <td>Detected explicitly unescaped content using 'Markup()'. This permits the unescaped data to include unescaped HTML which </td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>insecure-hash-algorithm-sha1</td>
+          <td><code>src/flask/sessions.py:281</code></td>
+          <td>Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable</td>
+        </tr></tbody>
+  </table>
+</section>
+
+<section id="zentinel">
+  <h2>Security Patterns (Zentinel)</h2>
+  <p style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+    7 findings in 83 files.
+    2 errors, 5 warnings.
+  </p>
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Location</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>universal.security.hardcoded-secret</td>
+          <td><code>examples/tutorial/flaskr/auth.py:55</code></td>
+          <td>Possible hardcoded secret — use environment variables or a vault</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>universal.security.hardcoded-secret</td>
+          <td><code>examples/tutorial/flaskr/auth.py:89</code></td>
+          <td>Possible hardcoded secret — use environment variables or a vault</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>universal.security.hardcoded-secret</td>
+          <td><code>tests/test_config.py:10</code></td>
+          <td>Possible hardcoded secret — use environment variables or a vault</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>universal.security.hardcoded-secret</td>
+          <td><code>tests/test_config.py:137</code></td>
+          <td>Possible hardcoded secret — use environment variables or a vault</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-error">ERROR</span></td>
+          <td>universal.security.exec</td>
+          <td><code>src/flask/config.py:209</code></td>
+          <td>exec() can execute arbitrary commands — validate all input</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-error">ERROR</span></td>
+          <td>universal.security.eval</td>
+          <td><code>src/flask/cli.py:1023</code></td>
+          <td>eval() executes arbitrary code — never use with untrusted input</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">WARNING</span></td>
+          <td>universal.security.hardcoded-secret</td>
+          <td><code>src/flask/sansio/app.py:213</code></td>
+          <td>Possible hardcoded secret — use environment variables or a vault</td>
+        </tr></tbody>
+  </table>
+</section>
+
+<div class="footer">
+  Generated by Sigma Stack Audit &middot; Vajra + Semgrep + Zentinel + VulnGraph MCP &middot; 2026-04-13 03:39 UTC
+</div>
+</body>
+</html>

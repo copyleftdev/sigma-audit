@@ -1,0 +1,1057 @@
+{
+  "meta": {
+    "repo": "pallets/flask",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 20,
+    "source_files": {
+      "ts": 0,
+      "tsx": 0,
+      "py": 83,
+      "go": 0
+    },
+    "total_cves": 31,
+    "severity": {
+      "NONE": 13,
+      "HIGH": 4,
+      "MEDIUM": 11,
+      "LOW": 3
+    },
+    "sast_findings": 4,
+    "pattern_findings": 7,
+    "exploitable": 1
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2019-14322",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.9005900025367737,
+      "epss_percentile": 0.9958400130271912,
+      "exploit_maturity": "WEAPONIZED",
+      "maturity_rationale": "5 public PoCs; EPSS 0.9006",
+      "kev_listed": false,
+      "exploit_count": 5,
+      "exploits": [
+        "EDB:50101",
+        "GitHub-PoC:CVE-2019-14322:0",
+        "GitHub-PoC:CVE-2019-14322:1",
+        "GitHub-PoC:CVE-2019-14322:2",
+        "Nuclei:CVE-2019-14322"
+      ],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-34069",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.3892900049686432,
+      "epss_percentile": 0.9726499915122986,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-352"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2022-29361",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.31112998723983765,
+      "epss_percentile": 0.9674500226974487,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "2 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 2,
+      "exploits": [
+        "GitHub-PoC:CVE-2022-29361:0",
+        "GitHub-PoC:CVE-2022-29361:1"
+      ],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2019-10906",
+      "package": "PyPI:jinja2@3.1.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.0348300002515316,
+      "epss_percentile": 0.8757699728012085,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2023-28858",
+      "package": "PyPI:redis@4.5.4",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.014879999682307243,
+      "epss_percentile": 0.8104900121688843,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-49766",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "MEDIUM",
+      "cvss": 6.300000190734863,
+      "epss_score": 0.013919999822974205,
+      "epss_percentile": 0.8037499785423279,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-22"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-49767",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "MEDIUM",
+      "cvss": 6.900000095367432,
+      "epss_score": 0.010900000110268593,
+      "epss_percentile": 0.7793999910354614,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-400",
+        "CWE-770"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        },
+        {
+          "id": "T1498.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1498.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.002",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2016-10745",
+      "package": "PyPI:jinja2@3.1.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.010219999589025974,
+      "epss_percentile": 0.7724599838256836,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2020-28724",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.009229999966919422,
+      "epss_percentile": 0.7598999738693237,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-34064",
+      "package": "PyPI:jinja2@3.1.2",
+      "severity": "MEDIUM",
+      "cvss": 5.400000095367432,
+      "epss_score": 0.008379999548196793,
+      "epss_percentile": 0.746940016746521,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "7 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 7,
+      "exploits": [
+        "GitHub-PoC:CVE-2024-34064:0",
+        "GitHub-PoC:CVE-2024-34064:1",
+        "GitHub-PoC:CVE-2024-34064:2",
+        "GitHub-PoC:CVE-2024-34064:3",
+        "GitHub-PoC:CVE-2024-34064:4",
+        "GitHub-PoC:CVE-2024-34064:5",
+        "GitHub-PoC:CVE-2024-34064:6"
+      ],
+      "cwes": [
+        "CWE-79"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2023-46136",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "HIGH",
+      "cvss": 8.0,
+      "epss_score": 0.006219999864697456,
+      "epss_percentile": 0.7010899782180786,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2023-46136:0"
+      ],
+      "cwes": [
+        "CWE-400",
+        "CWE-407"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2018-1000656",
+      "package": "PyPI:flask@2.3.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.005830000154674053,
+      "epss_percentile": 0.6902099847793579,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-56201",
+      "package": "PyPI:jinja2@3.1.2",
+      "severity": "MEDIUM",
+      "cvss": 5.400000095367432,
+      "epss_score": 0.0045900000259280205,
+      "epss_percentile": 0.6405400037765503,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-150"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2016-10516",
+      "package": "PyPI:werkzeug@2.3.3",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.004110000096261501,
+      "epss_percentile": 0.6139000058174133,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2019-1010083",
+      "package": "PyPI:flask@2.3.2",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.0039900001138448715,
+      "epss_percentile": 0.6064500212669373,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 52,
+    "overall_risk": "CRITICAL",
+    "techniques": [
+      "T1574.007",
+      "T1539",
+      "T1553.002",
+      "T1574.006",
+      "T1562.003",
+      "T1027",
+      "T1036.001",
+      "T1499",
+      "T1498.001",
+      "T1499.001",
+      "T1499.003",
+      "T1498.002",
+      "T1499.002",
+      "T1040",
+      "T1611",
+      "T1574.005",
+      "T1083",
+      "T1574.010",
+      "T1565.002",
+      "T1134.001",
+      "T1528",
+      "T1550.004",
+      "T1134",
+      "T1005"
+    ],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2019-14322",
+        "risk": "CRITICAL",
+        "maturity": "WEAPONIZED",
+        "path": [
+          "vulnerability:CVE-2019-14322"
+        ]
+      },
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2023-46136",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2023-46136",
+          "weakness:CWE-400",
+          "weakness:CWE-407",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2023-46136",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2023-46136",
+          "weakness:CWE-400",
+          "weakness:CWE-407",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2023-46136",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2023-46136",
+          "weakness:CWE-400",
+          "weakness:CWE-407",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2023-25577",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-25577",
+          "weakness:CWE-770",
+          "technique:T1498.001",
+          "technique:T1499.001",
+          "technique:T1499.003",
+          "technique:T1498.002",
+          "technique:T1499.002",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2023-25577",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-25577",
+          "weakness:CWE-770",
+          "technique:T1498.001",
+          "technique:T1499.001",
+          "technique:T1499.003",
+          "technique:T1498.002",
+          "technique:T1499.002",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "PyPI:werkzeug",
+        "cve": "CVE-2024-34069",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2024-34069",
+          "weakness:CWE-352"
+        ]
+      },
+      {
+        "entry": "PyPI:flask",
+        "cve": "CVE-2023-30861",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2023-30861",
+          "weakness:CWE-539",
+          "technique:T1539",
+          "technique:T1134.001",
+          "technique:T1528",
+          "technique:T1550.004",
+          "technique:T1134"
+        ]
+      },
+      {
+        "entry": "PyPI:flask",
+        "cve": "CVE-2023-30861",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2023-30861",
+          "weakness:CWE-539",
+          "technique:T1539",
+          "technique:T1134.001",
+          "technique:T1528",
+          "technique:T1550.004",
+          "technique:T1134"
+        ]
+      },
+      {
+        "entry": "PyPI:flask",
+        "cve": "CVE-2023-30861",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2023-30861",
+          "weakness:CWE-539",
+          "technique:T1539",
+          "technique:T1134.001",
+          "technique:T1528",
+          "technique:T1550.004",
+          "technique:T1134"
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 4,
+    "by_severity": {
+      "WARNING": 4
+    },
+    "by_rule": {
+      "eval-detected": 1,
+      "exec-detected": 1,
+      "explicit-unescape-with-markup": 1,
+      "insecure-hash-algorithm-sha1": 1
+    },
+    "findings": [
+      {
+        "rule": "eval-detected",
+        "severity": "WARNING",
+        "path": "src/flask/cli.py",
+        "line": 1023,
+        "message": "Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evalu"
+      },
+      {
+        "rule": "exec-detected",
+        "severity": "WARNING",
+        "path": "src/flask/config.py",
+        "line": 209,
+        "message": "Detected the use of exec(). exec() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evalu"
+      },
+      {
+        "rule": "explicit-unescape-with-markup",
+        "severity": "WARNING",
+        "path": "src/flask/json/tag.py",
+        "line": 188,
+        "message": "Detected explicitly unescaped content using 'Markup()'. This permits the unescaped data to include unescaped HTML which could result in cross-site scripting. Ensure this data is not externally control"
+      },
+      {
+        "rule": "insecure-hash-algorithm-sha1",
+        "severity": "WARNING",
+        "path": "src/flask/sessions.py",
+        "line": 281,
+        "message": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+      }
+    ]
+  },
+  "zentinel": {
+    "total": 7,
+    "files_scanned": 83,
+    "errors": 2,
+    "warnings": 5,
+    "by_rule": {
+      "universal.security.hardcoded-secret": 5,
+      "universal.security.exec": 1,
+      "universal.security.eval": 1
+    },
+    "highlights": [
+      {
+        "rule": "universal.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "examples/tutorial/flaskr/auth.py",
+        "line": 55,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a vault"
+      },
+      {
+        "rule": "universal.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "examples/tutorial/flaskr/auth.py",
+        "line": 89,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a vault"
+      },
+      {
+        "rule": "universal.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "tests/test_config.py",
+        "line": 10,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a vault"
+      },
+      {
+        "rule": "universal.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "tests/test_config.py",
+        "line": 137,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a vault"
+      },
+      {
+        "rule": "universal.security.exec",
+        "severity": "ERROR",
+        "file": "src/flask/config.py",
+        "line": 209,
+        "message": "exec() can execute arbitrary commands \u2014 validate all input"
+      },
+      {
+        "rule": "universal.security.eval",
+        "severity": "ERROR",
+        "file": "src/flask/cli.py",
+        "line": 1023,
+        "message": "eval() executes arbitrary code \u2014 never use with untrusted input"
+      },
+      {
+        "rule": "universal.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "src/flask/sansio/app.py",
+        "line": 213,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a vault"
+      }
+    ]
+  },
+  "github": {
+    "cve_issues": [
+      {
+        "cve_id": "CVE-2024-34069",
+        "issues": [
+          {
+            "number": 5991,
+            "title": "Security: 13 known CVEs in examples/celery/requirements.txt",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5991"
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2022-29361",
+        "issues": [
+          {
+            "number": 4638,
+            "title": "werkzeug critical vulnerability until 2.1.1",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/4638"
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2024-49766",
+        "issues": [
+          {
+            "number": 5991,
+            "title": "Security: 13 known CVEs in examples/celery/requirements.txt",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5991"
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2024-49767",
+        "issues": [
+          {
+            "number": 5991,
+            "title": "Security: 13 known CVEs in examples/celery/requirements.txt",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5991"
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2024-34064",
+        "issues": [
+          {
+            "number": 5991,
+            "title": "Security: 13 known CVEs in examples/celery/requirements.txt",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5991"
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2023-46136",
+        "issues": [
+          {
+            "number": 5991,
+            "title": "Security: 13 known CVEs in examples/celery/requirements.txt",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5991"
+          }
+        ]
+      },
+      {
+        "cve_id": "CVE-2024-56201",
+        "issues": [
+          {
+            "number": 5991,
+            "title": "Security: 13 known CVEs in examples/celery/requirements.txt",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5991"
+          },
+          {
+            "number": 5972,
+            "title": "<spam>",
+            "state": "closed",
+            "url": "https://github.com/pallets/flask/issues/5972"
+          }
+        ]
+      }
+    ],
+    "advisories": [
+      {
+        "ghsa_id": "GHSA-68rp-wp8r-4726",
+        "cve_id": "CVE-2026-27205",
+        "url": "https://api.github.com/repos/pallets/flask/security-advisories/GHSA-68rp-wp8r-4726",
+        "html_url": "https://github.com/pallets/flask/security/advisories/GHSA-68rp-wp8r-4726",
+        "summary": "Flask session does not add `Vary: Cookie` header when accessed in some ways",
+        "description": "When the `session` object is accessed, Flask should set the `Vary: Cookie` header. This instructs caches not to cache the response, as it may contain information specific to a logged in user. This is handled in most cases, but some forms of access such as the Python `in` operator were overlooked.\r\n\r\nThe severity depends on the application's use of the session, and the cache's behavior regarding cookies. The risk depends on all these conditions being met.\r\n\r\n1. The application must be hosted behind a caching proxy that does not ignore responses with cookies.\r\n2. The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\r\n3. The application accesses the session in a way that does not access the values, only the keys, and does not mutate the session.",
+        "severity": "low",
+        "author": null,
+        "publisher": {
+          "login": "davidism",
+          "id": 1242887,
+          "node_id": "MDQ6VXNlcjEyNDI4ODc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1242887?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/davidism",
+          "html_url": "https://github.com/davidism",
+          "followers_url": "https://api.github.com/users/davidism/followers",
+          "following_url": "https://api.github.com/users/davidism/following{/other_user}",
+          "gists_url": "https://api.github.com/users/davidism/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/davidism/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/davidism/subscriptions",
+          "organizations_url": "https://api.github.com/users/davidism/orgs",
+          "repos_url": "https://api.github.com/users/davidism/repos",
+          "events_url": "https://api.github.com/users/davidism/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/davidism/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-68rp-wp8r-4726",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2026-27205",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2026-02-19T17:44:53Z",
+        "published_at": "2026-02-19T05:01:23Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "flask"
+            },
+            "vulnerable_version_range": "<3.1.3",
+            "patched_versions": "3.1.3",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": null,
+            "score": null
+          },
+          "cvss_v4": {
+            "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+            "score": 2.3
+          }
+        },
+        "cwes": [
+          {
+            "cwe_id": "CWE-524",
+            "name": "Use of Cache Containing Sensitive Information"
+          }
+        ],
+        "cwe_ids": [
+          "CWE-524"
+        ],
+        "credits": [
+          {
+            "login": "shouryaj98",
+            "type": "reporter"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "shouryaj98",
+              "id": 26935465,
+              "node_id": "MDQ6VXNlcjI2OTM1NDY1",
+              "avatar_url": "https://avatars.githubusercontent.com/u/26935465?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/shouryaj98",
+              "html_url": "https://github.com/shouryaj98",
+              "followers_url": "https://api.github.com/users/shouryaj98/followers",
+              "following_url": "https://api.github.com/users/shouryaj98/following{/other_user}",
+              "gists_url": "https://api.github.com/users/shouryaj98/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/shouryaj98/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/shouryaj98/subscriptions",
+              "organizations_url": "https://api.github.com/users/shouryaj98/orgs",
+              "repos_url": "https://api.github.com/users/shouryaj98/repos",
+              "events_url": "https://api.github.com/users/shouryaj98/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/shouryaj98/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      {
+        "ghsa_id": "GHSA-4grg-w6v8-c28g",
+        "cve_id": "CVE-2025-47278",
+        "url": "https://api.github.com/repos/pallets/flask/security-advisories/GHSA-4grg-w6v8-c28g",
+        "html_url": "https://github.com/pallets/flask/security/advisories/GHSA-4grg-w6v8-c28g",
+        "summary": "fallback key is used instead of current signing key",
+        "description": "In Flask 3.1.0, the way fallback key configuration was handled resulted in the last fallback key being used for signing, rather than the current signing key.\r\n\r\nSigning is provided by the `itsdangerous` library. A list of keys can be passed, and it expects the last (top) key in the list to be the most recent key, and uses that for signing. Flask was incorrectly constructing that list in reverse, passing the signing key first.\r\n\r\nSites that have opted-in to use key rotation by setting `SECRET_KEY_FALLBACKS` are likely to unexpectedly be signing their sessions with stale keys, and their transition to fresher keys will be impeded. Sessions are still signed, so this would not cause any sort of data integrity loss.",
+        "severity": "low",
+        "author": null,
+        "publisher": {
+          "login": "davidism",
+          "id": 1242887,
+          "node_id": "MDQ6VXNlcjEyNDI4ODc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1242887?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/davidism",
+          "html_url": "https://github.com/davidism",
+          "followers_url": "https://api.github.com/users/davidism/followers",
+          "following_url": "https://api.github.com/users/davidism/following{/other_user}",
+          "gists_url": "https://api.github.com/users/davidism/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/davidism/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/davidism/subscriptions",
+          "organizations_url": "https://api.github.com/users/davidism/orgs",
+          "repos_url": "https://api.github.com/users/davidism/repos",
+          "events_url": "https://api.github.com/users/davidism/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/davidism/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-4grg-w6v8-c28g",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2025-47278",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2025-05-13T17:29:00Z",
+        "published_at": "2025-05-13T15:01:27Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "flask"
+            },
+            "vulnerable_version_range": "3.1.0",
+            "patched_versions": "3.1.1",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": null,
+            "score": null
+          },
+          "cvss_v4": {
+            "vector_string": "CVSS:4.0/AV:L/AC:L/AT:P/PR:H/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+            "score": 1.8
+          }
+        },
+        "cwes": [
+          {
+            "cwe_id": "CWE-683",
+            "name": "Function Call With Incorrect Order of Arguments"
+          }
+        ],
+        "cwe_ids": [
+          "CWE-683"
+        ],
+        "credits": [
+          {
+            "login": "jayaddison",
+            "type": "reporter"
+          },
+          {
+            "login": "Brax94",
+            "type": "finder"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "jayaddison",
+              "id": 55152140,
+              "node_id": "MDQ6VXNlcjU1MTUyMTQw",
+              "avatar_url": "https://avatars.githubusercontent.com/u/55152140?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/jayaddison",
+              "html_url": "https://github.com/jayaddison",
+              "followers_url": "https://api.github.com/users/jayaddison/followers",
+              "following_url": "https://api.github.com/users/jayaddison/following{/other_user}",
+              "gists_url": "https://api.github.com/users/jayaddison/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/jayaddison/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/jayaddison/subscriptions",
+              "organizations_url": "https://api.github.com/users/jayaddison/orgs",
+              "repos_url": "https://api.github.com/users/jayaddison/repos",
+              "events_url": "https://api.github.com/users/jayaddison/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/jayaddison/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          },
+          {
+            "user": {
+              "login": "Brax94",
+              "id": 7072029,
+              "node_id": "MDQ6VXNlcjcwNzIwMjk=",
+              "avatar_url": "https://avatars.githubusercontent.com/u/7072029?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/Brax94",
+              "html_url": "https://github.com/Brax94",
+              "followers_url": "https://api.github.com/users/Brax94/followers",
+              "following_url": "https://api.github.com/users/Brax94/following{/other_user}",
+              "gists_url": "https://api.github.com/users/Brax94/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/Brax94/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/Brax94/subscriptions",
+              "organizations_url": "https://api.github.com/users/Brax94/orgs",
+              "repos_url": "https://api.github.com/users/Brax94/repos",
+              "events_url": "https://api.github.com/users/Brax94/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/Brax94/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "finder",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      {
+        "ghsa_id": "GHSA-m2qf-hxjv-5gpq",
+        "cve_id": "CVE-2023-30861",
+        "url": "https://api.github.com/repos/pallets/flask/security-advisories/GHSA-m2qf-hxjv-5gpq",
+        "html_url": "https://github.com/pallets/flask/security/advisories/GHSA-m2qf-hxjv-5gpq",
+        "summary": "Possible disclosure of permanent session cookie due to missing Vary: Cookie header",
+        "description": "When all of the following conditions are met, a response containing data intended for one client may be cached and subsequently sent by a proxy to other clients. If the proxy also caches `Set-Cookie` headers, it may send one client's `session` cookie to other clients. The severity depends on the application's use of the session, and the proxy's behavior regarding cookies. The risk depends on _all_ these conditions being met.\r\n\r\n1. The application must be hosted behind a caching proxy that does not strip cookies or ignore responses with cookies.\r\n2. The application sets [`session.permanent = True`](https://flask.palletsprojects.com/en/2.3.x/api/#flask.session.permanent).\r\n2. The application does not access or modify the session at any point during a request.\r\n4. [`SESSION_REFRESH_EACH_REQUEST`](https://flask.palletsprojects.com/en/2.3.x/config/#SESSION_REFRESH_EACH_REQUEST) is enabled (the default).\r\n5. The application does not set a `Cache-Control` header to indicate that a page is private or should not be cached.\r\n\r\nThis happens because vulnerable versions of Flask only set the `Vary: Cookie` header when the session is accessed or modified, not when it is refreshed (re-sent to update the expiration) without being accessed or modified.",
+        "severity": "high",
+        "author": null,
+        "publisher": {
+          "login": "davidism",
+          "id": 1242887,
+          "node_id": "MDQ6VXNlcjEyNDI4ODc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1242887?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/davidism",
+          "html_url": "https://github.com/davidism",
+          "followers_url": "https://api.github.com/users/davidism/followers",
+          "following_url": "https://api.github.com/users/davidism/following{/other_user}",
+          "gists_url": "https://api.github.com/users/davidism/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/davidism/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/davidism/subscriptions",
+          "organizations_url": "https://api.github.com/users/davidism/orgs",
+          "repos_url": "https://api.github.com/users/davidism/repos",
+          "events_url": "https://api.github.com/users/davidism/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/davidism/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "identifiers": [
+          {
+            "value": "GHSA-m2qf-hxjv-5gpq",
+            "type": "GHSA"
+          },
+          {
+            "value": "CVE-2023-30861",
+            "type": "CVE"
+          }
+        ],
+        "state": "published",
+        "created_at": null,
+        "updated_at": "2023-05-01T16:47:36Z",
+        "published_at": "2023-05-01T15:42:50Z",
+        "closed_at": null,
+        "withdrawn_at": null,
+        "submission": null,
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "flask"
+            },
+            "vulnerable_version_range": "<2.3.1",
+            "patched_versions": "2.2.5, 2.3.2",
+            "vulnerable_functions": []
+          }
+        ],
+        "cvss_severities": {
+          "cvss_v3": {
+            "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "score": 7.5
+          },
+          "cvss_v4": {
+            "vector_string": null,
+            "score": null
+          }
+        },
+        "cwes": [],
+        "cwe_ids": [],
+        "credits": [
+          {
+            "login": "twm",
+            "type": "reporter"
+          }
+        ],
+        "credits_detailed": [
+          {
+            "user": {
+              "login": "twm",
+              "id": 43662,
+              "node_id": "MDQ6VXNlcjQzNjYy",
+              "avatar_url": "https://avatars.githubusercontent.com/u/43662?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/twm",
+              "html_url": "https://github.com/twm",
+              "followers_url": "https://api.github.com/users/twm/followers",
+              "following_url": "https://api.github.com/users/twm/following{/other_user}",
+              "gists_url": "https://api.github.com/users/twm/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/twm/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/twm/subscriptions",
+              "organizations_url": "https://api.github.com/users/twm/orgs",
+              "repos_url": "https://api.github.com/users/twm/repos",
+              "events_url": "https://api.github.com/users/twm/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/twm/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "type": "reporter",
+            "state": "accepted"
+          }
+        ],
+        "collaborating_users": null,
+        "collaborating_teams": null,
+        "private_fork": null,
+        "cvss": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "score": 7.5
+        }
+      }
+    ]
+  }
+}
