@@ -53,6 +53,24 @@
       "top_cve_cvss": 0,
       "top_cve_epss": 0,
       "risk": "NONE"
+    },
+    {
+      "slug": "strapi-strapi",
+      "repo": "strapi/strapi",
+      "date": "2026-04-13",
+      "total_cves": 32,
+      "critical": 3,
+      "high": 7,
+      "dependencies": 394,
+      "sast_findings": 0,
+      "pattern_findings": 24377,
+      "exploitable": 0,
+      "attack_chains": 39,
+      "techniques": 27,
+      "top_cve": "CVE-2015-9235",
+      "top_cve_cvss": 0.0,
+      "top_cve_epss": 0.3246999979019165,
+      "risk": "HIGH"
     }
   ]
 }

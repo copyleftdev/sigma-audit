@@ -1,0 +1,748 @@
+{
+  "meta": {
+    "repo": "strapi/strapi",
+    "branch": "main",
+    "audit_date": "2026-04-13",
+    "tools": [
+      "Vajra",
+      "Semgrep",
+      "Zentinel",
+      "VulnGraph MCP",
+      "GitHub"
+    ]
+  },
+  "overview": {
+    "dependencies": 394,
+    "source_files": {
+      "ts": 2798,
+      "tsx": 693,
+      "py": 0,
+      "go": 0
+    },
+    "total_cves": 32,
+    "severity": {
+      "NONE": 10,
+      "MEDIUM": 10,
+      "HIGH": 7,
+      "CRITICAL": 3,
+      "LOW": 2
+    },
+    "sast_findings": 0,
+    "pattern_findings": 24377,
+    "exploitable": 0
+  },
+  "intel": [
+    {
+      "cve_id": "CVE-2015-9235",
+      "package": "npm:jsonwebtoken@9.0.0",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.3246999979019165,
+      "epss_percentile": 0.9685199856758118,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "4 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 4,
+      "exploits": [
+        "GitHub-PoC:CVE-2015-9235:0",
+        "GitHub-PoC:CVE-2015-9235:1",
+        "GitHub-PoC:CVE-2015-9235:2",
+        "GitHub-PoC:CVE-2015-9235:3"
+      ],
+      "cwes": [
+        "CWE-20"
+      ],
+      "techniques": [
+        {
+          "id": "T1574.007",
+          "source": "cwe"
+        },
+        {
+          "id": "T1539",
+          "source": "cwe"
+        },
+        {
+          "id": "T1553.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1574.006",
+          "source": "cwe"
+        },
+        {
+          "id": "T1562.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1027",
+          "source": "cwe"
+        },
+        {
+          "id": "T1036.001",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2019-10742",
+      "package": "npm:axios@1.13.5",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.13089999556541443,
+      "epss_percentile": 0.941100001335144,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2019-10742:0"
+      ],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2018-6341",
+      "package": "npm:react-dom@18.3.1",
+      "severity": "MEDIUM",
+      "cvss": 6.099999904632568,
+      "epss_score": 0.10571999847888947,
+      "epss_percentile": 0.9327300190925598,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2018-6341:0"
+      ],
+      "cwes": [
+        "CWE-79"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2021-3749",
+      "package": "npm:axios@1.13.5",
+      "severity": "HIGH",
+      "cvss": 7.5,
+      "epss_score": 0.08262000232934952,
+      "epss_percentile": 0.9223700165748596,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2021-3749:0"
+      ],
+      "cwes": [
+        "CWE-1333"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2021-23337",
+      "package": "npm:lodash@4.17.23",
+      "severity": "HIGH",
+      "cvss": 7.199999809265137,
+      "epss_score": 0.043140001595020294,
+      "epss_percentile": 0.8889899849891663,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "2 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 2,
+      "exploits": [
+        "GitHub-PoC:CVE-2021-23337:0",
+        "Nuclei:CVE-2021-23337"
+      ],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2020-8203",
+      "package": "npm:lodash@4.17.23",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.0357000008225441,
+      "epss_percentile": 0.8772500157356262,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-770"
+      ],
+      "techniques": [
+        {
+          "id": "T1498.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.001",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.003",
+          "source": "cwe"
+        },
+        {
+          "id": "T1498.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499.002",
+          "source": "cwe"
+        },
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2024-29180",
+      "package": "npm:webpack-dev-middleware@6.1.2",
+      "severity": "HIGH",
+      "cvss": 7.400000095367432,
+      "epss_score": 0.03393999859690666,
+      "epss_percentile": 0.8741300106048584,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-22"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2019-10744",
+      "package": "npm:lodash@4.17.23",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.03254000097513199,
+      "epss_percentile": 0.8713200092315674,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-39338",
+      "package": "npm:axios@1.13.5",
+      "severity": "MEDIUM",
+      "cvss": 4.0,
+      "epss_score": 0.02879999950528145,
+      "epss_percentile": 0.8629800081253052,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2024-43788",
+      "package": "npm:webpack@5.90.3",
+      "severity": "MEDIUM",
+      "cvss": 6.400000095367432,
+      "epss_score": 0.017659999430179596,
+      "epss_percentile": 0.8263199925422668,
+      "exploit_maturity": "POC",
+      "maturity_rationale": "1 proof-of-concept(s) available",
+      "kev_listed": false,
+      "exploit_count": 1,
+      "exploits": [
+        "GitHub-PoC:CVE-2024-43788:0"
+      ],
+      "cwes": [
+        "CWE-79"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2023-28154",
+      "package": "npm:webpack@5.90.3",
+      "severity": "CRITICAL",
+      "cvss": 9.800000190734863,
+      "epss_score": 0.012419999577105045,
+      "epss_percentile": 0.7927200198173523,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2018-16487",
+      "package": "npm:lodash@4.17.23",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.004679999779909849,
+      "epss_percentile": 0.6449699997901917,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-400"
+      ],
+      "techniques": [
+        {
+          "id": "T1499",
+          "source": "cwe"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2020-28168",
+      "package": "npm:axios@1.13.5",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.004459999967366457,
+      "epss_percentile": 0.6347399950027466,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2018-3721",
+      "package": "npm:lodash@4.17.23",
+      "severity": "NONE",
+      "cvss": 0.0,
+      "epss_score": 0.0024900001008063555,
+      "epss_percentile": 0.4812999963760376,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [
+        "CWE-471"
+      ],
+      "techniques": []
+    },
+    {
+      "cve_id": "CVE-2020-28500",
+      "package": "npm:lodash@4.17.23",
+      "severity": "MEDIUM",
+      "cvss": 5.300000190734863,
+      "epss_score": 0.0024500000290572643,
+      "epss_percentile": 0.4775800108909607,
+      "exploit_maturity": "NONE",
+      "maturity_rationale": "No known exploit activity",
+      "kev_listed": false,
+      "exploit_count": 0,
+      "exploits": [],
+      "cwes": [],
+      "techniques": []
+    }
+  ],
+  "attack_surface": {
+    "chains_found": 39,
+    "overall_risk": "HIGH",
+    "techniques": [
+      "T1090.001",
+      "T1498.001",
+      "T1499.001",
+      "T1499.003",
+      "T1498.002",
+      "T1499.002",
+      "T1499",
+      "T1499.004",
+      "T1539",
+      "T1574.010",
+      "T1027.009",
+      "T1564.009",
+      "T1027.006",
+      "T1574.007",
+      "T1553.002",
+      "T1574.006",
+      "T1562.003",
+      "T1027",
+      "T1036.001",
+      "T1557",
+      "T1040",
+      "T1185",
+      "T1563",
+      "T1505.003",
+      "T1548",
+      "T1134",
+      "T1550.001"
+    ],
+    "actors": [],
+    "top_chains": [
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2025-62718",
+        "risk": "HIGH",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2025-62718",
+          "weakness:CWE-918",
+          "weakness:CWE-441",
+          "technique:T1090.001"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2026-40175",
+        "risk": "HIGH",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2026-40175",
+          "weakness:CWE-918",
+          "weakness:CWE-444",
+          "weakness:CWE-113",
+          "technique:T1539"
+        ]
+      },
+      {
+        "entry": "npm:webpack",
+        "cve": "CVE-2023-28154",
+        "risk": "HIGH",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2023-28154"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2021-3749",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2021-3749",
+          "weakness:CWE-1333"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2025-27152",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2025-27152",
+          "weakness:CWE-918"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2025-27152",
+        "risk": "MEDIUM",
+        "maturity": "POC",
+        "path": [
+          "vulnerability:CVE-2025-27152",
+          "weakness:CWE-918"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2025-58754",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2025-58754",
+          "weakness:CWE-770",
+          "technique:T1498.001",
+          "technique:T1499.001",
+          "technique:T1499.003",
+          "technique:T1498.002",
+          "technique:T1499.002",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2025-58754",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2025-58754",
+          "weakness:CWE-770",
+          "technique:T1498.001",
+          "technique:T1499.001",
+          "technique:T1499.003",
+          "technique:T1498.002",
+          "technique:T1499.002",
+          "technique:T1499"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2026-25639",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-25639",
+          "weakness:CWE-754"
+        ]
+      },
+      {
+        "entry": "npm:axios",
+        "cve": "CVE-2026-25639",
+        "risk": "MEDIUM",
+        "maturity": "NONE",
+        "path": [
+          "vulnerability:CVE-2026-25639",
+          "weakness:CWE-754"
+        ]
+      }
+    ]
+  },
+  "semgrep": {
+    "total": 0,
+    "by_severity": {},
+    "by_rule": {},
+    "findings": []
+  },
+  "zentinel": {
+    "total": 24377,
+    "files_scanned": 500,
+    "errors": 168,
+    "warnings": 23843,
+    "by_rule": {
+      "community.assigned-undefined": 22866,
+      "community.express-check-csurf-middleware-usage": 168,
+      "community.useless-assignment": 168,
+      "community.aead-no-final": 168,
+      "community.sequelize-raw-query-1": 168,
+      "community.sequelize-raw-query-2": 168,
+      "community.sequelize-raw-query-4": 168,
+      "community.sequelize-raw-query-6": 168,
+      "community.disallow-old-tls-versions2": 168,
+      "community.lazy-load-module": 72,
+      "typescript.security.hardcoded-secret": 64,
+      "typescript.security.process-exit": 29,
+      "typescript.security.crypto-createhash-md5": 1,
+      "typescript.security.crypto-createhash-md5-precise": 1
+    },
+    "highlights": [
+      {
+        "rule": "typescript.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a secrets manager"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 10,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "typescript.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a secrets manager"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-4",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-6",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.disallow-old-tls-versions2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 106,
+        "message": "\"Detects creations of $HTTPS servers from option objects that don't disallow SSL v2, SSL v3, and TLS v1. These protocols are deprecated due to POODLE,"
+      },
+      {
+        "rule": "typescript.security.hardcoded-secret",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 149,
+        "message": "Possible hardcoded secret \u2014 use environment variables or a secrets manager"
+      },
+      {
+        "rule": "community.aead-no-final",
+        "severity": "ERROR",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 149,
+        "message": "\"The 'final' call of a Decipher object checks the authentication tag in a mode for authenticated encryption. Failing to call 'final' will invalidate a"
+      },
+      {
+        "rule": "community.sequelize-raw-query-1",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 149,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      },
+      {
+        "rule": "community.sequelize-raw-query-2",
+        "severity": "WARNING",
+        "file": "tests/api/plugins/users-permissions/content-api/auth-password-update-revokes-sessions.test.api.ts",
+        "line": 149,
+        "message": "\"Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. Data replacement or data binding shou"
+      }
+    ]
+  },
+  "github": {
+    "cve_issues": [],
+    "advisories": []
+  }
+}
